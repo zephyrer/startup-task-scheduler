@@ -1,0 +1,1380 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// 日本語 resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_JPN)
+#ifdef _WIN32
+LANGUAGE LANG_JAPANESE, SUBLANG_DEFAULT
+#pragma code_page(932)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_JPN)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 17, 1\r\n"
+    "#pragma code_page(932)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\sTask.rc2""  // Microsoft Visual C++ 以外のツールで編集されたリソース\r\n"
+    "#include ""l.jpn\\afxres.rc""          // 標準のコンポーネント\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON    DISCARDABLE     "res\\idr_main.ico"
+IDR_STASKTYPE           ICON    DISCARDABLE     "res\\sTaskDoc.ico"
+IDR_SCRIPT              ICON    DISCARDABLE     "res\\script.ico"
+IDR_XDOCICON            ICON    DISCARDABLE     "res\\docicon.ico"
+IDI_ICO_INST            ICON    DISCARDABLE     "res\\ico_inst.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAINFRAME MENU PRELOAD DISCARDABLE 
+BEGIN
+    POPUP "ﾌｧｲﾙ(&F)"
+    BEGIN
+        MENUITEM "タスクの追加(&N) ...",        ID_TASK_NEW
+        MENUITEM "タスクの削除(&D)",            ID_TASK_CUT
+        MENUITEM SEPARATOR
+        MENUITEM "変更を（レジストリに）保存する(&W)", ID_WRITEREG
+        MENUITEM "タスクスケジューラの環境設定(&E) ...", ID_CONFIG
+        MENUITEM "デバッグモード(&T)",          ID_DEBUG
+        MENUITEM SEPARATOR
+        MENUITEM "終了(&X)",                    ID_APP_EXIT
+    END
+    POPUP "選択中タスクの編集(&E)"
+    BEGIN
+        MENUITEM "機能設定(&E) ...",            ID_TASK_CONFIG
+        MENUITEM "一時的にOFF(&C)",             ID_TASK_OFF
+        MENUITEM "実行(&G)",                    ID_TASK_EXEC
+        POPUP "実行順序"
+        BEGIN
+            MENUITEM "ひとつ上へ(&U)",              ID_TASK_UP
+            MENUITEM "ひとつ下へ(&D)",              ID_TASK_DOWN
+        END
+    END
+    POPUP "表示(&V)"
+    BEGIN
+        MENUITEM "ツールバー(&T)",              ID_VIEW_TOOLBAR
+        MENUITEM "ステータスバー(&S)",          ID_VIEW_STATUS_BAR
+        MENUITEM SEPARATOR
+        POPUP "表示形式"
+        BEGIN
+            MENUITEM "大きいアイコン(&L)",          ID_VIEW_ICON
+            MENUITEM "詳細(&S)",                    ID_VIEW_REPORT
+        END
+    END
+    POPUP "ﾍﾙﾌﾟ(&H)"
+    BEGIN
+        MENUITEM "ヘルプ(&H)",                  ID_HELP_FINDER
+        MENUITEM SEPARATOR
+        MENUITEM "バージョン情報(&A)...",       ID_APP_ABOUT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_MAINFRAME ACCELERATORS PRELOAD MOVEABLE PURE 
+BEGIN
+    "D",            ID_TASK_DOWN,           VIRTKEY, CONTROL, NOINVERT
+    "N",            ID_TASK_NEW,            VIRTKEY, CONTROL, NOINVERT
+    "U",            ID_TASK_UP,             VIRTKEY, CONTROL, NOINVERT
+    VK_DELETE,      ID_TASK_CUT,            VIRTKEY, NOINVERT
+    VK_F1,          ID_HELP,                VIRTKEY, NOINVERT
+    VK_F1,          ID_CONTEXT_HELP,        VIRTKEY, SHIFT, NOINVERT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOG DISCARDABLE  0, 0, 239, 215
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "スタートアップ タスクスケジューラ"
+FONT 9, "ＭＳ Ｐゴシック"
+BEGIN
+    CONTROL         "OK",IDOK,"Button",BS_OWNERDRAW | WS_GROUP | WS_TABSTOP,
+                    10,10,215,140
+    CONTROL         152,IDC_STATIC,"Static",SS_BITMAP,5,5,229,151
+    ICON            IDR_MAINFRAME,IDC_STATIC,5,160,20,20
+    LTEXT           "スタートアップ タスクスケジューラ (sTask)\n version 1.6 for Windows 95/98/Me/NT/2000/XP\n(C) 1999-2002 INOUE. Hirokazu\n\nhttp://www.ne.jp/asahi/oasis/inoue-h/\nhttp://inoue-h.connect.to/",
+                    IDC_STATIC,30,160,200,50
+END
+
+IDD_PROP_ADD1 DIALOGEX 0, 0, 255, 219
+STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
+CAPTION "タスク"
+FONT 9, "ＭＳ Ｐゴシック"
+BEGIN
+    LTEXT           "タスクの名前",IDC_STATIC,10,10,75,15,SS_CENTERIMAGE
+    EDITTEXT        IDC_EDIT_NAME,90,10,155,15,ES_AUTOHSCROLL | NOT 
+                    WS_BORDER,WS_EX_STATICEDGE
+    CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDHORZ,10,35,235,1
+    LTEXT           "実行するファイル名",IDC_STATIC,10,50,75,10
+    EDITTEXT        IDC_EDIT_FPASS,90,45,155,15,ES_AUTOHSCROLL | NOT 
+                    WS_BORDER,WS_EX_STATICEDGE
+    PUSHBUTTON      "参照",IDC_BTN_BROWSE,190,65,55,15
+    LTEXT           "実行時のパラメーター",IDC_STATIC,10,90,75,10
+    EDITTEXT        IDC_EDIT_PARAM,90,85,155,15,ES_AUTOHSCROLL | NOT 
+                    WS_BORDER,WS_EX_STATICEDGE
+    LTEXT           "コメント",IDC_STATIC,10,105,75,10
+    EDITTEXT        IDC_EDIT_COMMENT,90,105,155,35,ES_AUTOHSCROLL | NOT 
+                    WS_BORDER,WS_EX_STATICEDGE
+    CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDHORZ,10,150,234,1
+    CONTROL         "実行する　（予定されたタスクは起動時に実行されます）",
+                    IDC_CHECK_ON,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,10,
+                    200,235,15
+END
+
+IDD_PROP_ADD2 DIALOGEX 0, 0, 255, 219
+STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
+CAPTION "スケジュール"
+FONT 9, "ＭＳ Ｐゴシック", 0, 0, 0x1
+BEGIN
+    LTEXT           "タスクの名前",IDC_STATIC,10,10,75,15,SS_CENTERIMAGE
+    EDITTEXT        IDC_PROP1_NAME,90,10,155,15,ES_AUTOHSCROLL | ES_READONLY | 
+                    NOT WS_BORDER | NOT WS_TABSTOP,WS_EX_STATICEDGE
+    CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDHORZ,10,35,235,1
+    LTEXT           "ログオン時タスクのスケジュール",IDC_STATIC,10,50,115,10
+    COMBOBOX        IDC_COMBO_APART,20,65,80,60,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "日に１回",IDC_TEXT_APART,85,105,115,10,NOT WS_GROUP
+    EDITTEXT        IDC_EDIT_INTERVAL,20,100,55,15,ES_AUTOHSCROLL | 
+                    ES_NUMBER | NOT WS_BORDER,WS_EX_STATICEDGE
+    GROUPBOX        "タスクのスケジュール",IDC_STATIC,10,85,235,120
+    LTEXT           "ただし、次の曜日に当てはまるときには、実行しない",
+                    IDC_STATIC,20,125,205,10
+    CONTROL         "日",IDC_CHECK_SUN,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    20,140,20,10
+    CONTROL         "月",IDC_CHECK_MON,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    50,140,20,10
+    CONTROL         "火",IDC_CHECK_TUE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    80,140,20,10
+    CONTROL         "水",IDC_CHECK_WED,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    110,140,20,10
+    CONTROL         "木",IDC_CHECK_THU,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    140,140,20,10
+    CONTROL         "金",IDC_CHECK_FRI,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    170,140,20,10
+    CONTROL         "土",IDC_CHECK_SAT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    200,140,20,10
+    CONTROL         "次の一定時間内を除外する",IDC_CHECK_TIME,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,20,160,160,10
+    CONTROL         "DateTimePicker1",IDC_INOUT_TIME0,"SysDateTimePick32",
+                    DTS_RIGHTALIGN | DTS_UPDOWN | WS_TABSTOP | 0x8,20,180,55,
+                    15
+    LTEXT           "から",IDC_STATIC,85,185,15,10
+    CONTROL         "DateTimePicker1",IDC_INPUT_TIME1,"SysDateTimePick32",
+                    DTS_RIGHTALIGN | DTS_UPDOWN | WS_TABSTOP | 0x8,105,180,
+                    55,15
+    LTEXT           "までの時間内",IDC_STATIC,170,185,40,10
+END
+
+IDD_PROP_ADD3 DIALOGEX 0, 0, 254, 219
+STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
+CAPTION "高度な設定"
+FONT 9, "ＭＳ Ｐゴシック"
+BEGIN
+    CONTROL         "次のタスクを待機させる （実行可能ファイルのみ有効） （推奨）",
+                    IDC_CHECK_WAIT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,10,
+                    10,205,15
+    EDITTEXT        IDC_EDIT_WAIT,10,30,60,15,ES_AUTOHSCROLL | NOT WS_BORDER,
+                    WS_EX_STATICEDGE
+    LTEXT           "秒間待ってから実行する （0～120秒)",IDC_STATIC,80,36,
+                    115,10
+    CONTROL         "次の回数実行したら、タスクを停止する",IDC_CHECK_STOP,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,10,50,185,15
+    EDITTEXT        IDC_EDIT_STOP,10,65,60,15,ES_AUTOHSCROLL | NOT WS_BORDER,
+                    WS_EX_STATICEDGE
+    LTEXT           "回実行したら、停止する",IDC_STATIC,75,70,115,10
+    CONTROL         "タスクを実行する前に、ダイアログを表示する",
+                    IDC_CHECK_STDLG,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,10,
+                    90,185,15
+    CONTROL         "直前のタスクの実行と連動 （このタスクが実行されたこととなる）",
+                    IDC_CHECK_PREVTASK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    10,110,220,15
+    CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDHORZ,10,135,232,1
+    LTEXT           "デバッグ用の設定 （実行記録の書き換え）",IDC_STATIC,10,
+                    140,220,10
+    LTEXT           "前回の実行日時",IDC_STATIC,10,161,55,8
+    CONTROL         "DateTimePicker1",IDC_EDIT_TIME1,"SysDateTimePick32",
+                    DTS_RIGHTALIGN | WS_TABSTOP,65,155,60,15
+    CONTROL         "DateTimePicker1",IDC_EDIT_TIME2,"SysDateTimePick32",
+                    DTS_RIGHTALIGN | DTS_UPDOWN | WS_TABSTOP | 0x8,125,155,
+                    60,15
+    LTEXT           "総実行回数",IDC_STATIC,10,181,55,8
+    EDITTEXT        IDC_EDIT_EXEC,65,175,60,15,ES_AUTOHSCROLL | NOT 
+                    WS_BORDER,WS_EX_STATICEDGE
+    LTEXT           "（タスクの停止に関連）",IDC_STATIC,130,180,105,10
+    LTEXT           "チェック回数",IDC_STATIC,10,201,55,8
+    EDITTEXT        IDC_EDIT_CHECK,65,195,60,15,ES_AUTOHSCROLL | NOT 
+                    WS_BORDER,WS_EX_STATICEDGE
+    LTEXT           "（起動ごとのスケジュールに関連）",IDC_STATIC,130,200,
+                    105,10
+END
+
+IDD_PROP_CNF1 DIALOGEX 0, 0, 255, 219
+STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
+CAPTION "環境設定"
+FONT 9, "ＭＳ Ｐゴシック"
+BEGIN
+    CTEXT           "すべてのタスク実行に影響する条件を設定します",
+                    IDC_STATIC,15,10,225,10
+    CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDHORZ,10,30,233,1
+    GROUPBOX        "スタートアップ タスクスケジューラ自体の起動遅延時間",
+                    IDC_STATIC,10,40,235,35
+    EDITTEXT        IDC_G_DELAY,20,50,60,15,ES_AUTOHSCROLL | NOT WS_BORDER,
+                    WS_EX_STATICEDGE
+    LTEXT           "秒  ( 0～120秒 ) 推奨 3 秒",IDC_STATIC,85,55,120,10
+    GROUPBOX        "タスク実行間隔の判定方法",IDC_STATIC,10,80,235,45
+    CONTROL         "時分秒まで実行間隔判定に用いる",IDC_G_TIME1,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP,15,90,220,15
+    CONTROL         "時分秒は無視する。（例　23:59 と 00:01 は１日間隔となる） （推奨）",
+                    IDC_G_TIME2,"Button",BS_AUTORADIOBUTTON,15,105,220,15
+    CONTROL         "タスクが実行できなかった場合、ダイアログを表示する。 （推奨）",
+                    IDC_G_FAILDLG,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,
+                    130,230,15
+    CONTROL         "実行状況のダイアログを表示する （推奨）",IDC_DLG,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,15,145,230,15
+    CONTROL         "すべてのタスクの実行判定結果のダイアログを表示する。（デバッグ用）",
+                    IDC_DLG0,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,160,
+                    230,15
+END
+
+IDD_PROP_CNF2 DIALOG DISCARDABLE  0, 0, 255, 219
+STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
+CAPTION "セキュリティー"
+FONT 9, "ＭＳ Ｐゴシック"
+BEGIN
+    GROUPBOX        "パスワードによる設定の保護",IDC_STATIC,5,5,245,85
+    CONTROL         "パスワードによる保護を有効にする",IDC_G_SECURE,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,15,230,15
+    PUSHBUTTON      "パスワードの変更",IDC_BTN_PASS,10,35,75,15
+    LTEXT           "この設定は、自動実行させたいタスクを第三者に妨害させないために使用します。\nスタートアップ タスクスケジューラの機能設定ウインドウを使用する前に、「パスワード」の入力が必要となります。",
+                    IDC_STATIC,10,55,235,25
+    PUSHBUTTON      "ｱﾝｲﾝｽﾄｰﾙ作成",IDC_BTN_MKUNIN,10,100,75,15
+    LTEXT           "スタートメニューにアンインストール用のショートカットを作成します",
+                    IDC_STATIC,90,100,160,20
+END
+
+IDD_DEBUG DIALOG DISCARDABLE  0, 0, 249, 159
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "スタートアップ タスクスケジューラ 「デバッグモード」"
+FONT 9, "ＭＳ Ｐゴシック"
+BEGIN
+    LTEXT           "これよりデバッグモードに入ります。\nこれ以後に行った修正は保存されません。",
+                    IDC_STATIC,10,10,230,15
+    GROUPBOX        "テストしたい日時",IDC_STATIC,5,35,235,45
+    CONTROL         "DateTimePicker1",IDC_NOW_DATE,"SysDateTimePick32",
+                    DTS_RIGHTALIGN | DTS_LONGDATEFORMAT | WS_TABSTOP,15,55,
+                    70,15
+    CONTROL         "DateTimePicker1",IDC_NOW_TIME,"SysDateTimePick32",
+                    DTS_RIGHTALIGN | DTS_UPDOWN | WS_TABSTOP | 0x8,100,55,70,
+                    15
+    CONTROL         "すべてのタスクの実行判定結果のダイアログを表示する",
+                    IDC_DLG0,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,10,90,230,
+                    15
+    CONTROL         "実行状況のダイアログを表示する",IDC_DLG,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,110,235,20
+    LTEXT           "デバッグモードに入りますか　？",IDC_STATIC,10,140,115,
+                    10
+    DEFPUSHBUTTON   "はい",IDOK,135,140,50,14
+    PUSHBUTTON      "いいえ",IDCANCEL,190,140,50,14
+END
+
+IDD_DLG_PASSWD DIALOG DISCARDABLE  0, 0, 234, 79
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "スタートアップ タスクスケジューラ"
+FONT 9, "ＭＳ Ｐゴシック"
+BEGIN
+    ICON            IDR_MAINFRAME,IDC_STATIC,15,20,20,20
+    LTEXT           "パスワードを入力してください",IDC_MESSAGE,55,15,170,15
+    EDITTEXT        IDC_EDIT,55,35,170,15,ES_PASSWORD | ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,120,60,50,14
+    PUSHBUTTON      "ｷｬﾝｾﾙ",IDCANCEL,175,60,50,14
+END
+
+IDD_PROP_ADD4 DIALOGEX 0, 0, 254, 219
+STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
+CAPTION "高度な設定"
+FONT 9, "ＭＳ Ｐゴシック"
+BEGIN
+    LTEXT           "タスクの名前",IDC_STATIC,10,10,75,15,SS_CENTERIMAGE
+    EDITTEXT        IDC_PROP1_NAME,90,10,155,15,ES_AUTOHSCROLL | ES_READONLY | 
+                    NOT WS_BORDER | NOT WS_TABSTOP,WS_EX_STATICEDGE
+    CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDHORZ,10,35,231,1
+    CONTROL         "次のタスクを待機させる （実行可能ファイルのみ有効） （推奨）",
+                    IDC_CHECK_WAIT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,10,
+                    45,205,15
+    EDITTEXT        IDC_EDIT_WAIT,10,65,60,15,ES_AUTOHSCROLL | NOT WS_BORDER,
+                    WS_EX_STATICEDGE
+    LTEXT           "秒間待ってから実行する （0～120秒)",IDC_STATIC,80,71,
+                    115,10
+    CONTROL         "次の回数実行したら、タスクを停止する",IDC_CHECK_STOP,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,10,85,185,15
+    EDITTEXT        IDC_EDIT_STOP,10,101,60,15,ES_AUTOHSCROLL | NOT 
+                    WS_BORDER,WS_EX_STATICEDGE
+    LTEXT           "回実行したら、停止する",IDC_STATIC,75,105,115,10
+    CONTROL         "タスクを実行する前に、ダイアログを表示する",
+                    IDC_CHECK_STDLG,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,10,
+                    125,185,15
+    CONTROL         "直前のタスクの実行と連動 （このタスクが実行されたこととなる）",
+                    IDC_CHECK_PREVTASK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    10,145,220,15
+END
+
+IDD_PROP_ADD0 DIALOG DISCARDABLE  0, 0, 255, 219
+STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
+CAPTION "新しいタスクの追加"
+FONT 9, "ＭＳ Ｐゴシック"
+BEGIN
+    CONTROL         "お勧めタスクの追加",IDC_R_SEL1,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP,10,10,230,15
+    COMBOBOX        IDC_RECOMMEND,15,35,165,90,CBS_DROPDOWNLIST | CBS_SORT | 
+                    WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Windowsフォルダの実行ファイルから追加",IDC_R_SEL2,
+                    "Button",BS_AUTORADIOBUTTON,10,80,230,15
+    COMBOBOX        IDC_WINFILE,15,105,165,90,CBS_DROPDOWNLIST | CBS_SORT | 
+                    WS_VSCROLL | WS_TABSTOP
+    CONTROL         "その他のファイルから追加",IDC_R_SEL3,"Button",
+                    BS_AUTORADIOBUTTON,10,150,230,15
+END
+
+IDD_DLG_NORMAL DIALOG DISCARDABLE  0, 0, 274, 79
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION
+CAPTION "スタートアップ タスクスケジューラ"
+FONT 9, "ＭＳ Ｐゴシック"
+BEGIN
+    ICON            IDR_MAINFRAME,IDC_STATIC,10,10,20,20
+    LTEXT           "",IDC_LFNAME,40,10,220,25
+    LTEXT           "処理中 ...",IDC_STATIC,35,40,55,10
+    LTEXT           "",IDC_MES,115,40,125,10
+    CONTROL         "Progress1",IDC_PRGRESS,"msctls_progress32",WS_BORDER,5,
+                    60,260,8
+END
+
+IDD_DLG_INST DIALOG DISCARDABLE  0, 0, 259, 185
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "スタートアップ タスクスケジューラ のインストール  / sTask Install"
+
+FONT 9, "ＭＳ Ｐゴシック"
+BEGIN
+    ICON            IDI_ICO_INST,IDC_STATIC,5,5,20,20
+    LTEXT           "スタートアップ  タスクスケジューラをインストールします (Install sTask)",
+                    IDC_STATIC,30,10,215,10
+    CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDHORZ,5,30,245,1
+    GROUPBOX        "自動実行オプション  (Auto Run Option)",IDC_STATIC,5,35,
+                    250,75
+    CONTROL         "自動起動しない (No Auto Run)",IDC_R_AUTOEXEC,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP,15,50,230,10
+    CONTROL         "スタートメニューの「スタート」グループに登録 (Startup on Start Menu)",
+                    IDC_R_AUTOEXEC2,"Button",BS_AUTORADIOBUTTON,15,65,230,10
+    CONTROL         "レジストリに登録（ユーザごと設定） (Registry Run (Current User))",
+                    IDC_R_AUTOEXEC3,"Button",BS_AUTORADIOBUTTON,15,80,230,10
+    CONTROL         "レジストリに登録（全ユーザ共通設定） (Registry Run (All User))",
+                    IDC_R_AUTOEXEC4,"Button",BS_AUTORADIOBUTTON,15,95,230,10
+    GROUPBOX        "アンインストール方法の設定  (Uninstall Shortcut on ...?)",
+                    IDC_STATIC,5,115,250,45
+    CONTROL         "コントロールパネルの「アプリケーションの追加と削除」 (from &Control Panel)",
+                    IDC_CHECK_UNINST_CPL,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,10,131,240,10
+    CONTROL         "スタートメニューに登録する （推奨） (from Start Men&u)",
+                    IDC_CHECK_UNINST_START,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,10,145,240,10
+    DEFPUSHBUTTON   "OK(&K)",IDOK,80,165,55,15
+    PUSHBUTTON      "キャンセル(&C)",IDCANCEL,140,165,55,15
+    PUSHBUTTON      "ヘルプ(&H)",IDC_BTN_HELP,200,165,55,15
+END
+
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,6,0,0
+ PRODUCTVERSION 1,6,0,0
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x9L
+#else
+ FILEFLAGS 0x8L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "041104b0"
+        BEGIN
+            VALUE "Comments", "\0"
+            VALUE "CompanyName", "(C) INOUE Hirokazu\0"
+            VALUE "FileDescription", "Startup Task Scheduler (Multi Language Version)\0"
+            VALUE "FileVersion", "1.6.0.0\0"
+            VALUE "InternalName", "sTask\0"
+            VALUE "LegalCopyright", "Copyright (C) 1999-2002 INOUE. Hirokazu\0"
+            VALUE "LegalTrademarks", "Free Ware Version\0"
+            VALUE "OriginalFilename", "sTask.exe\0"
+            VALUE "PrivateBuild", "Microsoft Visual C++ 6.0\0"
+            VALUE "ProductName", "Startup Task Scheduler (Multi Language Version)\0"
+            VALUE "ProductVersion", "1.6.0.0\0"
+            VALUE "SpecialBuild", "\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x411, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 232
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 208
+    END
+
+    IDD_DEBUG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 242
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 152
+    END
+
+    IDD_DLG_PASSWD, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 227
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 72
+    END
+
+    IDD_DLG_NORMAL, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 267
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 72
+    END
+
+    IDD_DLG_INST, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 252
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 178
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Toolbar
+//
+
+IDR_MAINFRAME TOOLBAR DISCARDABLE  16, 15
+BEGIN
+    BUTTON      ID_TASK_NEW
+    BUTTON      ID_TASK_CUT
+    BUTTON      ID_TASK_OFF
+    BUTTON      ID_TASK_CONFIG
+    BUTTON      ID_TASK_EXEC
+    BUTTON      ID_TASK_UP
+    BUTTON      ID_TASK_DOWN
+    SEPARATOR
+    BUTTON      ID_VIEW_ICON
+    BUTTON      ID_VIEW_REPORT
+    SEPARATOR
+    BUTTON      ID_CONFIG
+    BUTTON      ID_APP_ABOUT
+    BUTTON      ID_CONTEXT_HELP
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDR_MAINFRAME           BITMAP  MOVEABLE PURE   "res\\Toolbar.bmp"
+IDB_TRAIN               BITMAP  DISCARDABLE     "res\\train.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog Info
+//
+
+IDD_PROP_ADD2 DLGINIT
+BEGIN
+    IDC_COMBO_APART, 0x403, 9, 0
+0x4e8b, 0xae93, 0xb282, 0xc682, "\000" 
+    IDC_COMBO_APART, 0x403, 7, 0
+0xfa93, 0xb282, 0xc682, "\000" 
+    IDC_COMBO_APART, 0x403, 7, 0
+0x548f, 0xb282, 0xc682, "\000" 
+    IDC_COMBO_APART, 0x403, 7, 0
+0x8e8c, 0xb282, 0xc682, "\000" 
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE PRELOAD DISCARDABLE 
+BEGIN
+    IDR_MAINFRAME           "sTask\n\nSTask\n\n\nSTask.Document\nSTask Document"
+END
+
+STRINGTABLE PRELOAD DISCARDABLE 
+BEGIN
+    AFX_IDS_APP_TITLE       "sTask"
+    AFX_IDS_IDLEMESSAGE     "ﾍﾙﾌﾟを表示するには [F1] を押してください。"
+    AFX_IDS_HELPMODEMESSAGE "ﾍﾙﾌﾟを使用するｵﾌﾞｼﾞｪｸﾄを選択"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_INDICATOR_EXT        "EXT"
+    ID_INDICATOR_CAPS       "CAP"
+    ID_INDICATOR_NUM        "NUM"
+    ID_INDICATOR_SCRL       "SCRL"
+    ID_INDICATOR_OVR        "上書"
+    ID_INDICATOR_REC        "記録"
+    ID_INDICATOR_KANA       "ｶﾅ"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_APP_ABOUT            "ﾌﾟﾛｸﾞﾗﾑの情報、ﾊﾞｰｼﾞｮﾝそして著作権を表示\nﾊﾞｰｼﾞｮﾝ情報"
+    ID_APP_EXIT             "スタートアップ タスクスケジューラを終了します\n終了"
+    ID_HELP_INDEX           "ﾍﾙﾌﾟ ﾄﾋﾟｯｸの一覧\nﾍﾙﾌﾟ ｲﾝﾃﾞｯｸｽ"
+    ID_HELP_FINDER          "ﾍﾙﾌﾟ ﾄﾋﾟｯｸの一覧\nﾍﾙﾌﾟ ﾄﾋﾟｯｸ"
+    ID_HELP_USING           "ﾍﾙﾌﾟの使い方を表示\nﾍﾙﾌﾟ"
+    ID_CONTEXT_HELP         "ｸﾘｯｸされたﾎﾞﾀﾝ、ﾒﾆｭｰまたはｳｨﾝﾄﾞｳのﾍﾙﾌﾟを表示\nﾍﾙﾌﾟ"
+    ID_HELP                 "現在のﾀｽｸまたはｺﾏﾝﾄﾞのﾍﾙﾌﾟを表示\nﾍﾙﾌﾟ"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AFX_IDS_SCRESTORE       "ｳｨﾝﾄﾞｳを通常のｻｲｽﾞに戻す"
+    AFX_IDS_SCTASKLIST      "ｱﾌﾟﾘｹｰｼｮﾝの切り替え"
+    STR_PAS_INPOLD          "現在の（古い）パスワードを入力してください"
+    STR_APPNAME             "スタートアップ タスクスケジューラ"
+    STR_FIL_SEL             "プログラム|*.exe|Visual Basicスクリプト|*.vbs|Javaスクリプト|*.js|すべてのファイル|*.*||"
+    STR_ERRPAS              "パスワードが誤っています"
+    STR_PAS_IMP             "パスワードを入力してください"
+    STR_FIL_CNFNAME         "sTAsk設定"
+    STR_FIL_AUTNAME         "sTask自動実行"
+    STR_NAME_SCANDISK       "スキャンディスク"
+    STR_NAME_DEFRAG         "ディスクのデフラグ"
+    STR_NAME_SYSFILCHK      "システムファイルチェッカー"
+    STR_NAME_DISKCLEAN      "ディスクのクリーンアップ"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_TASK_NEW             "新しいタスクの追加\nタスク追加"
+    ID_WRITEREG             "タスクの追加・削除・条件などの変更点をレジストリに保存します\n保存"
+    ID_VIEW_ICON            "タスクを大きいアイコンで表示します\n大きいアイコン"
+    ID_VIEW_REPORT          "詳細に表示します\n詳細表示"
+    ID_TASK_UP              "選択中タスクの実行順序をひとつ上に移します\n上へ"
+    ID_DEBUG                "実行日時などの条件をテストします\nデバッグ"
+    ID_TASK_DOWN            "選択中タスクの実行順序をひとつ下に移します\n下へ"
+    ID_TASK_OFF             "選択中タスクを起動しないようにします\n無効"
+    ID_CONFIG               "sTaskの機能を設定します\n環境設定"
+    ID_TASK_EXEC            "選択中タスクを実行します\n実行"
+    ID_TASK_CONFIG          "選択中タスクの詳細設定をします\n設定"
+    ID_TASK_CUT             "選択中タスクを削除します\n削除"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    STR_NAME_REGCHK         "レジストリチェッカー"
+    STR_PER_LOGON           "回ごと"
+    STR_PER_DAY             "日ごと"
+    STR_PER_WEEK            "週ごと"
+    STR_PER_MONTH           "月ごと"
+    STR_PER_RANDOM          "ランダム（設定不可）"
+    STR_PAS_IMPNEW          "新しいパスワードを入力してください"
+    STR_PAS_IMPCONFIRM      "確認のため、もう一度パスワードを入力してください"
+    STR_PAS_CHANGEOK        "パスワードを変更しました"
+    STR_PAS_CHANGENG        "パスワードは変更されませんでした"
+    STR_REGKEY_STARTUP      "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Shell Folders"
+    AFX_STR_LINK_PROG       "\\sTask設定.LNK"
+    AFX_STR_LINK_STARTUP    "\\sTask自動実行.LNK"
+    STR_PAS_ERR_OFF         "パスワードが間違っています\nセキュリティー設定は使用できません"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    STR_EXEC_DEBUG          "タスク 「 %s 」 を実行します。     \n\nファイル　　　%s\nパラメーター　%s\nファイル種別　%s\n\n実行しますか ？"
+    STR_EXEC_DEBUG_TITLE    "タスク実行 （デバッグモード）"
+    STR_EXEC_NORM           "タスク 「%s」 を実行しますか ？"
+    STR_EXEC_DLGPRGRESS     "%s の判定をしています\n処理中 %d / %d"
+    STR_EXEC_STOP           "タスク 「%s」 は停止中のため、実行されません"
+    STR_NEXEC_NREACH        "タスク 「%s」 は実行日時に達していないため、実行されません\n\n%d年%d月%d日 %d時%d分%d秒 以降に実行されます\n現在日時は%d年%d月%d日 %d時%d分%d秒 です\n"
+    STR_NEXEC_EXCLUDETIME   "タスク 「%s」 は除外時間のため実行されません\n\n除外時間は%d時%d分%d秒から%d時%d分%d秒です\n現在時刻は%d時%d分%d秒です\n"
+    STR_NEXEC_EXCLUDEDAY    "タスク 「%s」 は除外曜日「%s」曜日のため実行されません\n"
+    STR_NEXEC_COUNTER       "タスク 「%s」 は %d 回目のチェック時点まで実行されません\n\n現在 %d 回目のチェックです"
+    STR_NEXEC_EXECERR       "タスク 「%s」 は実行できませんでした\n\nファイルが存在しないか壊れている可能性があります\n"
+    STR_SUN                 "日"
+    STR_MON                 "月"
+    STR_TUE                 "火"
+    STR_WED                 "水"
+    STR_THU                 "木"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    STR_FRI                 "金"
+    STR_SAT                 "土"
+    AFX_STR_LINK_UNINST     "\\sTaskアンインストール.LNK"
+    AFX_STR_UNINST_CPLNAME  "sTask"
+    AFX_STR_USERDAT_1       "Software\\hi soft\\sTask"
+    AFX_STR_USERDAT_2       "Software\\hi soft"
+    STR_MES_UNIN_CUR        "スタートアップ タスクスケジューラ をアンインストールします\r\nUninstall sTask ?\r\n\r\n（カレント・ユーザ・モード）"
+    STR_MES_UNIN_ADM        "スタートアップ タスクスケジューラ をアンインストールします\r\nUninstall sTask ?\r\n\r\nこの操作で、全てのユーザの自動実行が解除されます\r\n\r\n（アドミニストレータ・モード）"
+    STR_MES_UNIN_NOT        "スタートアップ タスクスケジューラ をアンインストールする権限がありません\r\nユーザデータのみ消去しますか ？\r\nYou Don't Have Permission to Uninstall\r\nDo you want to delete only User Data ?"
+    STR_MES_NEW_PASSWORD    "今後、パスワードによる設定の保護などを行う場合は、\r\n次のパスワードを記録しておいて下さい。\r\n\r\n新しいパスワードは 「%s」です。"
+    STR_NAME_DEFRAG2000     "デフラグ"
+    STR_NAME_SVC            "サービスの起動と停止"
+    STR_NAME_EVENTVWR       "イベントビュア"
+    STR_MES_DEBUG_NOSAVE    "デバッグモードのため、変更内容は保存されません"
+    STR_VIEW_TASK           "タスク名"
+    STR_VIEW_SCHEDULE       "スケジュール"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    STR_VIEW_PREVEXEC       "前回の実行日"
+    STR_VIEW_NEXTEXEC       "次回の実行予定"
+    STR_VIEW_STATUS         "状態"
+    STR_VIEW_ADD_NEW_ITEM   "タスクの追加"
+    STR_EXCEPTION           "を除く"
+    STR_VIEW_WAITPREV       "待機"
+    STR_VIEW_LOOKPREV       "直前と連動"
+    STR_VIEW_LIST_DATETIME  "%m月%d日 %H:%M"
+    STR_VIEW_AT_LOGON       "ログオン時"
+    STR_VIEW_STOP_STATE     "停止中"
+    STR_ERR_NOADD_NOTASKNAME 
+                            "タスク名とタスクファイルが指定されていないので、新規登録されませんでした"
+    STR_ERR_NOEDIT_NOTASKNAME 
+                            "タスク名とタスクファイルが指定されていないので、変更されませんでした"
+    STR_TASK_CONFIG_SHORT   "タスクの機能設定"
+    STR_CONFIG_SHORT        "環境設定"
+    STR_MES_EXIT_DEBUG      "現在までの編集結果をリセットして、デバッグモードから抜けますか ？\n「いいえ」の場合は、再びデバッグ実行されます"
+    STR_MES_REGSAVED        "設定を保存しました"
+END
+
+#endif    // 日本語 resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// 英語 (ｱﾒﾘｶ) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAINFRAME MENU PRELOAD DISCARDABLE 
+BEGIN
+    POPUP "File(&F)"
+    BEGIN
+        MENUITEM "Add new task(&N) ...",        ID_TASK_NEW
+        MENUITEM "Delete selected task(&D)",    ID_TASK_CUT
+        MENUITEM SEPARATOR
+        MENUITEM "Save settings(&W)",           ID_WRITEREG
+        MENUITEM "Global configuration(&E) ...", ID_CONFIG
+        MENUITEM "Debug mode(&T)",              ID_DEBUG
+        MENUITEM SEPARATOR
+        MENUITEM "Exit(&X)",                    ID_APP_EXIT
+    END
+    POPUP "Config selected task(&E)"
+    BEGIN
+        MENUITEM "Configuration(&E) ...",       ID_TASK_CONFIG
+        MENUITEM "Temporary OFF(&C)",           ID_TASK_OFF
+        MENUITEM "Exec(&G)",                    ID_TASK_EXEC
+        POPUP "Change order"
+        BEGIN
+            MENUITEM "Move Up(&U)",                 ID_TASK_UP
+            MENUITEM "Move Down(&D)",               ID_TASK_DOWN
+        END
+    END
+    POPUP "View(&V)"
+    BEGIN
+        MENUITEM "Tool bar(&T)",                ID_VIEW_TOOLBAR
+        MENUITEM "Status bar(&S)",              ID_VIEW_STATUS_BAR
+        MENUITEM SEPARATOR
+        POPUP "View style"
+        BEGIN
+            MENUITEM "Large Icon(&L)",              ID_VIEW_ICON
+            MENUITEM "Detail(&S)",                  ID_VIEW_REPORT
+        END
+    END
+    POPUP "Help(&H)"
+    BEGIN
+        MENUITEM "Help(&H)",                    ID_HELP_FINDER
+        MENUITEM SEPARATOR
+        MENUITEM "About(&A)...",                ID_APP_ABOUT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_DLG_NORMAL DIALOG DISCARDABLE  0, 0, 274, 79
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION
+CAPTION "Startup Task Scheduler"
+FONT 9, "Arial"
+BEGIN
+    ICON            IDR_MAINFRAME,IDC_STATIC,10,10,20,20
+    LTEXT           "",IDC_LFNAME,40,10,220,25
+    LTEXT           "processing ...",IDC_STATIC,35,40,55,10
+    LTEXT           "",IDC_MES,115,40,125,10
+    CONTROL         "Progress1",IDC_PRGRESS,"msctls_progress32",WS_BORDER,5,
+                    60,260,8
+END
+
+IDD_DLG_PASSWD DIALOG DISCARDABLE  0, 0, 229, 63
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Startup Task Scheduler"
+FONT 9, "Arial"
+BEGIN
+    ICON            IDR_MAINFRAME,IDC_STATIC,15,15,18,17
+    LTEXT           "Input Password, please .",IDC_MESSAGE,55,10,165,10
+    EDITTEXT        IDC_EDIT,50,25,170,15,ES_PASSWORD | ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,115,45,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,170,45,50,14
+END
+
+IDD_ABOUTBOX DIALOG DISCARDABLE  0, 0, 239, 189
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Startup Task Scheduler"
+FONT 9, "Arial"
+BEGIN
+    CONTROL         "OK",IDOK,"Button",BS_OWNERDRAW | WS_GROUP | WS_TABSTOP,
+                    10,10,215,115
+    CONTROL         152,IDC_STATIC,"Static",SS_BITMAP,5,5,229,151
+    ICON            IDR_MAINFRAME,IDC_STATIC,10,140,18,17
+    LTEXT           "Startup Task Scheduler (sTask) (Multi Language)\n version 1.6 for Windows 95/98/Me/NT/2000/XP\n(C) 1999-2002 INOUE. Hirokazu\n\nhttp://www.ne.jp/asahi/oasis/inoue-h/\nhttp://inoue-h.connect.to/",
+                    IDC_STATIC,35,135,195,50
+END
+
+IDD_DEBUG DIALOG DISCARDABLE  0, 0, 249, 159
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Startup Task Scheduler - Debug (Evaluation) Mode"
+FONT 9, "Arial"
+BEGIN
+    LTEXT           "In ""Debug Mode"", every result and settings will not save .\nPlease use ""save"" menu or exit sTask , before enter to ""debug mode"" .",
+                    IDC_STATIC,10,10,230,15
+    GROUPBOX        "evaluation date and time",IDC_STATIC,5,35,235,45
+    CONTROL         "DateTimePicker1",IDC_NOW_DATE,"SysDateTimePick32",
+                    DTS_RIGHTALIGN | WS_TABSTOP,15,55,70,15
+    CONTROL         "DateTimePicker1",IDC_NOW_TIME,"SysDateTimePick32",
+                    DTS_RIGHTALIGN | DTS_UPDOWN | WS_TABSTOP | 0x8,100,55,70,
+                    15
+    CONTROL         "Show every evaluation result dialog box",IDC_DLG0,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,10,90,230,15
+    CONTROL         "Show Progress dialog box",IDC_DLG,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,110,235,20
+    LTEXT           "Enter ""Debug Mode"" ?",IDC_STATIC,10,140,115,10
+    DEFPUSHBUTTON   "Yes",IDOK,135,140,50,14
+    PUSHBUTTON      "No",IDCANCEL,190,140,50,14
+END
+
+IDD_DLG_INST DIALOG DISCARDABLE  0, 0, 259, 185
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Startup Task Scheduler (sTask) Install"
+FONT 9, "Arial"
+BEGIN
+    ICON            IDI_ICO_INST,IDC_STATIC,5,5,20,20
+    LTEXT           "Install Startup Task Scheduler (sTask)",IDC_STATIC,30,
+                    10,215,10
+    CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDHORZ,5,30,245,1
+    GROUPBOX        "Auto Run Option",IDC_STATIC,5,35,250,75
+    CONTROL         "No Auto Run",IDC_R_AUTOEXEC,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP | WS_TABSTOP,15,50,230,10
+    CONTROL         "Startup on Start Menu",IDC_R_AUTOEXEC2,"Button",
+                    BS_AUTORADIOBUTTON,15,65,230,10
+    CONTROL         "Registry Run (Current User)",IDC_R_AUTOEXEC3,"Button",
+                    BS_AUTORADIOBUTTON,15,80,230,10
+    CONTROL         "Registry Run (All User)",IDC_R_AUTOEXEC4,"Button",
+                    BS_AUTORADIOBUTTON,15,95,230,10
+    GROUPBOX        "Uninstall Shortcut on ...?",IDC_STATIC,5,115,250,45
+    CONTROL         "Uninstall from &Control Panel",IDC_CHECK_UNINST_CPL,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,10,131,240,10
+    CONTROL         "Uninstall from Start Men&u",IDC_CHECK_UNINST_START,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,10,145,240,10
+    DEFPUSHBUTTON   "OK(&K)",IDOK,80,165,55,15
+    PUSHBUTTON      "Cancel(&C)",IDCANCEL,140,165,55,15
+    PUSHBUTTON      "Help(&H)",IDC_BTN_HELP,200,165,55,15
+END
+
+IDD_PROP_ADD0 DIALOG DISCARDABLE  0, 0, 255, 219
+STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
+CAPTION "Scheduled Task Wizard (Add New Task)"
+FONT 9, "Arial"
+BEGIN
+    CONTROL         "Typical Program",IDC_R_SEL1,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,10,10,230,15
+    COMBOBOX        IDC_RECOMMEND,15,35,165,90,CBS_DROPDOWNLIST | CBS_SORT | 
+                    WS_VSCROLL | WS_TABSTOP
+    CONTROL         "from 'Windows' folder",IDC_R_SEL2,"Button",
+                    BS_AUTORADIOBUTTON,10,80,230,15
+    COMBOBOX        IDC_WINFILE,15,105,165,90,CBS_DROPDOWNLIST | CBS_SORT | 
+                    WS_VSCROLL | WS_TABSTOP
+    CONTROL         "from other file",IDC_R_SEL3,"Button",BS_AUTORADIOBUTTON,
+                    10,150,230,15
+END
+
+IDD_PROP_ADD1 DIALOGEX 0, 0, 255, 219
+STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
+CAPTION "Task"
+FONT 9, "Arial"
+BEGIN
+    LTEXT           "Task Name",IDC_STATIC,10,10,75,15,SS_CENTERIMAGE
+    EDITTEXT        IDC_EDIT_NAME,90,10,155,15,ES_AUTOHSCROLL | NOT 
+                    WS_BORDER,WS_EX_STATICEDGE
+    CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDHORZ,10,35,235,1
+    LTEXT           "Execute FIle Path",IDC_STATIC,10,45,75,15,
+                    SS_CENTERIMAGE
+    EDITTEXT        IDC_EDIT_FPASS,90,45,155,15,ES_AUTOHSCROLL | NOT 
+                    WS_BORDER,WS_EX_STATICEDGE
+    PUSHBUTTON      "Browse ...",IDC_BTN_BROWSE,190,65,55,15
+    LTEXT           "Parameter",IDC_STATIC,10,85,75,15,SS_CENTERIMAGE
+    EDITTEXT        IDC_EDIT_PARAM,90,85,155,15,ES_AUTOHSCROLL | NOT 
+                    WS_BORDER,WS_EX_STATICEDGE
+    LTEXT           "Comment",IDC_STATIC,10,105,75,10
+    EDITTEXT        IDC_EDIT_COMMENT,90,105,155,35,ES_AUTOHSCROLL | NOT 
+                    WS_BORDER,WS_EX_STATICEDGE
+    CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDHORZ,10,150,234,1
+    CONTROL         "Enabled (scheduled task runs at designated timing)",
+                    IDC_CHECK_ON,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,10,
+                    200,235,15
+END
+
+IDD_PROP_ADD2 DIALOGEX 0, 0, 255, 219
+STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
+CAPTION "Schedule"
+FONT 9, "Arial"
+BEGIN
+    LTEXT           "Task Name",IDC_STATIC,10,10,75,15,SS_CENTERIMAGE
+    EDITTEXT        IDC_PROP1_NAME,90,10,155,15,ES_AUTOHSCROLL | ES_READONLY | 
+                    NOT WS_BORDER | NOT WS_TABSTOP,WS_EX_STATICEDGE
+    CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDHORZ,10,35,235,1
+    LTEXT           "Schedule period",IDC_STATIC,10,50,115,10
+    COMBOBOX        IDC_COMBO_APART,20,65,80,60,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Day Interval",IDC_TEXT_APART,85,100,115,15,
+                    SS_CENTERIMAGE | NOT WS_GROUP
+    EDITTEXT        IDC_EDIT_INTERVAL,20,100,55,15,ES_AUTOHSCROLL | 
+                    ES_NUMBER | NOT WS_BORDER,WS_EX_STATICEDGE
+    GROUPBOX        "Schedule",IDC_STATIC,10,85,235,120
+    LTEXT           "Task will not execute at following day of the week",
+                    IDC_STATIC,20,125,205,10
+    CONTROL         "Sun",IDC_CHECK_SUN,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,20,140,25,10
+    CONTROL         "Mon",IDC_CHECK_MON,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,50,140,25,10
+    CONTROL         "Tue",IDC_CHECK_TUE,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,80,140,25,10
+    CONTROL         "Wed",IDC_CHECK_WED,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,110,140,25,10
+    CONTROL         "Thu",IDC_CHECK_THU,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,140,140,25,10
+    CONTROL         "Fri",IDC_CHECK_FRI,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,170,140,25,10
+    CONTROL         "Sat",IDC_CHECK_SAT,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,200,140,25,10
+    CONTROL         "Task will not execute at following time period",
+                    IDC_CHECK_TIME,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,20,
+                    160,160,10
+    CONTROL         "DateTimePicker1",IDC_INOUT_TIME0,"SysDateTimePick32",
+                    DTS_RIGHTALIGN | DTS_UPDOWN | WS_TABSTOP | 0x8,45,180,55,
+                    15
+    LTEXT           "from",IDC_STATIC,25,185,15,10
+    CONTROL         "DateTimePicker1",IDC_INPUT_TIME1,"SysDateTimePick32",
+                    DTS_RIGHTALIGN | DTS_UPDOWN | WS_TABSTOP | 0x8,125,180,
+                    55,15
+    LTEXT           "to",IDC_STATIC,105,185,15,10
+END
+
+IDD_PROP_ADD3 DIALOGEX 0, 0, 254, 219
+STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
+CAPTION "Settings"
+FONT 9, "Arial"
+BEGIN
+    CONTROL         "Next task wait this task termination (only if executables)",
+                    IDC_CHECK_WAIT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,10,
+                    10,205,15
+    EDITTEXT        IDC_EDIT_WAIT,10,30,60,15,ES_AUTOHSCROLL | NOT WS_BORDER,
+                    WS_EX_STATICEDGE
+    LTEXT           "wait timer before execute this task (0-120 sec)",-1,80,
+                    30,150,16,SS_CENTERIMAGE
+    CONTROL         "Stop task evaluation after following execution count",
+                    IDC_CHECK_STOP,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,10,
+                    50,225,15
+    EDITTEXT        IDC_EDIT_STOP,10,65,60,15,ES_AUTOHSCROLL | NOT WS_BORDER,
+                    WS_EX_STATICEDGE
+    LTEXT           "times",-1,75,65,115,15,SS_CENTERIMAGE
+    CONTROL         "Show dialog box before execute task",IDC_CHECK_STDLG,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,10,90,185,15
+    CONTROL         "This task will not execute, if previous task executed",
+                    IDC_CHECK_PREVTASK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    10,110,220,15
+    CONTROL         "",-1,"Static",SS_ETCHEDHORZ,10,135,232,1
+    LTEXT           "Overwrite Internal Data (for debug or evaluation)",-1,
+                    10,140,220,10
+    LTEXT           "Last exec",-1,10,155,50,14,SS_CENTERIMAGE
+    CONTROL         "DateTimePicker1",IDC_EDIT_TIME1,"SysDateTimePick32",
+                    DTS_RIGHTALIGN | WS_TABSTOP,65,155,60,15
+    CONTROL         "DateTimePicker1",IDC_EDIT_TIME2,"SysDateTimePick32",
+                    DTS_RIGHTALIGN | DTS_UPDOWN | WS_TABSTOP | 0x8,125,155,
+                    60,15
+    LTEXT           "Exec count",-1,10,175,50,14,SS_CENTERIMAGE
+    EDITTEXT        IDC_EDIT_EXEC,65,175,60,15,ES_AUTOHSCROLL | NOT 
+                    WS_BORDER,WS_EX_STATICEDGE
+    LTEXT           "Evaluate count",-1,10,195,50,14,SS_CENTERIMAGE
+    EDITTEXT        IDC_EDIT_CHECK,65,195,60,15,ES_AUTOHSCROLL | NOT 
+                    WS_BORDER,WS_EX_STATICEDGE
+END
+
+IDD_PROP_ADD4 DIALOGEX 0, 0, 254, 219
+STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
+CAPTION "Settings"
+FONT 9, "Arial"
+BEGIN
+    LTEXT           "Task Name",IDC_STATIC,10,10,75,15,SS_CENTERIMAGE
+    EDITTEXT        IDC_PROP1_NAME,90,10,155,15,ES_AUTOHSCROLL | ES_READONLY | 
+                    NOT WS_BORDER | NOT WS_TABSTOP,WS_EX_STATICEDGE
+    CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDHORZ,10,35,231,1
+    CONTROL         "Next task wait this task termination (only if executables)",
+                    IDC_CHECK_WAIT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,10,
+                    45,205,15
+    EDITTEXT        IDC_EDIT_WAIT,10,65,60,15,ES_AUTOHSCROLL | NOT WS_BORDER,
+                    WS_EX_STATICEDGE
+    LTEXT           "wait timer before execute this task (0-120 sec)",
+                    IDC_STATIC,80,65,160,16,SS_CENTERIMAGE
+    CONTROL         "Stop task evaluation after following execution count",
+                    IDC_CHECK_STOP,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,10,
+                    85,185,15
+    EDITTEXT        IDC_EDIT_STOP,10,101,60,15,ES_AUTOHSCROLL | NOT 
+                    WS_BORDER,WS_EX_STATICEDGE
+    LTEXT           "times",IDC_STATIC,75,100,115,15,SS_CENTERIMAGE
+    CONTROL         "Show dialog box before execute task",IDC_CHECK_STDLG,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,10,125,185,15
+    CONTROL         "This task will not execute, if previous task executed",
+                    IDC_CHECK_PREVTASK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    10,145,220,15
+END
+
+IDD_PROP_CNF1 DIALOGEX 0, 0, 255, 183
+STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
+CAPTION "Global Configuration"
+FONT 9, "Arial"
+BEGIN
+    CTEXT           "Global Configuration of Startup Task Scheduler",
+                    IDC_STATIC,15,10,225,10
+    CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDHORZ,10,30,233,1
+    GROUPBOX        "Global delay timer (before evaluate first task)",
+                    IDC_STATIC,10,40,235,35
+    EDITTEXT        IDC_G_DELAY,20,50,60,15,ES_AUTOHSCROLL | NOT WS_BORDER,
+                    WS_EX_STATICEDGE
+    LTEXT           "(secs) (0-120sec)",IDC_STATIC,85,50,120,15,
+                    SS_CENTERIMAGE
+    GROUPBOX        "Date and time evaluation method",IDC_STATIC,10,80,235,
+                    45
+    CONTROL         "use hour, minute and second",IDC_G_TIME1,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP,15,90,220,15
+    CONTROL         "ignore hour, minute and second",IDC_G_TIME2,"Button",
+                    BS_AUTORADIOBUTTON,15,105,220,15
+    CONTROL         "Display dialog box when task execution failed",
+                    IDC_G_FAILDLG,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,
+                    130,230,15
+    CONTROL         "Display progress dialog box",IDC_DLG,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,15,145,230,15
+    CONTROL         "Display every evaluation result",IDC_DLG0,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,15,160,230,15
+END
+
+IDD_PROP_CNF2 DIALOG DISCARDABLE  0, 0, 255, 183
+STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
+CAPTION "Security Setting"
+FONT 9, "Arial"
+BEGIN
+    GROUPBOX        "Setup protection by password",IDC_STATIC,5,5,245,85
+    CONTROL         "Enable protection",IDC_G_SECURE,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,15,230,15
+    PUSHBUTTON      "Change password",IDC_BTN_PASS,10,35,75,15
+    LTEXT           "If you enable this option, you must input password before use setup window .",
+                    IDC_STATIC,10,55,235,25
+    PUSHBUTTON      "make uninstall",IDC_BTN_MKUNIN,10,100,75,15
+    LTEXT           "Make uninstall shortcut on start menu .",IDC_STATIC,90,
+                    105,160,20
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_DLG_NORMAL, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 267
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 72
+    END
+
+    IDD_DLG_PASSWD, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 222
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 56
+    END
+
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 232
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 182
+    END
+
+    IDD_DEBUG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 242
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 152
+    END
+
+    IDD_DLG_INST, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 252
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 178
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Toolbar
+//
+
+IDR_MAINFRAME TOOLBAR DISCARDABLE  16, 15
+BEGIN
+    BUTTON      ID_TASK_NEW
+    BUTTON      ID_TASK_CUT
+    BUTTON      ID_TASK_OFF
+    BUTTON      ID_TASK_CONFIG
+    BUTTON      ID_TASK_EXEC
+    BUTTON      ID_TASK_UP
+    BUTTON      ID_TASK_DOWN
+    SEPARATOR
+    BUTTON      ID_VIEW_ICON
+    BUTTON      ID_VIEW_REPORT
+    SEPARATOR
+    BUTTON      ID_CONFIG
+    BUTTON      ID_APP_ABOUT
+    BUTTON      ID_CONTEXT_HELP
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDR_MAINFRAME           BITMAP  MOVEABLE PURE   "res\\mainfram.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog Info
+//
+
+IDD_PROP_ADD2 DLGINIT
+BEGIN
+    IDC_COMBO_APART, 0x403, 15, 0
+0x6f4c, 0x6f67, 0x206e, 0x6e49, 0x6574, 0x7672, 0x6c61, "\000" 
+    IDC_COMBO_APART, 0x403, 13, 0
+0x6144, 0x2079, 0x6e49, 0x6574, 0x7672, 0x6c61, "\000" 
+    IDC_COMBO_APART, 0x403, 14, 0
+0x6557, 0x6b65, 0x4920, 0x746e, 0x7265, 0x6176, 0x006c, 
+    IDC_COMBO_APART, 0x403, 15, 0
+0x6f4d, 0x746e, 0x2068, 0x6e49, 0x6574, 0x7672, 0x6c61, "\000" 
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE PRELOAD DISCARDABLE 
+BEGIN
+    IDR_MAINFRAME           "sTask\n\nSTask\n\n\nSTask.Document\nSTask Document"
+END
+
+STRINGTABLE PRELOAD DISCARDABLE 
+BEGIN
+    AFX_IDS_APP_TITLE       "sTask"
+    AFX_IDS_IDLEMESSAGE     "Press [F1] to view help"
+    AFX_IDS_HELPMODEMESSAGE "Select an object to consult with help file"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_INDICATOR_EXT        "EXT"
+    ID_INDICATOR_CAPS       "CAP"
+    ID_INDICATOR_NUM        "NUM"
+    ID_INDICATOR_SCRL       "SCRL"
+    ID_INDICATOR_OVR        "OVWR"
+    ID_INDICATOR_REC        "REC"
+    ID_INDICATOR_KANA       "KANA"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_APP_ABOUT            "Show version information\nAbout"
+    ID_APP_EXIT             "Quit Startup Task Scheduler\nQuit"
+    ID_HELP_INDEX           "Help Index\nHelp Index"
+    ID_HELP_FINDER          "Help Index\nHelp Topic"
+    ID_HELP_USING           "Show how to use windows help\nHelp on Help"
+    ID_CONTEXT_HELP         "Show clicked item's help\nHelp"
+    ID_HELP                 "Show current command help\nHelp"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AFX_IDS_SCRESTORE       "Restore window size"
+    AFX_IDS_SCTASKLIST      "Change application"
+    STR_PAS_INPOLD          "Enter OLD password"
+    STR_APPNAME             "Startup Task Scheduler"
+    STR_FIL_SEL             "Programs|*.exe|Visual Basic Script|*.vbs|Java Script|*.js|All FIles|*.*||"
+    STR_ERRPAS              "Wrong Password"
+    STR_PAS_IMP             "Enter Password"
+    STR_FIL_CNFNAME         "sTask Configuration"
+    STR_FIL_AUTNAME         "sTask Startup"
+    STR_NAME_SCANDISK       "Scandisk"
+    STR_NAME_DEFRAG         "Disk Defrag"
+    STR_NAME_SYSFILCHK      "System File Checker"
+    STR_NAME_DISKCLEAN      "Disk Cleanup"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_TASK_NEW             "Add New Task\nAdd New Task"
+    ID_WRITEREG             "Save all configuration and task settings\nSave"
+    ID_VIEW_ICON            "View with large icons\nLarge Icons"
+    ID_VIEW_REPORT          "View in detail\nDetail"
+    ID_TASK_UP              "Move selected task to one previous\nMove Prev"
+    ID_DEBUG                "Examine task sceduller in debugging mode\nDebug Mode"
+    ID_TASK_DOWN            "Move selected task to one after\nMove After"
+    ID_TASK_OFF             "Disable selected task\nDisable"
+    ID_CONFIG               "Configure Startup Task Scheduler\nConfig"
+    ID_TASK_EXEC            "Execute selected task\nExec"
+    ID_TASK_CONFIG          "Configure selected task\nConfig Task"
+    ID_TASK_CUT             "Delete selected task\nDelete"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    STR_NAME_REGCHK         "Registry Checker"
+    STR_PER_LOGON           "Logon Interval."
+    STR_PER_DAY             "Day Interval."
+    STR_PER_WEEK            "Week Interval."
+    STR_PER_MONTH           "Month Interval."
+    STR_PER_RANDOM          "Random (NG)"
+    STR_PAS_IMPNEW          "Enter new password"
+    STR_PAS_IMPCONFIRM      "Please enter (new) password again to verify"
+    STR_PAS_CHANGEOK        "Password is changed"
+    STR_PAS_CHANGENG        "Password is not changed"
+    STR_REGKEY_STARTUP      "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Shell Folders"
+    AFX_STR_LINK_PROG       "\\sTask Config.LNK"
+    AFX_STR_LINK_STARTUP    "\\sTask startup.LNK"
+    STR_PAS_ERR_OFF         "Wrong password !\nPassword protect mode is disabled"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    STR_EXEC_DEBUG          "Exec task [ %s] . \n\nFile    %s\nParameter   %s\nExtention  %s\n\nDo you want to exec this task ?"
+    STR_EXEC_DEBUG_TITLE    "Exec Task (Debugging Mode)"
+    STR_EXEC_NORM           "Exec task [%s] ?"
+    STR_EXEC_DLGPRGRESS     "Examine %s\n%d / %d examined ..."
+    STR_EXEC_STOP           "Skip task [%s] , (Disable task configuration)"
+    STR_NEXEC_NREACH        "Skip task [%s] , because this task does not come to scheduled time .\r\n\r\nThis task will execute after %d/%d/%d  %d:%d:%d .\r\n(Current time is %d/%d/%d %d:%d:%d"
+    STR_NEXEC_EXCLUDETIME   "Skip task [%s] , because of exclude time period .\r\n\r\nExclude period is from %d:%d:%d  to %d:%d:%d .\r\n(Current time is %d:%d:%d .)"
+    STR_NEXEC_EXCLUDEDAY    "Skip task [%s] , because of exclude day of week [%s]"
+    STR_NEXEC_COUNTER       "Skip task [%s] , because of exclude counter .\r\n\r\nThis task will execute after [%d] count . (Current counter is [%d] .)"
+    STR_NEXEC_EXECERR       "Task [%s] can not be executed .\r\n\r\nFile may be damaged or broken shortcut ."
+    STR_SUN                 "Sun "
+    STR_MON                 "Mon "
+    STR_TUE                 "Tue "
+    STR_WED                 "Wed "
+    STR_THU                 "Thu "
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    STR_FRI                 "Fri "
+    STR_SAT                 "Sat "
+    AFX_STR_LINK_UNINST     "\\sTask Uninstall.LNK"
+    AFX_STR_UNINST_CPLNAME  "sTask"
+    AFX_STR_USERDAT_1       "Software\\hi soft\\sTask"
+    AFX_STR_USERDAT_2       "Software\\hi soft"
+    STR_MES_UNIN_CUR        "Uninstall Startup Task Scheduler (sTask) ?\r\n\r\n(current user mode)"
+    STR_MES_UNIN_ADM        "Uninstall Startup Task Scheduler (sTask) ?\r\n\r\n(administrator mode)"
+    STR_MES_UNIN_NOT        "You Don't Have Permission to Uninstall\r\nDo you want to delete only User Data ?"
+    STR_MES_NEW_PASSWORD    "Your NEW password is [%s] .\r\n\r\nPlease remember this password ."
+    STR_NAME_DEFRAG2000     "Defrag"
+    STR_NAME_SVC            "Service Settings"
+    STR_NAME_EVENTVWR       "Event Viewer"
+    STR_MES_DEBUG_NOSAVE    "No Settings update, because of 'Debugging Mode'"
+    STR_VIEW_TASK           "Task Name"
+    STR_VIEW_SCHEDULE       "Schedulle"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    STR_VIEW_PREVEXEC       "Last Run"
+    STR_VIEW_NEXTEXEC       "Next Run"
+    STR_VIEW_STATUS         "Status"
+    STR_VIEW_ADD_NEW_ITEM   "Add Scheduled Task"
+    STR_EXCEPTION           " excluded."
+    STR_VIEW_WAITPREV       "Wait Prev ."
+    STR_VIEW_LOOKPREV       "Sync Prev Done ."
+    STR_VIEW_LIST_DATETIME  "%m/%d %H:%M"
+    STR_VIEW_AT_LOGON       "Logon"
+    STR_VIEW_STOP_STATE     "Disabled"
+    STR_ERR_NOADD_NOTASKNAME 
+                            "Task is not saved, because task name and path is not set ."
+    STR_ERR_NOEDIT_NOTASKNAME 
+                            "Task settins is not updated , because of task name and path is not set ."
+    STR_TASK_CONFIG_SHORT   "Task Configuration"
+    STR_CONFIG_SHORT        "Configuration"
+    STR_MES_EXIT_DEBUG      "Do you want to exit debug mode ?\r\n\r\n(If you press ""NO"", you  enter debug mode again .)"
+    STR_MES_REGSAVED        "Settings are Saved to Registry"
+END
+
+#endif    // 英語 (ｱﾒﾘｶ) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_JPN)
+#ifdef _WIN32
+LANGUAGE 17, 1
+#pragma code_page(932)
+#endif //_WIN32
+#include "res\sTask.rc2"  // Microsoft Visual C++ 以外のツールで編集されたリソース
+#include "l.jpn\afxres.rc"          // 標準のコンポーネント
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+
