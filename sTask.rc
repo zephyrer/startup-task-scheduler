@@ -151,7 +151,7 @@ BEGIN
                     10,10,215,140
     CONTROL         152,IDC_STATIC,"Static",SS_BITMAP,5,5,229,151
     ICON            IDR_MAINFRAME,IDC_STATIC,5,160,20,20
-    LTEXT           "スタートアップ タスクスケジューラ (sTask)\n version 1.6 for Windows 95/98/Me/NT/2000/XP\n(C) 1999-2002 INOUE. Hirokazu\n\nhttp://www.ne.jp/asahi/oasis/inoue-h/\nhttp://inoue-h.connect.to/",
+    LTEXT           "スタートアップ タスクスケジューラ (sTask)\n version 1.61 for Windows 95/98/Me/NT/2000/XP\n(C) 1999-2002 INOUE. Hirokazu\n\nhttp://www.ne.jp/asahi/oasis/inoue-h/\nhttp://inoue-h.connect.to/",
                     IDC_STATIC,30,160,200,50
 END
 
@@ -448,8 +448,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 1,6,0,0
- PRODUCTVERSION 1,6,0,0
+ FILEVERSION 1,6,1,0
+ PRODUCTVERSION 1,6,1,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x9L
@@ -467,14 +467,14 @@ BEGIN
             VALUE "Comments", "\0"
             VALUE "CompanyName", "(C) INOUE Hirokazu\0"
             VALUE "FileDescription", "Startup Task Scheduler (Multi Language Version)\0"
-            VALUE "FileVersion", "1.6.0.0\0"
+            VALUE "FileVersion", "1.6.1.0\0"
             VALUE "InternalName", "sTask\0"
             VALUE "LegalCopyright", "Copyright (C) 1999-2002 INOUE. Hirokazu\0"
             VALUE "LegalTrademarks", "Free Ware Version\0"
             VALUE "OriginalFilename", "sTask.exe\0"
             VALUE "PrivateBuild", "Microsoft Visual C++ 6.0\0"
             VALUE "ProductName", "Startup Task Scheduler (Multi Language Version)\0"
-            VALUE "ProductVersion", "1.6.0.0\0"
+            VALUE "ProductVersion", "1.6.1.0\0"
             VALUE "SpecialBuild", "\0"
         END
     END
@@ -840,8 +840,8 @@ BEGIN
     CONTROL         "OK",IDOK,"Button",BS_OWNERDRAW | WS_GROUP | WS_TABSTOP,
                     10,10,215,115
     CONTROL         152,IDC_STATIC,"Static",SS_BITMAP,5,5,229,151
-    ICON            IDR_MAINFRAME,IDC_STATIC,10,140,18,17
-    LTEXT           "Startup Task Scheduler (sTask) (Multi Language)\n version 1.6 for Windows 95/98/Me/NT/2000/XP\n(C) 1999-2002 INOUE. Hirokazu\n\nhttp://www.ne.jp/asahi/oasis/inoue-h/\nhttp://inoue-h.connect.to/",
+    ICON            IDR_MAINFRAME,IDC_STATIC,10,140,20,20
+    LTEXT           "Startup Task Scheduler (sTask) (Multi Language)\n version 1.61 for Windows 95/98/Me/NT/2000/XP\n(C) 1999-2002 INOUE. Hirokazu\n\nhttp://www.ne.jp/asahi/oasis/inoue-h/\nhttp://inoue-h.connect.to/",
                     IDC_STATIC,35,135,195,50
 END
 

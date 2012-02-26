@@ -6,7 +6,7 @@
 .ce 3
 スタートアップ タスク スケジューラ
 Startup Task Scheduler
-version 1.6 for Windows
+version 1.61 for Windows
 
 .ri 1
 (C)opyright 1999-2002 井上 博計
@@ -75,5 +75,5 @@ sTaskヘルプファイルの「使用許諾条件」に沿います。
 
 
 .ri 1
-2002 / 05 / 15
+2002 / 11 / 14
 .hl 1

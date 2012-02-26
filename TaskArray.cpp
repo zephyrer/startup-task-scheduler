@@ -160,6 +160,9 @@ BOOL CTaskArray::ExecTask(UINT i, HWND hWnd)
 	char fname[_MAX_FNAME];
 	char ext[_MAX_EXT];
 	CString strTmp1, strTmp2;
+	PROCESS_INFORMATION pi;		// CreateProcess 用
+	STARTUPINFO si;				// CreateProcess 用
+	char strTmp3[MAX_PATH];		// CreateProcess 用
    
 	_splitpath((LPCSTR)tasks[i].fpass, drive, dir, fname, ext);
 
@@ -191,18 +194,49 @@ BOOL CTaskArray::ExecTask(UINT i, HWND hWnd)
 	// **********************************
 	// 拡張子により、実行可能ファイルは SPAWN 、それ以外はシェル実行
 	// **********************************
-	if(!strcmpi(ext,".exe") || !strcmpi(ext,".com") || !strcmpi(ext,".bat"))	
+//			******************** ver 1.61b *.cmd も CreateProcess で実行
+	if(!strcmpi(ext,".exe") || !strcmpi(ext,".com") || !strcmpi(ext,".bat") || !strcmpi(ext,".cmd"))	
 	{
 		if(tasks[i].waitexit)
 		{	// 次のタスクを待機させる
 			// (2002/05/11) spawnl から spawnlp に変更
-			if(_spawnlp(_P_WAIT,tasks[i].fpass,tasks[i].fpass,tasks[i].param,NULL) < 0)
-				return FALSE;
+
+//			******************** ver 1.61b プロセス実行方法を変更（スペースのあるパス名に対応）
+//			if(_spawnlp(_P_WAIT,tasks[i].fpass,tasks[i].fpass,tasks[i].param,NULL) < 0)
+//				return FALSE;
+
+
+			// 途中にスペースのあるパス名への対応
+			if(strstr(tasks[i].fpass, " ") != NULL)
+				sprintf(strTmp3, "\"%s\" %s", tasks[i].fpass, tasks[i].param);
+			else
+				sprintf(strTmp3, "%s %s", tasks[i].fpass, tasks[i].param);
+
+			// プロセスの作成・実行
+			ZeroMemory(&si,sizeof(si));
+			si.cb=sizeof(si);
+			if(!::CreateProcess(NULL, strTmp3, NULL, NULL, FALSE, NORMAL_PRIORITY_CLASS, NULL, NULL, &si, &pi))
+				return FALSE;	// プロセス作成に失敗
+
+			::WaitForSingleObject(pi.hProcess, INFINITE);		// プログラムが終了するまで待機
 		}
 		else
 		{
-			if(_spawnlp(_P_NOWAIT,tasks[i].fpass,tasks[i].fpass,tasks[i].param,NULL) < 0)
-				return FALSE;
+//			******************** ver 1.61b プロセス実行方法を変更（スペースのあるパス名に対応）
+//			if(_spawnlp(_P_NOWAIT,tasks[i].fpass,tasks[i].fpass,tasks[i].param,NULL) < 0)
+//				return FALSE;
+			// 途中にスペースのあるパス名への対応
+			if(strstr(tasks[i].fpass, " ") != NULL)
+				sprintf(strTmp3, "\"%s\" %s", tasks[i].fpass, tasks[i].param);
+			else
+				sprintf(strTmp3, "%s %s", tasks[i].fpass, tasks[i].param);
+
+			// プロセスの作成・実行
+			ZeroMemory(&si,sizeof(si));
+			si.cb=sizeof(si);
+			if(!::CreateProcess(NULL, strTmp3, NULL, NULL, FALSE, NORMAL_PRIORITY_CLASS, NULL, NULL, &si, &pi))
+				return FALSE;	// プロセス作成に失敗
+
 		}
 
 	}
