@@ -34,6 +34,7 @@
 #define IDC_TEXT_APART                  1007
 #define IDC_BTN_EXECDIR                 1007
 #define IDC_CHECK_WAIT                  1008
+#define IDC_BTN_POWERTEST               1008
 #define IDC_CHECK_MON                   1009
 #define IDC_CHECK_STOP                  1010
 #define IDC_CHECK_STDLG                 1011
@@ -97,6 +98,7 @@
 #define IDC_PROP5_NAME                  1060
 #define IDC_CMB_WNDSTYLE                1061
 #define IDC_CMB_CURDIR                  1063
+#define IDC_CMB_POWERSTAT               1063
 #define IDC_EDIT_CURDIR                 1064
 #define IDC_BTN_CURDIR                  1065
 #define IDC_CMB_EXECDIR                 1066
@@ -195,7 +197,7 @@
 #define _APS_3D_CONTROLS                     1
 #define _APS_NEXT_RESOURCE_VALUE        160
 #define _APS_NEXT_COMMAND_VALUE         32784
-#define _APS_NEXT_CONTROL_VALUE         1067
+#define _APS_NEXT_CONTROL_VALUE         1068
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

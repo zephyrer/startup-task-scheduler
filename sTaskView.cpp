@@ -417,6 +417,7 @@ void CSTaskView::OnTaskNew()
 	prop1.trn_sel = &prop0.m_select;
 	prop1.m_cmb_wndstyle = 0;
 	prop1.m_execdir_mode = 1;
+	prop1.m_cmb_powerstat = 0;
 	prop2.m_apart = 2;
 	prop2.m_interval = 1;
 	prop2.m_time0 = CTime(1999,1,1,0,0,0);
@@ -542,6 +543,7 @@ BOOL CSTaskView::EditTask(UINT i)
 	prop1.m_cmb_wndstyle = theApp->m_tasks.tasks[i].wndstyle;
 	prop1.m_execdir_mode = theApp->m_tasks.tasks[i].execdir_mode;
 	prop1.m_execdir = theApp->m_tasks.tasks[i].execdir;
+	prop1.m_cmb_powerstat = theApp->m_tasks.tasks[i].powerstat;
 	prop2.m_apart = theApp->m_tasks.tasks[i].apart;
 	prop2.m_interval = theApp->m_tasks.tasks[i].interval;
 	if(theApp->m_tasks.tasks[i].date & 0x40) prop2.m_dsun = TRUE;
@@ -584,6 +586,7 @@ BOOL CSTaskView::EditTask(UINT i)
 		theApp->m_tasks.tasks[i].wndstyle = prop1.m_cmb_wndstyle;
 		theApp->m_tasks.tasks[i].execdir_mode = prop1.m_execdir_mode;
 		theApp->m_tasks.tasks[i].execdir = prop1.m_execdir;
+		theApp->m_tasks.tasks[i].powerstat = prop1.m_cmb_powerstat;
 		theApp->m_tasks.tasks[i].apart = prop2.m_apart;
 		theApp->m_tasks.tasks[i].interval = prop2.m_interval;
 		theApp->m_tasks.tasks[i].date = (prop2.m_dsun ? 0x40:0) | (prop2.m_dmon ? 0x20:0) |

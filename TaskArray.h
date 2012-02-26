@@ -41,6 +41,7 @@ public:
 	int wndstyle;
 	int execdir_mode;
 	CString execdir;
+	int powerstat;
 };
 
 // **********************************

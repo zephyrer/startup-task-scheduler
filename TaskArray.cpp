@@ -565,9 +565,30 @@ BOOL CTaskArray::ExecAllTask(HWND hWnd)
 							tasks[i].name, tasks[i].interval, tasks[i].cnt_check);
 						::MessageBox(hWnd, strTmp1, strAppName, MB_OK|MB_ICONINFORMATION|MB_APPLMODAL|MB_TOPMOST|MB_SETFOREGROUND);
 					}
-					continue;
+					continue;	// 次のタスクへ
 				}
-			}
+			}	// 起動回数カウントもの終わり
+			if(tasks[i].powerstat != 0)
+			{	// 電源状態
+				SYSTEM_POWER_STATUS SystemPowerStatus;
+				GetSystemPowerStatus(&SystemPowerStatus);
+				if(tasks[i].powerstat == 1 && SystemPowerStatus.ACLineStatus == 0)	// AC電源断
+					continue;	// 次のタスクへ
+				if(tasks[i].powerstat == 2 && (SystemPowerStatus.BatteryFlag & 8))	// バッテリ充電中
+					continue;	// 次のタスクへ
+				if(tasks[i].powerstat == 3 && (SystemPowerStatus.BatteryFlag & 4))	// バッテリ クリティカル以下
+					continue;	// 次のタスクへ
+				if(tasks[i].powerstat == 4 && (SystemPowerStatus.BatteryFlag & 2 || SystemPowerStatus.BatteryFlag & 4))	// バッテリ 低以下 （低 + クリティカル）
+					continue;	// 次のタスクへ
+				if(tasks[i].powerstat == 5 && (SystemPowerStatus.BatteryLifePercent < 25))	// バッテリ 25%
+					continue;	// 次のタスクへ
+				if(tasks[i].powerstat == 6 && (SystemPowerStatus.BatteryLifePercent < 50))	// バッテリ 50%
+					continue;	// 次のタスクへ
+				if(tasks[i].powerstat == 7 && (SystemPowerStatus.BatteryLifePercent < 75))	// バッテリ 75%
+					continue;	// 次のタスクへ
+				if(tasks[i].powerstat == 8 && (SystemPowerStatus.BatteryLifePercent < 90))	// バッテリ 90%
+					continue;	// 次のタスクへ
+			}	// 電源状態終わり
 
 		}
 

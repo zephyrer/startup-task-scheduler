@@ -264,6 +264,8 @@ BOOL CSTaskApp::RegWriteAll()
 			WriteProfileInt(str_n,"execdir_mode",m_tasks.tasks[i].execdir_mode);
 		if(m_tasks.tasks[i].execdir != GetProfileString(str_n,"execdir"))
 			WriteProfileString(str_n,"execdir",m_tasks.tasks[i].execdir);
+		if(m_tasks.tasks[i].powerstat != (int)GetProfileInt(str_n,"powerstat",0))
+			WriteProfileInt(str_n,"powerstat",m_tasks.tasks[i].powerstat);
 		
 	}
 	return TRUE;
@@ -314,6 +316,7 @@ BOOL CSTaskApp::RegReadAll()
 		m_tasks.tasks[i].wndstyle = GetProfileInt(str_n,"wndstyle",0);
 		m_tasks.tasks[i].execdir_mode = GetProfileInt(str_n,"execdir_mode",0);
 		m_tasks.tasks[i].execdir = GetProfileString(str_n,"execdir");
+		m_tasks.tasks[i].powerstat = GetProfileInt(str_n,"powerstat",0);
 		// オーバーフロー対策
 		if(m_tasks.tasks[i].cnt_check > 1000) m_tasks.tasks[i].cnt_check=0;
 		if(m_tasks.tasks[i].cnt_exec > 1000) m_tasks.tasks[i].cnt_exec = 0;

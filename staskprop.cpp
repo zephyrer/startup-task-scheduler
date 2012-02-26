@@ -159,6 +159,7 @@ CPropAdd1::CPropAdd1() : CPropertyPage(CPropAdd1::IDD)
 	m_cmb_wndstyle = -1;
 	m_execdir_mode = -1;
 	m_execdir = _T("");
+	m_cmb_powerstat = -1;
 	//}}AFX_DATA_INIT
 }
 
@@ -185,6 +186,7 @@ void CPropAdd1::DoDataExchange(CDataExchange* pDX)
 	DDX_CBIndex(pDX, IDC_CMB_WNDSTYLE, m_cmb_wndstyle);
 	DDX_CBIndex(pDX, IDC_CMB_EXECDIR, m_execdir_mode);
 	DDX_Text(pDX, IDC_EDIT_EXECDIR, m_execdir);
+	DDX_CBIndex(pDX, IDC_CMB_POWERSTAT, m_cmb_powerstat);
 	//}}AFX_DATA_MAP
 }
 
@@ -195,6 +197,7 @@ BEGIN_MESSAGE_MAP(CPropAdd1, CPropertyPage)
 	ON_WM_SHOWWINDOW()
 	ON_CBN_SELCHANGE(IDC_CMB_EXECDIR, OnSelchangeCmbExecdir)
 	ON_BN_CLICKED(IDC_BTN_EXECDIR, OnBtnExecdir)
+	ON_BN_CLICKED(IDC_BTN_POWERTEST, OnBtnPowertest)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -1088,4 +1091,38 @@ void CPropAdd1::OnBtnExecdir()
 	SetDlgItemText(IDC_EDIT_EXECDIR, strPathname);
 	
 	
+}
+
+void CPropAdd1::OnBtnPowertest() 
+{
+	// TODO: この位置にコントロール通知ハンドラ用のコードを追加してください
+	SYSTEM_POWER_STATUS SystemPowerStatus;
+	CString strTmp, strBatteryFlag;
+	GetSystemPowerStatus(&SystemPowerStatus);
+	if(SystemPowerStatus.BatteryFlag == 255) strBatteryFlag = "Unknown";
+	else{
+		if(SystemPowerStatus.BatteryFlag == 128) strBatteryFlag = "No Battery";
+		else{
+			strBatteryFlag = "Battery ";
+			if(SystemPowerStatus.BatteryFlag & 1) strBatteryFlag += " High";
+			if(SystemPowerStatus.BatteryFlag & 2) strBatteryFlag += " Low";
+			if(SystemPowerStatus.BatteryFlag & 4) strBatteryFlag += " Critical";
+			if(SystemPowerStatus.BatteryFlag & 8) strBatteryFlag += " , Charging now";
+		}
+	}
+	strTmp.Format("Power Status Information\nWindows Base Services : GetSystemPowerStatus\n"
+				"\n"
+				"AC Line Status : %s\n"
+				"Battery Flag : %s\n"
+				"Battery Life Percent : %d %%\n"
+				"Battery Life Time : %d seconds\n"
+				"Battery Full Life Time : %d seconds",
+				SystemPowerStatus.ACLineStatus == 0 ? "AC Offline" : (SystemPowerStatus.ACLineStatus == 1 ? "AC Online" : "Unknown"),
+				strBatteryFlag,
+				SystemPowerStatus.BatteryLifePercent == 255 ? -1 : SystemPowerStatus.BatteryLifePercent,
+				SystemPowerStatus.BatteryLifeTime,
+				SystemPowerStatus.BatteryFullLifeTime);
+
+	MessageBox(strTmp);
+
 }

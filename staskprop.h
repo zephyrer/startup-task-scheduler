@@ -37,6 +37,7 @@ public:
 	int		m_cmb_wndstyle;
 	int		m_execdir_mode;
 	CString	m_execdir;
+	int		m_cmb_powerstat;
 	//}}AFX_DATA
 
 
@@ -57,6 +58,7 @@ protected:
 	afx_msg void OnSelchangeCmbExecdir();
 	virtual BOOL OnInitDialog();
 	afx_msg void OnBtnExecdir();
+	afx_msg void OnBtnPowertest();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 
