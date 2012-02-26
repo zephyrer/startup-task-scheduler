@@ -35,5 +35,6 @@ HIDD_PROP_ADD4                          0x20089
 HIDD_PROP_ADD0                          0x2008A
 HIDD_DLG_NORMAL                         0x2008B
 HIDD_DLG_INST                           0x20091
+HIDD_PROP_ADD5                          0x2009B
  
 // Frame Controls (IDW_*) 

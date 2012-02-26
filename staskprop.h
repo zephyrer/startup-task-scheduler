@@ -137,6 +137,7 @@ public:
 	CTime	m_lastexec_time;
 	UINT	m_cnt_check;
 	UINT	m_cnt_exec;
+	int		m_cmb_syncexec;
 	//}}AFX_DATA
 
 
@@ -259,6 +260,7 @@ public:
 	BOOL	m_waitexit;
 	UINT	m_waitsec;
 	UINT	m_taskoffcount;
+	int		m_cmb_syncexec;
 	//}}AFX_DATA
 
 
@@ -322,6 +324,47 @@ protected:
 	// 生成されたメッセージ マップ関数
 	//{{AFX_MSG(CPropAdd0)
 	virtual BOOL OnInitDialog();
+	//}}AFX_MSG
+	DECLARE_MESSAGE_MAP()
+
+};
+/////////////////////////////////////////////////////////////////////////////
+// CPropAdd5 ダイアログ
+
+class CPropAdd5 : public CPropertyPage
+{
+	DECLARE_DYNCREATE(CPropAdd5)
+
+// コンストラクション
+public:
+	CPropAdd5();
+	~CPropAdd5();
+	CString *trn_fpass;
+	CString *trn_name;
+
+// ダイアログ データ
+	//{{AFX_DATA(CPropAdd5)
+	enum { IDD = IDD_PROP_ADD5 };
+		// メモ - ClassWizard はこの位置にデータ メンバを追加します。
+		//    この位置に生成されるコードを編集しないでください。
+	//}}AFX_DATA
+
+
+// オーバーライド
+	// ClassWizard は仮想関数のオーバーライドを生成します。
+
+	//{{AFX_VIRTUAL(CPropAdd5)
+	public:
+	virtual BOOL OnSetActive();
+	protected:
+	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV サポート
+	//}}AFX_VIRTUAL
+
+// インプリメンテーション
+protected:
+	// 生成されたメッセージ マップ関数
+	//{{AFX_MSG(CPropAdd5)
+	afx_msg void OnShowWindow(BOOL bShow, UINT nStatus);
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 

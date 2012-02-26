@@ -37,6 +37,7 @@ public:
 	UINT taskoffcount;
 	BOOL dialog;
 	BOOL syncprev;
+	int syncexec;
 };
 
 // **********************************
@@ -63,7 +64,7 @@ public:
 			BOOL exec=FALSE, UINT apart =2, UINT interval=1, UINT date=0,
 			BOOL excludetime=FALSE, CTime time0=CTime(1999,1,1,0,0,0), CTime time1=CTime(1999,1,1,0,0,0),
 			BOOL waitexit=FALSE, UINT waitsec=0, BOOL taskoff=FALSE, UINT taskoffcount=0,
-			BOOL dialog=0, BOOL syncprev=FALSE);
+			BOOL dialog=0, BOOL syncprev=FALSE, int syncexec=0);
 	UINT maxtask;
 	CTask tasks[21];
 	CTaskArray();

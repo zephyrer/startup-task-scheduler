@@ -232,6 +232,8 @@ BOOL CSTaskApp::RegWriteAll()
 			WriteProfileInt(str_n,"dlg",m_tasks.tasks[i].dialog);
 		if(m_tasks.tasks[i].syncprev != (BOOL)GetProfileInt(str_n,"sync",0))
 			WriteProfileInt(str_n,"sync",m_tasks.tasks[i].syncprev);
+		if(m_tasks.tasks[i].syncexec != (int)GetProfileInt(str_n,"syncexec",0))
+			WriteProfileInt(str_n,"syncexec",m_tasks.tasks[i].syncexec);
 		if(m_tasks.tasks[i].cnt_check != GetProfileInt(str_n,"c_c",0))
 			WriteProfileInt(str_n,"c_c",m_tasks.tasks[i].cnt_check);
 		if(m_tasks.tasks[i].cnt_exec != GetProfileInt(str_n,"c_e",0))
@@ -278,6 +280,7 @@ BOOL CSTaskApp::RegReadAll()
 		m_tasks.tasks[i].taskoffcount = GetProfileInt(str_n,"toffcnt",0);
 		m_tasks.tasks[i].dialog = GetProfileInt(str_n,"dlg",1);
 		m_tasks.tasks[i].syncprev = GetProfileInt(str_n,"sync",0);
+		m_tasks.tasks[i].syncexec = GetProfileInt(str_n,"syncexec",0);
 		m_tasks.tasks[i].cnt_check = GetProfileInt(str_n,"c_c",0);
 		m_tasks.tasks[i].cnt_exec = GetProfileInt(str_n,"c_e",0);
 		// オーバーフロー対策

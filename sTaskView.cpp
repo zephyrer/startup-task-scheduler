@@ -389,16 +389,20 @@ BOOL CSTaskView::DisplayTasks()
 void CSTaskView::OnTaskNew() 
 {
 	// TODO: この位置にコマンド ハンドラ用のコードを追加してください
+	CString strTmp;
 	CPropAdd0 prop0;
 	CPropAdd1 prop1;
 	CPropAdd2 prop2;
 	CPropAdd4 prop4;
+	CPropAdd5 prop5;	// 最終ページ（prop4 の変更内容を反映するためのダミーページ)
 
-	CPropertySheet DlgAdd("タスクの新規追加", this);
+	strTmp.LoadString(STR_TASK_NEW_SHORT);	// タスクの機能設定
+	CPropertySheet DlgAdd(strTmp, this);
 	DlgAdd.AddPage(&prop0);
 	DlgAdd.AddPage(&prop1);
 	DlgAdd.AddPage(&prop2);
 	DlgAdd.AddPage(&prop4);
+	DlgAdd.AddPage(&prop5);		// 最後のページでは SetWizardButtons で「完了」表示する
 	// ウイザード形式にする
 	DlgAdd.m_psh.dwFlags |= PSH_WIZARD;
 	// 「適用」ボタンを表示しない
@@ -415,11 +419,14 @@ void CSTaskView::OnTaskNew()
 	prop2.m_interval = 1;
 	prop2.m_time0 = CTime(1999,1,1,0,0,0);
 	prop2.m_time1 = CTime(1999,1,1,0,0,0);
-	prop2.trn_fpass = &prop1.m_fpass;
-	prop2.trn_name = &prop1.m_name;
+	prop2.trn_fpass = &prop1.m_fpass;		// 文字列初期設定用
+	prop2.trn_name = &prop1.m_name;			// 文字列初期設定用
 	prop4.m_waitexit = TRUE;
 	prop4.m_waitsec = 0;
-	prop4.trn_name = &prop1.m_name;
+	prop4.trn_name = &prop1.m_name;			// 文字列初期設定用
+	prop4.m_cmb_syncexec = 0;
+	prop5.trn_fpass = &prop1.m_fpass;		// 文字列初期設定用
+	prop5.trn_name = &prop1.m_name;			// 文字列初期設定用
 	if(DlgAdd.DoModal() == ID_WIZFINISH)
 	{
 		if(prop1.m_name != "" && prop1.m_fpass !="")
@@ -430,7 +437,7 @@ void CSTaskView::OnTaskNew()
 					prop1.m_exec, prop2.m_apart, prop2.m_interval , date,
 					prop2.m_time, prop2.m_time0, prop2.m_time1,
 					prop4.m_waitexit, prop4.m_waitsec, prop4.m_taskoff, prop4.m_taskoffcount,
-					prop4.m_dialog, prop4.m_syncprev);
+					prop4.m_dialog, prop4.m_syncprev, prop4.m_cmb_syncexec);
 		}
 		else
 		{
@@ -549,6 +556,7 @@ BOOL CSTaskView::EditTask(UINT i)
 	prop3.m_taskoffcount = theApp->m_tasks.tasks[i].taskoffcount;
 	prop3.m_dialog = theApp->m_tasks.tasks[i].dialog;
 	prop3.m_syncprev = theApp->m_tasks.tasks[i].syncprev;
+	prop3.m_cmb_syncexec = theApp->m_tasks.tasks[i].syncexec;
 	prop3.m_cnt_check = theApp->m_tasks.tasks[i].cnt_check;
 	prop3.m_cnt_exec = theApp->m_tasks.tasks[i].cnt_exec;
 	prop3.m_lastexec_date = theApp->m_tasks.tasks[i].time_lastexec;
@@ -581,6 +589,7 @@ BOOL CSTaskView::EditTask(UINT i)
 		theApp->m_tasks.tasks[i].taskoffcount = prop3.m_taskoffcount;
 		theApp->m_tasks.tasks[i].dialog = prop3.m_dialog;
 		theApp->m_tasks.tasks[i].syncprev = prop3.m_syncprev;
+		theApp->m_tasks.tasks[i].syncexec = prop3.m_cmb_syncexec;
 		theApp->m_tasks.tasks[i].cnt_check = prop3.m_cnt_check;
 		theApp->m_tasks.tasks[i].cnt_exec = prop3.m_cnt_exec;
 		theApp->m_tasks.tasks[i].time_lastexec = CTime(prop3.m_lastexec_date.GetYear(),

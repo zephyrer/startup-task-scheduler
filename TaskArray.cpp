@@ -37,7 +37,7 @@ BOOL CTaskArray::NewTask(CString name, CString fpass, CString param, CString mes
 			BOOL exec, UINT apart, UINT interval, UINT date,
 			BOOL excludetime, CTime time0, CTime time1,
 			BOOL waitexit, UINT waitsec, BOOL taskoff, UINT taskoffcount,
-			BOOL dialog, BOOL syncprev)
+			BOOL dialog, BOOL syncprev, int syncexec)
 {
 	if(maxtask>20) return FALSE;
 	int i=maxtask;
@@ -55,11 +55,15 @@ BOOL CTaskArray::NewTask(CString name, CString fpass, CString param, CString mes
 	tasks[i].time0=time0;
 	tasks[i].time1=time1;
 	tasks[i].waitexit=waitexit;
+	tasks[i].waitsec=waitsec;
 	tasks[i].taskoff=taskoff;
 	tasks[i].taskoffcount=taskoffcount;
 	tasks[i].dialog=dialog;
 	tasks[i].syncprev=syncprev;
+	tasks[i].syncexec=syncexec;
 	tasks[i].time_lastexec= CTime::GetCurrentTime();
+	tasks[i].cnt_check = 0;
+	tasks[i].cnt_exec = 0;
 
 	return TRUE;
 }
@@ -152,6 +156,8 @@ BOOL CTaskArray::SwapTask(UINT i, UINT j)
 // **********************************
 // タスク（１つ）の実行
 // **********************************
+// 正常にタスクが実行されたら TRUE を返す
+//
 #include <process.h>	// _P_WAIT 用
 BOOL CTaskArray::ExecTask(UINT i, HWND hWnd)
 {
@@ -174,7 +180,7 @@ BOOL CTaskArray::ExecTask(UINT i, HWND hWnd)
 		strTmp1.Format(strTmp2, tasks[i].name, tasks[i].fpass, tasks[i].param, ext);
 		strTmp2.LoadString(STR_EXEC_DEBUG_TITLE);
 		if(::MessageBox(hWnd, strTmp1, strTmp2, MB_YESNO|MB_ICONQUESTION|MB_APPLMODAL|MB_TOPMOST|MB_SETFOREGROUND)
-			!= IDYES) return TRUE;
+			!= IDYES) return FALSE;
 	}
 	// 非デバッグモードでの表示
 	else if(tasks[i].dialog)
@@ -185,7 +191,7 @@ BOOL CTaskArray::ExecTask(UINT i, HWND hWnd)
 		else strTmp1 = tasks[i].mes;
 		strTmp2.LoadString(STR_APPNAME);
 		if(::MessageBox(hWnd, strTmp1, strTmp2, MB_YESNO|MB_ICONQUESTION|MB_APPLMODAL|MB_TOPMOST|MB_SETFOREGROUND)
-			!= IDYES) return TRUE;
+			!= IDYES) return FALSE;
 	}
 
 	// ウエイト挿入
@@ -276,6 +282,8 @@ BOOL CTaskArray::ExecAllTask(HWND hWnd)
 	CDlgProgress *dlgDebugProgress;				// プログレス表示 モードレスダイアログ
 	BOOL debug_dlg_OK = FALSE;		// モードレス・ダイアログ作成フラグ
 
+	BOOL bLastTaskExec;				// 一つ前のタスクが実行された （syncexec 判定用）
+
 	if(maxtask==0) return FALSE;	// 実行すべきタスクがない
 	strAppName.LoadString(STR_APPNAME);	// あらかじめプログラム名をロードしておく（多用するため）
 
@@ -339,6 +347,9 @@ BOOL CTaskArray::ExecAllTask(HWND hWnd)
 		else debug_dlg_OK = TRUE;
 	}
 
+
+	bLastTaskExec = FALSE;		// 前回のタスク実行状態のリセット
+
 	// **********************************
 	//  タスクを順に実行判定し、実行する
 	// **********************************
@@ -387,99 +398,132 @@ BOOL CTaskArray::ExecAllTask(HWND hWnd)
 
 		tasks[i].cnt_check++;	// チェック回数のカウンター
 
-		Tnext = CalcNextTime(i);
-		if(Tnext > Tnow)
-		{	// 日時が実行可能時期に達していない場合
-			if(g_dialog0)
-			{
-				strTmp2.LoadString(STR_NEXEC_NREACH);
-				strTmp1.Format(strTmp2,
-					tasks[i].name, Tnext.GetYear(), Tnext.GetMonth(), Tnext.GetDay(), Tnext.GetHour(), Tnext.GetMinute(), Tnext.GetSecond(),
-					Tnow.GetYear(), Tnow.GetMonth(), Tnow.GetDay(), Tnow.GetHour(), Tnow.GetMinute(), Tnow.GetSecond());
-				::MessageBox(hWnd, strTmp1, strAppName, MB_OK|MB_ICONINFORMATION|MB_APPLMODAL|MB_TOPMOST|MB_SETFOREGROUND);
-			}
-			continue;	// 次のタスクへ
-		}	// 期限チェック終わり
-		if(tasks[i].excludetime)
-		{	// 時間除外がある場合
-			long int t0,t1,tn;	// １日を秒単位に直し、前後関係を計算する
-			t0 = tasks[i].time0.GetHour() * 3600 + tasks[i].time0.GetMinute() * 60 + tasks[i].time0.GetSecond();
-			t1 = tasks[i].time1.GetHour() * 3600 + tasks[i].time1.GetMinute() * 60 + tasks[i].time1.GetSecond();
-			tn = Tnow.GetHour() * 3600 + Tnow.GetMinute() * 60 + Tnow.GetSecond();
-			if((t0 <= tn) && (tn <= t1))
-			{	// 同一日内の計算 (t0 <= tn <= t1)
-				if(g_dialog0)
-				{
-					strTmp2.LoadString(STR_NEXEC_EXCLUDETIME);
-					strTmp1.Format(strTmp2,
-						tasks[i].name, tasks[i].time0.GetHour(), tasks[i].time0.GetMinute(), tasks[i].time0.GetSecond(),
-						tasks[i].time1.GetHour(), tasks[i].time1.GetMinute(), tasks[i].time1.GetSecond(),
-						Tnow.GetHour(), Tnow.GetMinute(), Tnow.GetSecond());
-					::MessageBox(hWnd, strTmp1, strAppName, MB_OK|MB_ICONINFORMATION|MB_APPLMODAL|MB_TOPMOST|MB_SETFOREGROUND);
-				}
-				continue;	// 次のタスクへ
-			}
-			else if((t1 < t0) && ((t0 <= tn) || (tn <= t1)))
-			{	// 同一日内の計算 (t0 <= tnと0:00 <= t1)
-				if(g_dialog0)
-				{
-					strTmp2.LoadString(STR_NEXEC_EXCLUDETIME);
-					strTmp1.Format(strTmp2,
-						tasks[i].name, tasks[i].time0.GetHour(), tasks[i].time0.GetMinute(), tasks[i].time0.GetSecond(),
-						tasks[i].time1.GetHour(), tasks[i].time1.GetMinute(), tasks[i].time1.GetSecond(),
-						Tnow.GetHour(), Tnow.GetMinute(), Tnow.GetSecond());
-					::MessageBox(hWnd, strTmp1, strAppName, MB_OK|MB_ICONINFORMATION|MB_APPLMODAL|MB_TOPMOST|MB_SETFOREGROUND);
-				}
-				continue;	// 次のタスクへ
-			}
-		}	// 時間除外終わり
-		if(tasks[i].date)
-		{	// 曜日除外のチェック
-			CString mes2 = "";
-			if((Tnow.GetDayOfWeek() == 1) && (tasks[i].date & 0x40)) mes2.LoadString(STR_SUN);
-			if((Tnow.GetDayOfWeek() == 2) && (tasks[i].date & 0x20)) mes2.LoadString(STR_MON);
-			if((Tnow.GetDayOfWeek() == 3) && (tasks[i].date & 0x10)) mes2.LoadString(STR_TUE);
-			if((Tnow.GetDayOfWeek() == 4) && (tasks[i].date & 0x08)) mes2.LoadString(STR_WED);
-			if((Tnow.GetDayOfWeek() == 5) && (tasks[i].date & 0x04)) mes2.LoadString(STR_THU);
-			if((Tnow.GetDayOfWeek() == 6) && (tasks[i].date & 0x02)) mes2.LoadString(STR_FRI);
-			if((Tnow.GetDayOfWeek() == 7) && (tasks[i].date & 0x01)) mes2.LoadString(STR_SAT);
-			
-			if(mes2 != "")
-			{
-				if(g_dialog0)
-				{
-					strTmp2.LoadString(STR_NEXEC_EXCLUDEDAY);
-					strTmp1.Format(strTmp2,
-						tasks[i].name, mes2);
-					::MessageBox(hWnd, strTmp1, strAppName, MB_OK|MB_ICONINFORMATION|MB_APPLMODAL|MB_TOPMOST|MB_SETFOREGROUND);
-				}
-				continue;	// 次のタスクへ
-			}
-		}	// 曜日除外終わり
-		if(tasks[i].apart == 0)
-		{	// 起動回数カウントもの
-			if(tasks[i].cnt_check < tasks[i].interval)
-			{
-				if(g_dialog0)
-				{
-					strTmp2.LoadString(STR_NEXEC_COUNTER);
-					strTmp1.Format(strTmp2,
-						tasks[i].name, tasks[i].interval, tasks[i].cnt_check);
-					::MessageBox(hWnd, strTmp1, strAppName, MB_OK|MB_ICONINFORMATION|MB_APPLMODAL|MB_TOPMOST|MB_SETFOREGROUND);
-				}
-				continue;
-			}
+
+		// 直前のタスクとの連動判定
+		// syncecec = 0 : この機能を使わない
+		// syncecec = 1 : 直前のタスク：実行 → このタスク：強制実行
+		// syncecec = 2 : 直前のタスク：実実行 → このタスク：強制実行
+		// syncecec = 3 : 直前のタスク：実行 → このタスク：強制実実行
+		// syncecec = 4 : 直前のタスク：実実行 → このタスク：強制実実行
+
+		if(tasks[i].syncexec == 3 && bLastTaskExec == TRUE && i != 0)
+		{
+			bLastTaskExec = FALSE;
+			continue;		// 強制中止
 		}
+		if(tasks[i].syncexec == 4 && bLastTaskExec == FALSE && i != 0)
+		{
+			bLastTaskExec = FALSE;
+			continue;		// 強制中止
+		}
+
+		if(((tasks[i].syncexec == 1 && bLastTaskExec == TRUE) || (tasks[i].syncexec == 2 && bLastTaskExec == FALSE)) && i != 0)
+		{
+			bLastTaskExec = FALSE;
+			// 強制実行
+		}
+		else
+		{	// 通常どおり条件判定を行う
+			bLastTaskExec = FALSE;
+
+			Tnext = CalcNextTime(i);
+			if(Tnext > Tnow)
+			{	// 日時が実行可能時期に達していない場合
+				if(g_dialog0)
+				{
+					strTmp2.LoadString(STR_NEXEC_NREACH);
+					strTmp1.Format(strTmp2,
+						tasks[i].name, Tnext.GetYear(), Tnext.GetMonth(), Tnext.GetDay(), Tnext.GetHour(), Tnext.GetMinute(), Tnext.GetSecond(),
+						Tnow.GetYear(), Tnow.GetMonth(), Tnow.GetDay(), Tnow.GetHour(), Tnow.GetMinute(), Tnow.GetSecond());
+					::MessageBox(hWnd, strTmp1, strAppName, MB_OK|MB_ICONINFORMATION|MB_APPLMODAL|MB_TOPMOST|MB_SETFOREGROUND);
+				}
+				continue;	// 次のタスクへ
+			}	// 期限チェック終わり
+			if(tasks[i].excludetime)
+			{	// 時間除外がある場合
+				long int t0,t1,tn;	// １日を秒単位に直し、前後関係を計算する
+				t0 = tasks[i].time0.GetHour() * 3600 + tasks[i].time0.GetMinute() * 60 + tasks[i].time0.GetSecond();
+				t1 = tasks[i].time1.GetHour() * 3600 + tasks[i].time1.GetMinute() * 60 + tasks[i].time1.GetSecond();
+				tn = Tnow.GetHour() * 3600 + Tnow.GetMinute() * 60 + Tnow.GetSecond();
+				if((t0 <= tn) && (tn <= t1))
+				{	// 同一日内の計算 (t0 <= tn <= t1)
+					if(g_dialog0)
+					{
+						strTmp2.LoadString(STR_NEXEC_EXCLUDETIME);
+						strTmp1.Format(strTmp2,
+							tasks[i].name, tasks[i].time0.GetHour(), tasks[i].time0.GetMinute(), tasks[i].time0.GetSecond(),
+							tasks[i].time1.GetHour(), tasks[i].time1.GetMinute(), tasks[i].time1.GetSecond(),
+							Tnow.GetHour(), Tnow.GetMinute(), Tnow.GetSecond());
+						::MessageBox(hWnd, strTmp1, strAppName, MB_OK|MB_ICONINFORMATION|MB_APPLMODAL|MB_TOPMOST|MB_SETFOREGROUND);
+					}
+					continue;	// 次のタスクへ
+				}
+				else if((t1 < t0) && ((t0 <= tn) || (tn <= t1)))
+				{	// 同一日内の計算 (t0 <= tnと0:00 <= t1)
+					if(g_dialog0)
+					{
+						strTmp2.LoadString(STR_NEXEC_EXCLUDETIME);
+						strTmp1.Format(strTmp2,
+							tasks[i].name, tasks[i].time0.GetHour(), tasks[i].time0.GetMinute(), tasks[i].time0.GetSecond(),
+							tasks[i].time1.GetHour(), tasks[i].time1.GetMinute(), tasks[i].time1.GetSecond(),
+							Tnow.GetHour(), Tnow.GetMinute(), Tnow.GetSecond());
+						::MessageBox(hWnd, strTmp1, strAppName, MB_OK|MB_ICONINFORMATION|MB_APPLMODAL|MB_TOPMOST|MB_SETFOREGROUND);
+					}
+					continue;	// 次のタスクへ
+				}
+			}	// 時間除外終わり
+			if(tasks[i].date)
+			{	// 曜日除外のチェック
+				CString mes2 = "";
+				if((Tnow.GetDayOfWeek() == 1) && (tasks[i].date & 0x40)) mes2.LoadString(STR_SUN);
+				if((Tnow.GetDayOfWeek() == 2) && (tasks[i].date & 0x20)) mes2.LoadString(STR_MON);
+				if((Tnow.GetDayOfWeek() == 3) && (tasks[i].date & 0x10)) mes2.LoadString(STR_TUE);
+				if((Tnow.GetDayOfWeek() == 4) && (tasks[i].date & 0x08)) mes2.LoadString(STR_WED);
+				if((Tnow.GetDayOfWeek() == 5) && (tasks[i].date & 0x04)) mes2.LoadString(STR_THU);
+				if((Tnow.GetDayOfWeek() == 6) && (tasks[i].date & 0x02)) mes2.LoadString(STR_FRI);
+				if((Tnow.GetDayOfWeek() == 7) && (tasks[i].date & 0x01)) mes2.LoadString(STR_SAT);
+				
+				if(mes2 != "")
+				{
+					if(g_dialog0)
+					{
+						strTmp2.LoadString(STR_NEXEC_EXCLUDEDAY);
+						strTmp1.Format(strTmp2,
+							tasks[i].name, mes2);
+						::MessageBox(hWnd, strTmp1, strAppName, MB_OK|MB_ICONINFORMATION|MB_APPLMODAL|MB_TOPMOST|MB_SETFOREGROUND);
+					}
+					continue;	// 次のタスクへ
+				}
+			}	// 曜日除外終わり
+			if(tasks[i].apart == 0)
+			{	// 起動回数カウントもの
+				if(tasks[i].cnt_check < tasks[i].interval)
+				{
+					if(g_dialog0)
+					{
+						strTmp2.LoadString(STR_NEXEC_COUNTER);
+						strTmp1.Format(strTmp2,
+							tasks[i].name, tasks[i].interval, tasks[i].cnt_check);
+						::MessageBox(hWnd, strTmp1, strAppName, MB_OK|MB_ICONINFORMATION|MB_APPLMODAL|MB_TOPMOST|MB_SETFOREGROUND);
+					}
+					continue;
+				}
+			}
+
+		}
+
 		if(!ExecTask(i, hWnd))
 		{	// タスクが実行できなかったら
 			if(g_faildlg)
-			{	// ダイアログを表示する
+			{	// ダイアログを表示する （タスクが実行できなかったとき）
 				strTmp2.LoadString(STR_NEXEC_EXECERR);
 				strTmp1.Format(strTmp2,
 					tasks[i].name);
 					::MessageBox(hWnd, strTmp1, strAppName, MB_OK|MB_ICONEXCLAMATION|MB_APPLMODAL|MB_TOPMOST|MB_SETFOREGROUND);
 			}
+			bLastTaskExec = FALSE;	// (syncexec 判定用）
 		}
+		else bLastTaskExec = TRUE;	// （syncexec 判定用）
 	}
 
 	if(g_dialog && h_ThreadHandle != NULL)

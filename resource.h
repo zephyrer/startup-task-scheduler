@@ -21,6 +21,7 @@
 #define IDI_ICO_INST                    148
 #define IDR_STASKTYPE                   151
 #define IDB_TRAIN                       152
+#define IDD_PROP_ADD5                   155
 #define IDR_XDOCICON                    185
 #define IDC_EDIT_FPASS                  1000
 #define IDC_BTN_BROWSE                  1001
@@ -90,6 +91,8 @@
 #define IDC_R_AUTOEXEC4                 1056
 #define IDC_CHECK_UNINST_CPL            1057
 #define IDC_CHECK_UNINST_START          1058
+#define IDC_CMB_SYNCEXEC                1058
+#define IDC_PROP5_NAME                  1060
 #define ID_TASK_NEW                     32771
 #define ID_WRITEREG                     32772
 #define ID_VIEW_ICON                    32773
@@ -176,15 +179,16 @@
 #define STR_CONFIG_SHORT                61277
 #define STR_MES_EXIT_DEBUG              61278
 #define STR_MES_REGSAVED                61279
+#define STR_TASK_NEW_SHORT              61280
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
-#define _APS_NEXT_RESOURCE_VALUE        150
+#define _APS_NEXT_RESOURCE_VALUE        156
 #define _APS_NEXT_COMMAND_VALUE         32784
-#define _APS_NEXT_CONTROL_VALUE         1058
+#define _APS_NEXT_CONTROL_VALUE         1061
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

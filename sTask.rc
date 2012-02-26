@@ -151,14 +151,14 @@ BEGIN
                     10,10,215,140
     CONTROL         152,IDC_STATIC,"Static",SS_BITMAP,5,5,229,151
     ICON            IDR_MAINFRAME,IDC_STATIC,5,160,20,20
-    LTEXT           "スタートアップ タスクスケジューラ (sTask)\n version 1.61 for Windows 95/98/Me/NT/2000/XP\n(C) 1999-2002 INOUE. Hirokazu\n\nhttp://www.ne.jp/asahi/oasis/inoue-h/\nhttp://inoue-h.connect.to/",
+    LTEXT           "スタートアップ タスクスケジューラ (sTask)\n version 1.62 for Windows 95/98/Me/NT/2000/XP\n(C) 1999-2003 INOUE. Hirokazu\n\nhttp://www.ne.jp/asahi/oasis/inoue-h/\nhttp://inoue-h.connect.to/",
                     IDC_STATIC,30,160,200,50
 END
 
 IDD_PROP_ADD1 DIALOGEX 0, 0, 255, 219
 STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
 CAPTION "タスク"
-FONT 9, "ＭＳ Ｐゴシック"
+FONT 9, "ＭＳ Ｐゴシック", 0, 0, 0x1
 BEGIN
     LTEXT           "タスクの名前",IDC_STATIC,10,10,75,15,SS_CENTERIMAGE
     EDITTEXT        IDC_EDIT_NAME,90,10,155,15,ES_AUTOHSCROLL | NOT 
@@ -227,26 +227,31 @@ END
 IDD_PROP_ADD3 DIALOGEX 0, 0, 254, 219
 STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
 CAPTION "高度な設定"
-FONT 9, "ＭＳ Ｐゴシック"
+FONT 9, "ＭＳ Ｐゴシック", 0, 0, 0x1
 BEGIN
     CONTROL         "次のタスクを待機させる （実行可能ファイルのみ有効） （推奨）",
                     IDC_CHECK_WAIT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,10,
-                    10,205,15
-    EDITTEXT        IDC_EDIT_WAIT,10,30,60,15,ES_AUTOHSCROLL | NOT WS_BORDER,
+                    5,205,10
+    EDITTEXT        IDC_EDIT_WAIT,10,20,60,15,ES_AUTOHSCROLL | NOT WS_BORDER,
                     WS_EX_STATICEDGE
-    LTEXT           "秒間待ってから実行する （0～120秒)",IDC_STATIC,80,36,
-                    115,10
+    LTEXT           "秒間待ってから実行する （0～120秒)",IDC_STATIC,80,20,
+                    115,15,SS_CENTERIMAGE
     CONTROL         "次の回数実行したら、タスクを停止する",IDC_CHECK_STOP,
-                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,10,50,185,15
-    EDITTEXT        IDC_EDIT_STOP,10,65,60,15,ES_AUTOHSCROLL | NOT WS_BORDER,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,10,40,185,10
+    EDITTEXT        IDC_EDIT_STOP,10,55,60,15,ES_AUTOHSCROLL | NOT WS_BORDER,
                     WS_EX_STATICEDGE
-    LTEXT           "回実行したら、停止する",IDC_STATIC,75,70,115,10
+    LTEXT           "回実行したら、停止する",IDC_STATIC,80,55,115,15,
+                    SS_CENTERIMAGE
     CONTROL         "タスクを実行する前に、ダイアログを表示する",
                     IDC_CHECK_STDLG,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,10,
-                    90,185,15
-    CONTROL         "直前のタスクの実行と連動 （このタスクが実行されたこととなる）",
+                    75,185,10
+    CONTROL         "直前のタスクの実行と連動 （このタスクの最終実行日時を事前同期）",
                     IDC_CHECK_PREVTASK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
-                    10,110,220,15
+                    10,95,220,10
+    LTEXT           "直前のタスクと連動",IDC_STATIC,10,115,80,15,
+                    SS_CENTERIMAGE
+    COMBOBOX        IDC_CMB_SYNCEXEC,90,115,145,65,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
     CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDHORZ,10,135,232,1
     LTEXT           "デバッグ用の設定 （実行記録の書き換え）",IDC_STATIC,10,
                     140,220,10
@@ -270,7 +275,7 @@ END
 IDD_PROP_CNF1 DIALOGEX 0, 0, 255, 219
 STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
 CAPTION "環境設定"
-FONT 9, "ＭＳ Ｐゴシック"
+FONT 9, "ＭＳ Ｐゴシック", 0, 0, 0x1
 BEGIN
     CTEXT           "すべてのタスク実行に影響する条件を設定します",
                     IDC_STATIC,15,10,225,10
@@ -351,7 +356,7 @@ END
 IDD_PROP_ADD4 DIALOGEX 0, 0, 254, 219
 STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
 CAPTION "高度な設定"
-FONT 9, "ＭＳ Ｐゴシック"
+FONT 9, "ＭＳ Ｐゴシック", 0, 0, 0x1
 BEGIN
     LTEXT           "タスクの名前",IDC_STATIC,10,10,75,15,SS_CENTERIMAGE
     EDITTEXT        IDC_PROP1_NAME,90,10,155,15,ES_AUTOHSCROLL | ES_READONLY | 
@@ -372,9 +377,29 @@ BEGIN
     CONTROL         "タスクを実行する前に、ダイアログを表示する",
                     IDC_CHECK_STDLG,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,10,
                     125,185,15
-    CONTROL         "直前のタスクの実行と連動 （このタスクが実行されたこととなる）",
+    CONTROL         "直前のタスクの実行と連動 （このタスクの最終実行日時を事前同期）",
                     IDC_CHECK_PREVTASK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
                     10,145,220,15
+    LTEXT           "直前のタスクと連動",IDC_STATIC,10,165,80,15,
+                    SS_CENTERIMAGE
+    COMBOBOX        IDC_CMB_SYNCEXEC,90,165,145,65,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+END
+
+IDD_PROP_ADD5 DIALOGEX 0, 0, 254, 219
+STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
+CAPTION "完了"
+FONT 9, "ＭＳ Ｐゴシック"
+BEGIN
+    LTEXT           "タスクの名前",IDC_STATIC,10,10,75,15,SS_CENTERIMAGE
+    EDITTEXT        IDC_PROP5_NAME,90,10,155,15,ES_AUTOHSCROLL | ES_READONLY | 
+                    NOT WS_BORDER | NOT WS_TABSTOP,WS_EX_STATICEDGE
+    CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDHORZ,10,35,235,1
+    LTEXT           "実行するファイル名",IDC_STATIC,10,50,75,10
+    EDITTEXT        IDC_EDIT_FPASS,90,45,155,15,ES_AUTOHSCROLL | ES_READONLY | 
+                    NOT WS_BORDER,WS_EX_STATICEDGE
+    LTEXT           "入力した内容で新しいタスクを作成します",IDC_STATIC,10,
+                    85,235,15,SS_CENTERIMAGE
 END
 
 IDD_PROP_ADD0 DIALOG DISCARDABLE  0, 0, 255, 219
@@ -448,8 +473,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 1,6,1,0
- PRODUCTVERSION 1,6,1,0
+ FILEVERSION 1,6,2,0
+ PRODUCTVERSION 1,6,2,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x9L
@@ -467,14 +492,14 @@ BEGIN
             VALUE "Comments", "\0"
             VALUE "CompanyName", "(C) INOUE Hirokazu\0"
             VALUE "FileDescription", "Startup Task Scheduler (Multi Language Version)\0"
-            VALUE "FileVersion", "1.6.1.0\0"
+            VALUE "FileVersion", "1.6.2.0\0"
             VALUE "InternalName", "sTask\0"
-            VALUE "LegalCopyright", "Copyright (C) 1999-2002 INOUE. Hirokazu\0"
+            VALUE "LegalCopyright", "Copyright (C) 1999-2003 INOUE. Hirokazu\0"
             VALUE "LegalTrademarks", "Free Ware Version\0"
             VALUE "OriginalFilename", "sTask.exe\0"
             VALUE "PrivateBuild", "Microsoft Visual C++ 6.0\0"
             VALUE "ProductName", "Startup Task Scheduler (Multi Language Version)\0"
-            VALUE "ProductVersion", "1.6.1.0\0"
+            VALUE "ProductVersion", "1.6.2.0\0"
             VALUE "SpecialBuild", "\0"
         END
     END
@@ -588,6 +613,54 @@ BEGIN
     0
 END
 
+IDD_PROP_ADD3 DLGINIT
+BEGIN
+    IDC_CMB_SYNCEXEC, 0x403, 19, 0
+0xb182, 0xcc82, 0x408b, 0x5c94, 0xf082, 0x678e, 0xed82, 0xc882, 0xa282, 
+"\000" 
+    IDC_CMB_SYNCEXEC, 0x403, 43, 0
+0xbc92, 0x4f91, 0xcc82, 0x5e83, 0x5883, 0x4e83, 0x4681, 0xc08e, 0x738d, 
+0x8120, 0x20a8, 0xb182, 0xcc82, 0x5e83, 0x5883, 0x4e83, 0x4681, 0xad8b, 
+0xa790, 0xc08e, 0x738d, "\000" 
+    IDC_CMB_SYNCEXEC, 0x403, 45, 0
+0xbc92, 0x4f91, 0xcc82, 0x5e83, 0x5883, 0x4e83, 0x4681, 0xf194, 0xc08e, 
+0x738d, 0x8120, 0x20a8, 0xb182, 0xcc82, 0x5e83, 0x5883, 0x4e83, 0x4681, 
+0xad8b, 0xa790, 0xc08e, 0x738d, "\000" 
+    IDC_CMB_SYNCEXEC, 0x403, 43, 0
+0xbc92, 0x4f91, 0xcc82, 0x5e83, 0x5883, 0x4e83, 0x4681, 0xc08e, 0x738d, 
+0x8120, 0x20a8, 0xb182, 0xcc82, 0x5e83, 0x5883, 0x4e83, 0x4681, 0xad8b, 
+0xa790, 0x8692, 0x7e8e, "\000" 
+    IDC_CMB_SYNCEXEC, 0x403, 45, 0
+0xbc92, 0x4f91, 0xcc82, 0x5e83, 0x5883, 0x4e83, 0x4681, 0xf194, 0xc08e, 
+0x738d, 0x8120, 0x20a8, 0xb182, 0xcc82, 0x5e83, 0x5883, 0x4e83, 0x4681, 
+0xad8b, 0xa790, 0x8692, 0x7e8e, "\000" 
+    0
+END
+
+IDD_PROP_ADD4 DLGINIT
+BEGIN
+    IDC_CMB_SYNCEXEC, 0x403, 19, 0
+0xb182, 0xcc82, 0x408b, 0x5c94, 0xf082, 0x678e, 0xed82, 0xc882, 0xa282, 
+"\000" 
+    IDC_CMB_SYNCEXEC, 0x403, 43, 0
+0xbc92, 0x4f91, 0xcc82, 0x5e83, 0x5883, 0x4e83, 0x4681, 0xc08e, 0x738d, 
+0x8120, 0x20a8, 0xb182, 0xcc82, 0x5e83, 0x5883, 0x4e83, 0x4681, 0xad8b, 
+0xa790, 0xc08e, 0x738d, "\000" 
+    IDC_CMB_SYNCEXEC, 0x403, 45, 0
+0xbc92, 0x4f91, 0xcc82, 0x5e83, 0x5883, 0x4e83, 0x4681, 0xf194, 0xc08e, 
+0x738d, 0x8120, 0x20a8, 0xb182, 0xcc82, 0x5e83, 0x5883, 0x4e83, 0x4681, 
+0xad8b, 0xa790, 0xc08e, 0x738d, "\000" 
+    IDC_CMB_SYNCEXEC, 0x403, 43, 0
+0xbc92, 0x4f91, 0xcc82, 0x5e83, 0x5883, 0x4e83, 0x4681, 0xc08e, 0x738d, 
+0x8120, 0x20a8, 0xb182, 0xcc82, 0x5e83, 0x5883, 0x4e83, 0x4681, 0xad8b, 
+0xa790, 0x8692, 0x7e8e, "\000" 
+    IDC_CMB_SYNCEXEC, 0x403, 45, 0
+0xbc92, 0x4f91, 0xcc82, 0x5e83, 0x5883, 0x4e83, 0x4681, 0xf194, 0xc08e, 
+0x738d, 0x8120, 0x20a8, 0xb182, 0xcc82, 0x5e83, 0x5883, 0x4e83, 0x4681, 
+0xad8b, 0xa790, 0x8692, 0x7e8e, "\000" 
+    0
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -690,7 +763,7 @@ BEGIN
     STR_NEXEC_EXCLUDETIME   "タスク 「%s」 は除外時間のため実行されません\n\n除外時間は%d時%d分%d秒から%d時%d分%d秒です\n現在時刻は%d時%d分%d秒です\n"
     STR_NEXEC_EXCLUDEDAY    "タスク 「%s」 は除外曜日「%s」曜日のため実行されません\n"
     STR_NEXEC_COUNTER       "タスク 「%s」 は %d 回目のチェック時点まで実行されません\n\n現在 %d 回目のチェックです"
-    STR_NEXEC_EXECERR       "タスク 「%s」 は実行できませんでした\n\nファイルが存在しないか壊れている可能性があります\n"
+    STR_NEXEC_EXECERR       "タスク 「%s」 は実行されませんでした\n\nユーザによってキャンセルされた場合以外は、ファイルが存在しないか壊れている可能性があります\n"
     STR_SUN                 "日"
     STR_MON                 "月"
     STR_TUE                 "火"
@@ -738,6 +811,11 @@ BEGIN
     STR_CONFIG_SHORT        "環境設定"
     STR_MES_EXIT_DEBUG      "現在までの編集結果をリセットして、デバッグモードから抜けますか ？\n「いいえ」の場合は、再びデバッグ実行されます"
     STR_MES_REGSAVED        "設定を保存しました"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    STR_TASK_NEW_SHORT      "新しいタスクの追加"
 END
 
 #endif    // 日本語 resources
@@ -841,7 +919,7 @@ BEGIN
                     10,10,215,115
     CONTROL         152,IDC_STATIC,"Static",SS_BITMAP,5,5,229,151
     ICON            IDR_MAINFRAME,IDC_STATIC,10,140,20,20
-    LTEXT           "Startup Task Scheduler (sTask) (Multi Language)\n version 1.61 for Windows 95/98/Me/NT/2000/XP\n(C) 1999-2002 INOUE. Hirokazu\n\nhttp://www.ne.jp/asahi/oasis/inoue-h/\nhttp://inoue-h.connect.to/",
+    LTEXT           "Startup Task Scheduler (sTask) (Multi Language)\n version 1.62 for Windows 95/98/Me/NT/2000/XP\n(C) 1999-2003 INOUE. Hirokazu\n\nhttp://www.ne.jp/asahi/oasis/inoue-h/\nhttp://inoue-h.connect.to/",
                     IDC_STATIC,35,135,195,50
 END
 
@@ -915,7 +993,7 @@ END
 IDD_PROP_ADD1 DIALOGEX 0, 0, 255, 219
 STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
 CAPTION "Task"
-FONT 9, "Arial"
+FONT 9, "Arial", 0, 0, 0x1
 BEGIN
     LTEXT           "Task Name",IDC_STATIC,10,10,75,15,SS_CENTERIMAGE
     EDITTEXT        IDC_EDIT_NAME,90,10,155,15,ES_AUTOHSCROLL | NOT 
@@ -941,7 +1019,7 @@ END
 IDD_PROP_ADD2 DIALOGEX 0, 0, 255, 219
 STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
 CAPTION "Schedule"
-FONT 9, "Arial"
+FONT 9, "Arial", 0, 0, 0x1
 BEGIN
     LTEXT           "Task Name",IDC_STATIC,10,10,75,15,SS_CENTERIMAGE
     EDITTEXT        IDC_PROP1_NAME,90,10,155,15,ES_AUTOHSCROLL | ES_READONLY | 
@@ -987,26 +1065,29 @@ END
 IDD_PROP_ADD3 DIALOGEX 0, 0, 254, 219
 STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
 CAPTION "Settings"
-FONT 9, "Arial"
+FONT 9, "Arial", 0, 0, 0x1
 BEGIN
     CONTROL         "Next task wait this task termination (only if executables)",
                     IDC_CHECK_WAIT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,10,
-                    10,205,15
-    EDITTEXT        IDC_EDIT_WAIT,10,30,60,15,ES_AUTOHSCROLL | NOT WS_BORDER,
+                    5,205,10
+    EDITTEXT        IDC_EDIT_WAIT,10,20,60,15,ES_AUTOHSCROLL | NOT WS_BORDER,
                     WS_EX_STATICEDGE
     LTEXT           "wait timer before execute this task (0-120 sec)",-1,80,
-                    30,150,16,SS_CENTERIMAGE
+                    20,150,16,SS_CENTERIMAGE
     CONTROL         "Stop task evaluation after following execution count",
                     IDC_CHECK_STOP,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,10,
-                    50,225,15
-    EDITTEXT        IDC_EDIT_STOP,10,65,60,15,ES_AUTOHSCROLL | NOT WS_BORDER,
+                    40,225,10
+    EDITTEXT        IDC_EDIT_STOP,10,55,60,15,ES_AUTOHSCROLL | NOT WS_BORDER,
                     WS_EX_STATICEDGE
-    LTEXT           "times",-1,75,65,115,15,SS_CENTERIMAGE
+    LTEXT           "times",-1,80,55,115,15,SS_CENTERIMAGE
     CONTROL         "Show dialog box before execute task",IDC_CHECK_STDLG,
-                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,10,90,185,15
-    CONTROL         "This task will not execute, if previous task executed",
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,10,80,185,10
+    CONTROL         "Syncronize last exec time to prev task, if it is executed .",
                     IDC_CHECK_PREVTASK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
-                    10,110,220,15
+                    10,95,220,10
+    LTEXT           "Sync to Prev Task",-1,10,115,70,15,SS_CENTERIMAGE
+    COMBOBOX        IDC_CMB_SYNCEXEC,90,115,150,65,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
     CONTROL         "",-1,"Static",SS_ETCHEDHORZ,10,135,232,1
     LTEXT           "Overwrite Internal Data (for debug or evaluation)",-1,
                     10,140,220,10
@@ -1027,7 +1108,7 @@ END
 IDD_PROP_ADD4 DIALOGEX 0, 0, 254, 219
 STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
 CAPTION "Settings"
-FONT 9, "Arial"
+FONT 9, "Arial", 0, 0, 0x1
 BEGIN
     LTEXT           "Task Name",IDC_STATIC,10,10,75,15,SS_CENTERIMAGE
     EDITTEXT        IDC_PROP1_NAME,90,10,155,15,ES_AUTOHSCROLL | ES_READONLY | 
@@ -1051,12 +1132,16 @@ BEGIN
     CONTROL         "This task will not execute, if previous task executed",
                     IDC_CHECK_PREVTASK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
                     10,145,220,15
+    LTEXT           "Sync to Prev Task",IDC_STATIC,10,165,70,15,
+                    SS_CENTERIMAGE
+    COMBOBOX        IDC_CMB_SYNCEXEC,90,165,150,65,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
 END
 
 IDD_PROP_CNF1 DIALOGEX 0, 0, 255, 183
 STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
 CAPTION "Global Configuration"
-FONT 9, "Arial"
+FONT 9, "Arial", 0, 0, 0x1
 BEGIN
     CTEXT           "Global Configuration of Startup Task Scheduler",
                     IDC_STATIC,15,10,225,10
@@ -1096,6 +1181,22 @@ BEGIN
     PUSHBUTTON      "make uninstall",IDC_BTN_MKUNIN,10,100,75,15
     LTEXT           "Make uninstall shortcut on start menu .",IDC_STATIC,90,
                     105,160,20
+END
+
+IDD_PROP_ADD5 DIALOGEX 0, 0, 254, 219
+STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
+CAPTION "Complete"
+FONT 9, "Arial"
+BEGIN
+    LTEXT           "Task Name",IDC_STATIC,10,8,75,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_PROP5_NAME,90,8,155,12,ES_AUTOHSCROLL | ES_READONLY | 
+                    NOT WS_BORDER | NOT WS_TABSTOP,WS_EX_STATICEDGE
+    CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDHORZ,10,28,235,1
+    LTEXT           "Execute File Path",IDC_STATIC,10,40,75,8
+    EDITTEXT        IDC_EDIT_FPASS,90,36,155,12,ES_AUTOHSCROLL | ES_READONLY | 
+                    NOT WS_BORDER,WS_EX_STATICEDGE
+    LTEXT           "Create New Task Wizard Complete",IDC_STATIC,10,65,232,
+                    15,SS_CENTERIMAGE
 END
 
 
@@ -1196,6 +1297,54 @@ BEGIN
 0x6557, 0x6b65, 0x4920, 0x746e, 0x7265, 0x6176, 0x006c, 
     IDC_COMBO_APART, 0x403, 15, 0
 0x6f4d, 0x746e, 0x2068, 0x6e49, 0x6574, 0x7672, 0x6c61, "\000" 
+    0
+END
+
+IDD_PROP_ADD3 DLGINIT
+BEGIN
+    IDC_CMB_SYNCEXEC, 0x403, 25, 0
+0x6f44, 0x6e20, 0x746f, 0x7520, 0x6573, 0x7420, 0x6968, 0x2073, 0x7566, 
+0x636e, 0x6974, 0x6e6f, "\000" 
+    IDC_CMB_SYNCEXEC, 0x403, 43, 0
+0x7270, 0x7665, 0x7420, 0x7361, 0x206b, 0x203a, 0x7865, 0x6365, 0x2d20, 
+0x203e, 0x6874, 0x7369, 0x7420, 0x7361, 0x206b, 0x203a, 0x6f66, 0x6372, 
+0x2065, 0x7865, 0x6365, "\000" 
+    IDC_CMB_SYNCEXEC, 0x403, 47, 0
+0x7270, 0x7665, 0x7420, 0x7361, 0x206b, 0x203a, 0x6f6e, 0x2074, 0x7865, 
+0x6365, 0x2d20, 0x203e, 0x6874, 0x7369, 0x7420, 0x7361, 0x206b, 0x203a, 
+0x6f66, 0x6372, 0x2065, 0x7865, 0x6365, "\000" 
+    IDC_CMB_SYNCEXEC, 0x403, 47, 0
+0x7270, 0x7665, 0x7420, 0x7361, 0x206b, 0x203a, 0x7865, 0x6365, 0x2d20, 
+0x203e, 0x6874, 0x7369, 0x7420, 0x7361, 0x206b, 0x203a, 0x6f66, 0x6372, 
+0x2065, 0x6f6e, 0x2074, 0x7865, 0x6365, "\000" 
+    IDC_CMB_SYNCEXEC, 0x403, 51, 0
+0x7270, 0x7665, 0x7420, 0x7361, 0x206b, 0x203a, 0x6f6e, 0x2074, 0x7865, 
+0x6365, 0x2d20, 0x203e, 0x6874, 0x7369, 0x7420, 0x7361, 0x206b, 0x203a, 
+0x6f66, 0x6372, 0x2065, 0x6f6e, 0x2074, 0x7865, 0x6365, "\000" 
+    0
+END
+
+IDD_PROP_ADD4 DLGINIT
+BEGIN
+    IDC_CMB_SYNCEXEC, 0x403, 25, 0
+0x6f44, 0x6e20, 0x746f, 0x7520, 0x6573, 0x7420, 0x6968, 0x2073, 0x7566, 
+0x636e, 0x6974, 0x6e6f, "\000" 
+    IDC_CMB_SYNCEXEC, 0x403, 43, 0
+0x7270, 0x7665, 0x7420, 0x7361, 0x206b, 0x203a, 0x7865, 0x6365, 0x2d20, 
+0x203e, 0x6874, 0x7369, 0x7420, 0x7361, 0x206b, 0x203a, 0x6f66, 0x6372, 
+0x2065, 0x7865, 0x6365, "\000" 
+    IDC_CMB_SYNCEXEC, 0x403, 47, 0
+0x7270, 0x7665, 0x7420, 0x7361, 0x206b, 0x203a, 0x6f6e, 0x2074, 0x7865, 
+0x6365, 0x2d20, 0x203e, 0x6874, 0x7369, 0x7420, 0x7361, 0x206b, 0x203a, 
+0x6f66, 0x6372, 0x2065, 0x7865, 0x6365, "\000" 
+    IDC_CMB_SYNCEXEC, 0x403, 47, 0
+0x7270, 0x7665, 0x7420, 0x7361, 0x206b, 0x203a, 0x7865, 0x6365, 0x2d20, 
+0x203e, 0x6874, 0x7369, 0x7420, 0x7361, 0x206b, 0x203a, 0x6f66, 0x6372, 
+0x2065, 0x6f6e, 0x2074, 0x7865, 0x6365, "\000" 
+    IDC_CMB_SYNCEXEC, 0x403, 51, 0
+0x7270, 0x7665, 0x7420, 0x7361, 0x206b, 0x203a, 0x6f6e, 0x2074, 0x7865, 
+0x6365, 0x2d20, 0x203e, 0x6874, 0x7369, 0x7420, 0x7361, 0x206b, 0x203a, 
+0x6f66, 0x6372, 0x2065, 0x6f6e, 0x2074, 0x7865, 0x6365, "\000" 
     0
 END
 
@@ -1301,7 +1450,7 @@ BEGIN
     STR_NEXEC_EXCLUDETIME   "Skip task [%s] , because of exclude time period .\r\n\r\nExclude period is from %d:%d:%d  to %d:%d:%d .\r\n(Current time is %d:%d:%d .)"
     STR_NEXEC_EXCLUDEDAY    "Skip task [%s] , because of exclude day of week [%s]"
     STR_NEXEC_COUNTER       "Skip task [%s] , because of exclude counter .\r\n\r\nThis task will execute after [%d] count . (Current counter is [%d] .)"
-    STR_NEXEC_EXECERR       "Task [%s] can not be executed .\r\n\r\nFile may be damaged or broken shortcut ."
+    STR_NEXEC_EXECERR       "Task [%s] was not executed .\r\n\r\nUser Cancel , or File may be damaged or broken shortcut ."
     STR_SUN                 "Sun "
     STR_MON                 "Mon "
     STR_TUE                 "Tue "
@@ -1349,6 +1498,11 @@ BEGIN
     STR_CONFIG_SHORT        "Configuration"
     STR_MES_EXIT_DEBUG      "Do you want to exit debug mode ?\r\n\r\n(If you press ""NO"", you  enter debug mode again .)"
     STR_MES_REGSAVED        "Settings are Saved to Registry"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    STR_TASK_NEW_SHORT      "Add New Task"
 END
 
 #endif    // 英語 (ｱﾒﾘｶ) resources

@@ -456,6 +456,7 @@ CPropAdd3::CPropAdd3() : CPropertyPage(CPropAdd3::IDD)
 	m_lastexec_time = 0;
 	m_cnt_check = 0;
 	m_cnt_exec = 0;
+	m_cmb_syncexec = -1;
 	//}}AFX_DATA_INIT
 }
 
@@ -480,6 +481,7 @@ void CPropAdd3::DoDataExchange(CDataExchange* pDX)
 	DDX_DateTimeCtrl(pDX, IDC_EDIT_TIME2, m_lastexec_time);
 	DDX_Text(pDX, IDC_EDIT_CHECK, m_cnt_check);
 	DDX_Text(pDX, IDC_EDIT_EXEC, m_cnt_exec);
+	DDX_CBIndex(pDX, IDC_CMB_SYNCEXEC, m_cmb_syncexec);
 	//}}AFX_DATA_MAP
 }
 
@@ -530,6 +532,7 @@ CPropAdd4::CPropAdd4() : CPropertyPage(CPropAdd4::IDD)
 	m_waitexit = FALSE;
 	m_waitsec = 0;
 	m_taskoffcount = 0;
+	m_cmb_syncexec = -1;
 	//}}AFX_DATA_INIT
 }
 
@@ -550,6 +553,7 @@ void CPropAdd4::DoDataExchange(CDataExchange* pDX)
 	DDV_MinMaxUInt(pDX, m_waitsec, 0, 120);
 	DDX_Text(pDX, IDC_EDIT_STOP, m_taskoffcount);
 	DDV_MinMaxUInt(pDX, m_taskoffcount, 0, 100);
+	DDX_CBIndex(pDX, IDC_CMB_SYNCEXEC, m_cmb_syncexec);
 	//}}AFX_DATA_MAP
 }
 
@@ -567,7 +571,8 @@ BOOL CPropAdd4::OnSetActive()
 	// ウィザード形式のボタン「次」「完了」などの制御
 	CPropertySheet* pSheet = (CPropertySheet*)GetParent();
 	ASSERT_KINDOF(CPropertySheet, pSheet);
-	pSheet->SetWizardButtons( PSWIZB_BACK | PSWIZB_NEXT | PSWIZB_FINISH);
+	pSheet->SetWizardButtons( PSWIZB_BACK | PSWIZB_NEXT);	
+//	pSheet->SetWizardButtons( PSWIZB_BACK | PSWIZB_NEXT | PSWIZB_FINISH);
 	return CPropertyPage::OnSetActive();
 }
 
@@ -769,4 +774,62 @@ void CPropCnf2::OnBtnMkunin()
 {
 	// TODO: この位置にコントロール通知ハンドラ用のコードを追加してください
 	::MkUninstMnu();
+}
+/////////////////////////////////////////////////////////////////////////////
+// CPropAdd5 プロパティ ページ
+
+IMPLEMENT_DYNCREATE(CPropAdd5, CPropertyPage)
+
+CPropAdd5::CPropAdd5() : CPropertyPage(CPropAdd5::IDD)
+{
+	//{{AFX_DATA_INIT(CPropAdd5)
+		// メモ - ClassWizard はこの位置にメンバの初期化処理を追加します。
+	//}}AFX_DATA_INIT
+}
+
+CPropAdd5::~CPropAdd5()
+{
+}
+
+void CPropAdd5::DoDataExchange(CDataExchange* pDX)
+{
+	CPropertyPage::DoDataExchange(pDX);
+	//{{AFX_DATA_MAP(CPropAdd5)
+		// メモ - ClassWizard はこの位置にマッピング用のマクロを追加または削除します。
+	//}}AFX_DATA_MAP
+}
+
+
+BEGIN_MESSAGE_MAP(CPropAdd5, CPropertyPage)
+	//{{AFX_MSG_MAP(CPropAdd5)
+	ON_WM_SHOWWINDOW()
+	//}}AFX_MSG_MAP
+END_MESSAGE_MAP()
+
+/////////////////////////////////////////////////////////////////////////////
+// CPropAdd5 メッセージ ハンドラ
+
+BOOL CPropAdd5::OnSetActive() 
+{
+	// TODO: この位置に固有の処理を追加するか、または基本クラスを呼び出してください
+
+	// ウィザード形式のボタン「次」「完了」などの制御
+	CPropertySheet* pSheet = (CPropertySheet*)GetParent();
+	ASSERT_KINDOF(CPropertySheet, pSheet);
+	pSheet->SetWizardButtons( PSWIZB_BACK | PSWIZB_NEXT | PSWIZB_FINISH);
+	
+	return CPropertyPage::OnSetActive();
+}
+
+
+void CPropAdd5::OnShowWindow(BOOL bShow, UINT nStatus) 
+{
+	CPropertyPage::OnShowWindow(bShow, nStatus);
+	
+	// TODO: この位置にメッセージ ハンドラ用のコードを追加してください
+
+	// タイトル名の設定
+	SetDlgItemText(IDC_PROP5_NAME,*trn_name);
+	SetDlgItemText(IDC_EDIT_FPASS,*trn_fpass);
+	
 }
