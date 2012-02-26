@@ -1,105 +1,88 @@
-<html>
-
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
-<meta http-equiv="Content-Language" content="ja">
-<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
-<meta name="ProgId" content="FrontPage.Editor.Document">
-<title>‚ ‚Æ‚ª‚«E‹ZpŽ‘—¿</title>
-<link rel="stylesheet" type="text/css" href="main.css">
-</head>
-
-<body>
-
-<img border="0" src="pics/bg-blue-shade.png" width="100%" height="40">
-<div style="position:absolute; top:0px; left:0px;">
-	<table class="pagehead" border="0" width="95%" cellspacing="0" cellpadding="0" height="40">
-		<tr>
-			<td valign="middle" width="35"><img border="0" src="pics/ico-stask.png" align="middle"
-				width="32" height="32"></td>
-			<td valign="middle">&nbsp;‚ ‚Æ‚ª‚«E‹ZpŽ‘—¿</td>
-			<td valign="middle" width="80">
-				<p align="center"><a href="index.html"><img border="0" src="pics/ico-home.png"
-				width="61" height="18"></a></p>
-			</td>
-		</tr>
-	</table>
-</div>
-<h1>§ŒÀ</h1>
-<p class="doc-indent20">‘Ò‚¿ŽžŠÔ‚ðÝ’è‚µ‚½ê‡‚ÉAƒ}ƒEƒXƒJ[ƒ\ƒ‹‚ªu»ŽžŒv•t‚«‚Ì–îˆóvƒ‚[ƒh‚É‚È‚è‚Ü‚·B‚±‚ê‚ÍŽd—l‚Å‚·BiSleep 
-–½—ß‚ðŽg‚Á‚Ä‚¢‚é‚½‚ßj<br>
-ƒ^ƒXƒN‚Í21ŒÂ‚Ü‚Å‚µ‚©’Ç‰Á‚Å‚«‚Ü‚¹‚ñB<br>
-ƒŒƒWƒXƒgƒŠ‚ÉŠi”[‚·‚é‘Sƒf[ƒ^‚ðˆÃ†‰»‚µ‚Ä‚¢‚Ü‚¹‚ñB</p>
-<h1>ƒCƒ“ƒXƒg[ƒ‹ˆ—‚Ìƒ_ƒCƒAƒOƒ‰ƒ€</h1>
-<p class="doc-indent40"><img border="0" src="pics/fig-inst-diagram.png" width="261" height="513"></p>
-<h1>‚»‚Ì‘¼ ‹Zp“Iî•ñ</h1>
-<h2>‘½d‹N“®–hŽ~</h2>
-<p class="doc-indent20">Mutex ‚ðŽg‚Á‚ÄŽÀŒ»‚µ‚Ä‚¢‚Ü‚·B<br>
-sTask ŽÀs’†‚ÍA&quot;sTaskCtrlMutex&quot; ‚Æ‚¢‚¤•¶Žš—ñ‚Ì Mutex 
-‚ªŠm•Û‚³‚ê‚Ä‚¢‚Ü‚·</p>
-<h2>ƒvƒƒOƒ‰ƒ€‚ÌŽÀs</h2>
-<p class="doc-indent20">ŽÀsƒtƒ@ƒCƒ‹‚Í‰º‹LŒ`Ž®‚ÅŽÀs‚³‚ê‚Ü‚·</p>
-<p class="doc-indent20">STARTUPINFO si;<br>
-PROCESS_INFORMATION pi;<br>
-c (’†—ª) c<br>
-si.wShowWindow = SW_SHOWNORMAL; // —áFƒEƒCƒ“ƒhƒEƒXƒ^ƒCƒ‹‚ÌŽw’è<br>
-c (’†—ª) c</p>
-<p class="doc-indent20">::CreateProcess(NULL, [LPCSTR ProgPath], NULL, NULL, FALSE, 
-NORMAL_PRIORITY_CLASS, NULL, [LPCSTR Current Folder], &amp;si, &amp;pi);</p>
-<p class="doc-indent20">::WaitForSingleObject(pi.hProcess, INFINITE); // 
-ƒvƒƒOƒ‰ƒ€I—¹‚Ü‚Å‘Ò‹@</p>
-<p class="doc-indent20">ŽÀsƒtƒ@ƒCƒ‹ˆÈŠO‚Í‰º‹LŒ`Ž®‚ÅŽÀs‚³‚ê‚Ü‚·</p>
-<p class="doc-indent20">::ShellExecute(NULL,&quot;OPEN&quot;, [LPCSTR ProgPath], [LPCSTR ProgSwitch],&quot;&quot;,SW_SHOW);</p>
-<h2>Žg—p‚µ‚Ä‚¢‚éƒŒƒWƒXƒgƒŠ</h2>
-<p class="doc-indent20">HKCU\Software\hi_soft</p>
-<h1>•ÒW—š—ð</h1>
-<h2>‹Æ–±—pƒo[ƒWƒ‡ƒ“‚©‚çƒo[ƒWƒ‡ƒ“1.0‚Ö‚Ì•ÏX“_</h2>
-<p class="doc-indent20">ƒwƒ‹ƒvƒtƒ@ƒCƒ‹‚Ì‘å•‚È[ŽÀ<br>
-V‹K’Ç‰Á‚Éu‚¨Š©‚ßƒ^ƒXƒNAWindowsƒtƒHƒ‹ƒ_v‚ð’Ç‰Á<br>
-ƒŒƒWƒXƒgƒŠ•Û‘¶“à—e‚ð”ñˆÃ†‰»<br>
-ƒpƒXƒ[ƒh”FØ‚ðŠÈ—ª‰»<br>
-ƒCƒ“ƒXƒg[ƒ‰AƒAƒ“ƒCƒ“ƒXƒg[ƒ‰‚Ì’Ç‰Á</p>
-<h2>ƒo[ƒWƒ‡ƒ“ 1.1 i99”N7ŒŽ15“új</h2>
-<p class="doc-indent20">[BugFix] 
-ƒAƒ“ƒCƒ“ƒXƒg[ƒ‹Žž‚ÉƒAƒCƒRƒ“‚ªÁ‹Ž‚³‚ê‚È‚¢–â‘è‚ð‰ðŒˆ<br>
-[BugFix] 
-ƒpƒXƒ[ƒh‚ª‚í‚©‚ç‚È‚­‚Ä‚àƒZƒLƒ…ƒŠƒeƒB[Ý’è‚ª‚Å‚«‚é–â‘è‚ð‰ðŒˆ<br>
-ƒo[ƒWƒ‡ƒ“ 1.2 i99”N7ŒŽ31“új<br>
-[BugFix] Windows95‚Å‹N“®Žž‚ÉƒVƒXƒeƒ€’âŽ~‚·‚é–â‘è‚ð‰ðŒˆiMRUŠÇ—•œŠˆj</p>
-<h2>ƒo[ƒWƒ‡ƒ“ 1.5 (99”N11ŒŽ27“ú)</h2>
-<p class="doc-indent20">[BugFix] Windows95‚Å‚Q‰ñ–ÚˆÈ~‚Ì‹N“®Žž‚ÉƒVƒXƒeƒ€’âŽ~‚·‚é–â‘è‚ð‰ðŒˆB‚Ü‚½AGDIƒGƒ‰[‚É‚Â‚¢‚Ä‚à‰ðŒˆi²Ò°¼ÞØ½ÄEÊÝÄÞ×‚Æ±²ºÝEÊÝÄÞ×‚ÌŠJ•ú•û–@‚Ìƒ~ƒX‚ð’ù³j<br>
-[BugFix] 12ŒŽ‚Æ1ŒŽ‚ð‚Ü‚½‚®nƒ–ŒŽ’PˆÊ‚ÌŒvŽZ‚Ìƒ~ƒX‚ð’ù³<br>
-[BugFix] ƒ}ƒ‹ƒ`ƒ†[ƒU[‚É‘Î‰žBiƒŒƒWƒXƒgƒŠíœ•û–@‚ðHKEY_USERS‚©‚çHKEY_CURRENT_USER‚Ö•ÏXj<br>
-‰pŒêƒƒbƒZ[ƒW”Å‚ð•t‘® (sTask_e.exe)</p>
-<h2>ƒo[ƒWƒ‡ƒ“ 1.6 (2002”N05ŒŽ15“ú)</h2>
-<p class="doc-indent20">[VerUp] Windows 2000/XP ‘Î‰žiƒAƒ“ƒCƒ“ƒXƒg[ƒ‰‚ð‘Î‰žj<br>
-[VerUp] ŽÀsó‹µ‚Ìƒ_ƒCƒAƒƒO‚ð•ÊƒXƒŒƒbƒh‚É<br>
-[BugFix] –â‚¢‡‚í‚¹ƒ_ƒCƒAƒƒO‚ðÅ‘S–Ê‚É<br>
-[VerUp] ‰pŒêƒŠƒ\[ƒX‚ÌŒ‹‡‚ÅA“ú–{Œê”ÅˆÈŠO‚ÌWindows‚Å“®ì‚ª‰Â”\</p>
-<h2>ƒo[ƒWƒ‡ƒ“ 1.61 (2002”N11ŒŽ14“ú)</h2>
-<p class="doc-indent20">[BugFix] 
-ŠÔ‚ÉƒXƒy[ƒX‚Ì“ü‚éƒpƒX‚ðŽÀs‚Å‚«‚È‚¢–â‘è‚ðC³ (spawn ¨ CreateProcess)<br>
-[VerUp] Šg’£Žq CMD ‚àŒã‚Ìƒ^ƒXƒN‚ð‘Ò‹@‚³‚¹‚ç‚ê‚é</p>
-<h2>ƒo[ƒWƒ‡ƒ“ 1.62 (2003”N7ŒŽ15“ú)</h2>
-<p class="doc-indent20">[BugFix] 
-ƒ^ƒXƒN‚Ì’Ç‰Á‚ÅÅIƒXƒeƒbƒv‚Å‚ÌÝ’è‚ª”½‰f‚³‚ê‚È‚¢ƒoƒO‚ðC³<br>
-[VerUp] ’¼‘O‚Ìƒ^ƒXƒN‚Æ˜A“®‹@”\‚ðŠg[</p>
-<h2>ƒo[ƒWƒ‡ƒ“ 1.63 (2003”N8ŒŽ14“ú)</h2>
-<p class="doc-indent20">[VerUp] ƒJƒŒƒ“ƒgƒfƒBƒŒƒNƒgƒŠÝ’è‚Ì’Ç‰Á<br>
-[VerUp] ì‹ÆƒtƒHƒ‹ƒ_Ý’è‚Ì’Ç‰Á<br>
-[VerUp] ƒEƒCƒ“ƒhƒEó‘Ô‚Ì’Ç‰Á<br>
-[VerUp] ‘½d‹N“®‚Ì–hŽ~</p>
-<h2>ƒo[ƒWƒ‡ƒ“ 1.65 (2004”N2ŒŽ8“ú)</h2>
-<p class="doc-indent20">[VerUp] “dŒ¹ó‘Ô‚Ì’Ç‰Á</p>
-<h2>ƒo[ƒWƒ‡ƒ“ 1.66 (2007”N1ŒŽ27“ú)</h2>
-<p class="doc-indent20">[VerUp] HTML help ‰»<br>
-[VerUp] iŽÀŽ¿“I‚É–³ˆÓ–¡‚¾‚Á‚½j‚¨‹C‚É“ü‚èƒ^ƒXƒN‚Ìíœ<br>
-[VerUp] ƒAƒCƒRƒ“‚Ì’Ç‰ÁiJScript, VBScript, shell script, otherj<br>
-[VerUp] ƒpƒXƒ[ƒh‚Ì—”‚ª‰Šú‰»‚³‚ê‚Ä‚¢‚È‚©‚Á‚½ƒoƒO‚ðC³isrand 
-ŠÖ”‚Ì’Ç‰Áj<br>
-[VerUp] ƒc[ƒ‹ƒo[‚ðƒtƒ‰ƒbƒgEƒc[ƒ‹ƒo[‚É•ÏX<br>
-[VerUp] Windows Vista ‘Î‰ž</p>
-
-</body>
-
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="ltr" lang="ja" xml:lang="ja" xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+        <meta content="ja" http-equiv="Content-Language" />
+        <title>ãƒªãƒªãƒ¼ã‚¹ãƒŽãƒ¼ãƒˆï¼ˆãƒãƒ¼ã‚¸ãƒ§ãƒ³ã‚¢ãƒƒãƒ—å±¥æ­´ï¼‰</title>
+        <link href="main.css" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+        <div class="pagehead">
+            <table class="pagetitle">
+                <tbody>
+                    <tr>
+                        <td><img alt="" border="0" height="32" src="pics/ico-stask.png" width="32" /></td>
+                        <td width="100%">ãƒªãƒªãƒ¼ã‚¹ãƒŽãƒ¼ãƒˆï¼ˆãƒãƒ¼ã‚¸ãƒ§ãƒ³ã‚¢ãƒƒãƒ—å±¥æ­´ï¼‰</td>
+                        <td align="right"><a href="index.html" style="float: right;"><img alt="" border="0" height="18" src="pics/ico-home.png" width="61" /></a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="pagemain">
+            <h1>ãƒãƒ¼ã‚¸ãƒ§ãƒ³ã‚¢ãƒƒãƒ—å±¥æ­´</h1>
+            <p>Version 1.0 (1999/06/07)</p>
+            <ul>
+            <li>ãƒ˜ãƒ«ãƒ—ãƒ•ã‚¡ã‚¤ãƒ«</li>
+            <li>æ–°è¦è¿½åŠ ã«ã€ŒãŠå‹§ã‚ã‚¿ã‚¹ã‚¯ã€Windowsãƒ•ã‚©ãƒ«ãƒ€ã€ã‚’è¿½åŠ </li>
+            <li>ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ©ã€ã‚¢ãƒ³ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ©ã®è¿½åŠ </li>
+            </ul>
+            <p>Version 1.1 (1999/07/15)</p>
+        	<ul>
+        	<li>[BugFix] ã‚¢ãƒ³ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«æ™‚ã«ã‚¢ã‚¤ã‚³ãƒ³ãŒæ¶ˆåŽ»ã•ã‚Œãªã„å•é¡Œã‚’è§£æ±º</li>
+        	<li>[BugFix] ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ãŒã‚ã‹ã‚‰ãªãã¦ã‚‚ã‚»ã‚­ãƒ¥ãƒªãƒ†ã‚£ãƒ¼è¨­å®šãŒã§ãã‚‹å•é¡Œã‚’è§£æ±º</li>
+        	</ul>
+    		<p>Version 1.2 (1999/07/31)</p>
+       		<ul>
+       		<li>[BugFix] Windows95ã§èµ·å‹•æ™‚ã«ã‚·ã‚¹ãƒ†ãƒ åœæ­¢ã™ã‚‹å•é¡Œã‚’è§£æ±ºï¼ˆMRUç®¡ç†å¾©æ´»ï¼‰</li>
+       		</ul>
+    		<p>Version 1.5 (1999/11/27)</p>
+        	<ul>
+        	<li>[BugFix] Windows95ã§ï¼’å›žç›®ä»¥é™ã®èµ·å‹•æ™‚ã«ã‚·ã‚¹ãƒ†ãƒ åœæ­¢ã™ã‚‹å•é¡Œã‚’è§£æ±ºã€‚ã¾ãŸã€GDIã‚¨ãƒ©ãƒ¼ã«ã¤ã„ã¦ã‚‚è§£æ±ºï¼ˆã‚¤ãƒ¡ãƒ¼ã‚¸ãƒªã‚¹ãƒˆãƒ»ãƒãƒ³ãƒ‰ãƒ©ã¨ã‚¢ã‚¤ã‚³ãƒ³ãƒ»ãƒãƒ³ãƒ‰ãƒ©ã®é–‹æ”¾æ–¹æ³•ã®ãƒŸã‚¹ã‚’è¨‚æ­£ï¼‰</li>
+        	<li>[BugFix] 12æœˆã¨1æœˆã‚’ã¾ãŸãnãƒ¶æœˆå˜ä½ã®è¨ˆç®—ã®ãƒŸã‚¹ã‚’è¨‚æ­£</li>
+        	<li>[BugFix] ãƒžãƒ«ãƒãƒ¦ãƒ¼ã‚¶ãƒ¼ã«å¯¾å¿œã€‚ï¼ˆãƒ¬ã‚¸ã‚¹ãƒˆãƒªå‰Šé™¤æ–¹æ³•ã‚’HKEY_USERSã‹ã‚‰HKEY_CURRENT_USERã¸å¤‰æ›´ï¼‰</li>
+        	<li>è‹±èªžãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ç‰ˆã‚’ä»˜å±ž (sTask_e.exe)</li>
+        	</ul>
+    		<p>Version 1.6 (2002/05/15)</p>
+        	<ul>
+        	<li>[VerUp] Windows 2000/XP å¯¾å¿œï¼ˆã‚¢ãƒ³ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ©ã‚’å¯¾å¿œï¼‰</li>
+        	<li>[VerUp] å®Ÿè¡ŒçŠ¶æ³ã®ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚’åˆ¥ã‚¹ãƒ¬ãƒƒãƒ‰ã«</li>
+        	<li>[BugFix] å•ã„åˆã‚ã›ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚’æœ€å‰é¢ã«</li>
+        	<li>[VerUp] è‹±èªžãƒªã‚½ãƒ¼ã‚¹ã®çµåˆã§ã€æ—¥æœ¬èªžç‰ˆä»¥å¤–ã®Windowsã§å‹•ä½œãŒå¯èƒ½</li>
+        	</ul>
+    		<p>Version 1.61 (2002/11/14)</p>
+        	<ul>
+        	<li>[BugFix] é–“ã«ã‚¹ãƒšãƒ¼ã‚¹ã®å…¥ã‚‹ãƒ‘ã‚¹ã‚’å®Ÿè¡Œã§ããªã„å•é¡Œã‚’ä¿®æ­£ (spawn â†’ CreateProcess)</li>
+        	<li>[VerUp] æ‹¡å¼µå­ CMD ã‚‚å¾Œã®ã‚¿ã‚¹ã‚¯ã‚’å¾…æ©Ÿã•ã›ã‚‰ã‚Œã‚‹</li>
+        	</ul>
+    		<p>Version 1.62 (2003/07/15)</p>
+        	<ul>
+        	<li>[BugFix] ã‚¿ã‚¹ã‚¯ã®è¿½åŠ ã§æœ€çµ‚ã‚¹ãƒ†ãƒƒãƒ—ã§ã®è¨­å®šãŒåæ˜ ã•ã‚Œãªã„ãƒã‚°ã‚’ä¿®æ­£</li>
+        	<li>[VerUp] ç›´å‰ã®ã‚¿ã‚¹ã‚¯ã¨é€£å‹•æ©Ÿèƒ½ã‚’æ‹¡å……</li>
+        	</ul>
+    		<p>Version 1.63 (2003/08/14)</p>
+        	<ul>
+        	<li>[VerUp] ã‚«ãƒ¬ãƒ³ãƒˆãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªè¨­å®šã®è¿½åŠ </li>
+        	<li>[VerUp] ä½œæ¥­ãƒ•ã‚©ãƒ«ãƒ€è¨­å®šã®è¿½åŠ </li>
+        	<li>[VerUp] ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦çŠ¶æ…‹ã®è¿½åŠ </li>
+        	<li>[VerUp] å¤šé‡èµ·å‹•ã®é˜²æ­¢</li>
+        	</ul>
+    		<p>Version 1.65beta (2004/02/08)</p>
+        	<ul>
+        	<li>[VerUp] é›»æºçŠ¶æ…‹ã®è¿½åŠ </li>
+        	</ul>
+    		<p>Version 1.66 (2007/01/26)</p>
+        	<ul>
+        	<li>[VerUp] HTML help åŒ–</li>
+        	<li>[VerUp] ï¼ˆå®Ÿè³ªçš„ã«ç„¡æ„å‘³ã ã£ãŸï¼‰ãŠæ°—ã«å…¥ã‚Šã‚¿ã‚¹ã‚¯ã®å‰Šé™¤</li>
+        	<li>[VerUp] ã‚¢ã‚¤ã‚³ãƒ³ã®è¿½åŠ ï¼ˆJScript, VBScript, shell script, otherï¼‰</li>
+        	<li>[VerUp] ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ã®ä¹±æ•°ãŒåˆæœŸåŒ–ã•ã‚Œã¦ã„ãªã‹ã£ãŸãƒã‚°ã‚’ä¿®æ­£ï¼ˆsrand é–¢æ•°ã®è¿½åŠ ï¼‰</li>
+        	<li>[VerUp] ãƒ„ãƒ¼ãƒ«ãƒãƒ¼ã‚’ãƒ•ãƒ©ãƒƒãƒˆãƒ»ãƒ„ãƒ¼ãƒ«ãƒãƒ¼ã«å¤‰æ›´</li>
+        	<li>[VerUp] Windows Vista å¯¾å¿œ</li>
+        	</ul>
+        	<p>Version 1.7 (2012/02/27)</p>
+        	<ul>
+        	<li>ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ä¿å­˜ã‚’SHA-1ãƒãƒƒã‚·ãƒ¥ã«å¤‰æ›´</li>
+        	</ul>
+        </div>
+    </body>
 </html>

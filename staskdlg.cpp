@@ -104,6 +104,8 @@ CDlgInstall::CDlgInstall(CWnd* pParent /*=NULL*/)
 	m_chk_uninst_cpl = FALSE;
 	m_chk_uninst_start = FALSE;
 	m_r_autoexec = -1;
+	m_chk_protect = FALSE;
+	m_edit_password = _T("0000");
 	//}}AFX_DATA_INIT
 }
 
@@ -118,7 +120,10 @@ void CDlgInstall::DoDataExchange(CDataExchange* pDX)
 	DDX_Check(pDX, IDC_CHECK_UNINST_CPL, m_chk_uninst_cpl);
 	DDX_Check(pDX, IDC_CHECK_UNINST_START, m_chk_uninst_start);
 	DDX_Radio(pDX, IDC_R_AUTOEXEC, m_r_autoexec);
+	DDX_Check(pDX, IDC_CHECK_PROTECT, m_chk_protect);
+	DDV_MaxChars(pDX, m_edit_password, 20);
 	//}}AFX_DATA_MAP
+	DDX_Text(pDX, IDC_EDIT_PASSWORD, m_edit_password);
 }
 
 BEGIN_MESSAGE_MAP(CDlgInstall, CDialog)
@@ -149,21 +154,11 @@ BOOL CDlgInstall::OnInitDialog()
 
 // ************************************************************
 // ヘルプ表示関数
-// HTMLヘルプに対応させるために、クラスに対して WM_HELP メッセージを送る
-// (F1キーを押したときは、この関数は通らずに直接 this->WinHelp() 関数へ行く
-//
-// 最終的には CWinApp の WinHelp 関数へ渡され、HTMLヘルプを表示する
 // ************************************************************
 void CDlgInstall::OnBtnHelp() 
 {
 	// TODO: この位置にコントロール通知ハンドラ用のコードを追加してください
 
-	// CWinApp の WinHelp 関数を強制的に呼び出す
-//	CSTaskApp *theApp;
-//	theApp = (CSTaskApp *)AfxGetApp();
-//	theApp->WinHelp(0);
-
-	// イベントメッセージの送信
-	this->SendMessage(WM_HELP);
+	this->HtmlHelp(0,HH_DISPLAY_TOPIC);
 
 }

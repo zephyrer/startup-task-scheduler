@@ -13,9 +13,10 @@
 #include "sTaskDlg.h"
 #include "InstFunc.h"
 #include "CheckWinVer.h"
+#include "sTaskGlobal.h"
 
-#include <HtmlHelp.h>
 #include <stdlib.h>
+#include ".\stask.h"
 
 
 #ifdef _DEBUG
@@ -37,7 +38,7 @@ BEGIN_MESSAGE_MAP(CSTaskApp, CWinApp)
 	// 標準のファイル基本ドキュメント コマンド
 	ON_COMMAND(ID_FILE_NEW, CWinApp::OnFileNew)
 	ON_COMMAND(ID_FILE_OPEN, CWinApp::OnFileOpen)
-	ON_COMMAND(ID_HELP, CWinApp::OnHelp)
+//	ON_COMMAND(ID_HELP, CWinApp::OnHelp)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -47,6 +48,7 @@ CSTaskApp::CSTaskApp()
 {
 	// TODO: この位置に構築用コードを追加してください。
 	// ここに InitInstance 中の重要な初期化処理をすべて記述してください。
+	EnableHtmlHelp();
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -66,11 +68,8 @@ BOOL CSTaskApp::InitInstance()
 
 	CString tmpstr,tmpstr2;
 
-#ifdef _AFXDLL
-	Enable3dControls();		// 共有 DLL の中で MFC を使用する場合にはここを呼び出してください。
-#else
-	Enable3dControlsStatic();	// MFC と静的にリンクしている場合にはここを呼び出してください。
-#endif
+	InitCommonControls();
+	CWinApp::InitInstance();
 
 	// 設定が保存される下のレジストリ キーを変更します。
 	// TODO: この文字列を、会社名または所属など適切なものに
@@ -140,9 +139,10 @@ BOOL CSTaskApp::InitInstance()
 	if(m_tasks.g_secure)
 	{
 		CDlgPasswd dlg;
+		// 現在のパスワードを入力させ、SHA1変換してチェック。ただし、レジストリのパスワードSHA1値が40文字以外（旧バージョンアップデート）の場合は通す
 		dlg.m_message.LoadString(STR_PAS_IMP);
-		dlg.DoModal();
-		if(dlg.m_passwd != m_tasks.g_passwd)
+		if(dlg.DoModal() == TRUE && (::CalcHash_String(dlg.m_passwd, "SHA1") == this->m_tasks.g_passwd || this->m_tasks.g_passwd.GetLength() != 40)) ;
+		else
 		{
 			tmpstr.LoadString(STR_ERRPAS);
 			::MessageBox(NULL, (LPCSTR)tmpstr, "sTask (Error)", MB_OK|MB_ICONSTOP|MB_APPLMODAL);
@@ -151,7 +151,7 @@ BOOL CSTaskApp::InitInstance()
 	}
 
 	// **********************************
-	//  設定ダイアログの表示
+	//  タスク一覧（メインウインドウ）の表示
 	// **********************************
 
 	// アプリケーション用のドキュメント テンプレートを登録します。ドキュメント テンプレート
@@ -197,7 +197,7 @@ BOOL CSTaskApp::RegWriteAll()
 
 	if(m_tasks.g_debug) return FALSE;	// デバッグモードのときは保存しない
 
-	if(m_tasks.g_delay != GetProfileInt("Settings","delay",3))
+	if(m_tasks.g_delay != GetProfileInt("Settings","delay",15))
 		WriteProfileInt("Settings","delay",m_tasks.g_delay);
 	if(m_tasks.g_time != (BOOL)GetProfileInt("Settings","time",1))
 		WriteProfileInt("Settings","time",m_tasks.g_time);
@@ -222,7 +222,7 @@ BOOL CSTaskApp::RegWriteAll()
 	{
 		str_n.Format("task%d",i);
 		if(m_tasks.tasks[i].time_lastexec != CTime(GetProfileInt(str_n,"tlexec",0)))
-			WriteProfileInt(str_n,"tlexec",m_tasks.tasks[i].time_lastexec.GetTime());
+			WriteProfileInt(str_n,"tlexec",(int)m_tasks.tasks[i].time_lastexec.GetTime());
 		if(m_tasks.tasks[i].name != GetProfileString(str_n,"name"))
 			WriteProfileString(str_n,"name",m_tasks.tasks[i].name);
 		if(m_tasks.tasks[i].fpass != GetProfileString(str_n,"fpass"))
@@ -242,9 +242,9 @@ BOOL CSTaskApp::RegWriteAll()
 		if(m_tasks.tasks[i].excludetime != (BOOL)GetProfileInt(str_n,"extime",0))
 			WriteProfileInt(str_n,"extime",m_tasks.tasks[i].excludetime);
 		if(m_tasks.tasks[i].time0 != CTime(GetProfileInt(str_n,"t0",0)))
-			WriteProfileInt(str_n,"t0",m_tasks.tasks[i].time0.GetTime());
+			WriteProfileInt(str_n,"t0",(int)m_tasks.tasks[i].time0.GetTime());
 		if(m_tasks.tasks[i].time1 != CTime(GetProfileInt(str_n,"t1",0)))
-			WriteProfileInt(str_n,"t1",m_tasks.tasks[i].time1.GetTime());
+			WriteProfileInt(str_n,"t1",(int)m_tasks.tasks[i].time1.GetTime());
 		if(m_tasks.tasks[i].waitexit != (BOOL)GetProfileInt(str_n,"wexit",0))
 			WriteProfileInt(str_n,"wexit",m_tasks.tasks[i].waitexit);
 		if(m_tasks.tasks[i].waitsec != GetProfileInt(str_n,"wsec",0))
@@ -283,7 +283,7 @@ BOOL CSTaskApp::RegReadAll()
 {
 	CString str_n;
 
-	m_tasks.g_delay = GetProfileInt("Settings","delay",3);
+	m_tasks.g_delay = GetProfileInt("Settings","delay",15);
 	m_tasks.g_time = GetProfileInt("Settings","time",1);
 	m_tasks.g_dialog = GetProfileInt("Settings","dlg",1);
 	m_tasks.g_dialog0 = GetProfileInt("Settings","dlg0",0);
@@ -429,29 +429,11 @@ BOOL CSTaskApp::InstallSeq()
 	if(dlg.m_chk_uninst_start)
 		::MkUninstMnu();
 
-// sTask 固有 !
 	// **********************************
-	// パスワードの作成
+	// パスワードによる設定の保護
 	// **********************************
-	int i;
-	char strTmp3[2];	// パスワード作成用
-	CString tmpstr, tmpstr2;
-	tmpstr = "";
-	::srand((unsigned)::time(NULL));
-	for(i=0; i<8; i++)
-	{
-		while(1)
-		{
-			strTmp3[0] = GenerateRandom(0x41, 0x5a);			// 'A' - 'Z' のランダム値
-			if(strTmp3[0] != 'I' && strTmp3[0] != 'O') break;	// I と O は紛らわしいので禁止
-		}
-		strTmp3[1] = (char)NULL;
-		tmpstr += strTmp3;
-	}
-	m_tasks.g_passwd = tmpstr;
-	tmpstr.LoadString(STR_MES_NEW_PASSWORD);
-	tmpstr2.Format(tmpstr, m_tasks.g_passwd);
-	::MessageBox(NULL, (LPCSTR)tmpstr2, "sTask (information) NEW PASSWORD", MB_OK|MB_ICONINFORMATION|MB_APPLMODAL);
+	this->m_tasks.g_passwd = ::CalcHash_String(dlg.m_edit_password, "SHA1");
+	this->m_tasks.g_secure = dlg.m_chk_protect;
 
 	return TRUE;
 }
@@ -638,58 +620,7 @@ int CSTaskApp::ExitInstance()
 	return CWinApp::ExitInstance();
 }
 
-// ************************************************************
-// ヘルプ表示関数（仮想関数をオーバーライド）
-// HTMLヘルプに対応させるために、アプリケーションの最上位クラスでオーバーライド
-// 
-// 引数 dwData : 下位8ビットに、resource.hで定義されたダイアログのIDが入る
-//      nCmd   : HELP_CONTEXT=1
-// ************************************************************
-void CSTaskApp::WinHelp(DWORD dwData, UINT nCmd) 
+void CSTaskApp::HtmlHelp(DWORD dwData,UINT nCmd = 0x000F)
 {
-	// TODO: この位置に固有の処理を追加するか、または基本クラスを呼び出してください
-
-//	既存の WinHelp 関数を無効にする
-//	CWinApp::WinHelp(dwData, nCmd);
-
-	// HELP_CONTEXT (F1キー、ヘルプボタン）、HELP_FINDER（メニューのヘルプ） 以外は何もしない
-	if(nCmd != HELP_CONTEXT && nCmd != HELP_FINDER) return;
-
-	// HTMLヘルプのhWndハンドラ （失敗時はNULL）
-	HWND hWnd_Help;
-	// ヘルプファイルへの絶対パスを作るための、パス分解用一時文字列
-	char szChmPath[MAX_PATH], szAppPath[MAX_PATH];
-	char szDrive[_MAX_DRIVE];
-	char szDir[_MAX_DIR];
-	char szFname[_MAX_FNAME];
-	char szExt[_MAX_EXT];
-
-	CString sTmp, sAfxMsg;
-
-	// アプリケーション自身のパスを取得し、拡張子を chm に書き換える
-	// (HtmlHelp関数はカレントフォルダのヘルプファイルを取得しようとするため)
-	if(!::GetModuleFileName(NULL, szAppPath, MAX_PATH)) return;
-	::_splitpath(szAppPath, szDrive, szDir, szFname, szExt);
-	::_makepath(szChmPath, szDrive, szDir,szFname, ".chm");
-
-	// ヘルプの表示
-	if(this->m_pMainWnd == NULL)
-	{	// メインウインドウのハンドラが定義されていないとき
-//		hWnd_Help = ::HtmlHelp(NULL, szChmPath, HH_DISPLAY_TOPIC, NULL);
-		hWnd_Help = ::HtmlHelp(NULL, szChmPath, HH_HELP_CONTEXT, LOWORD(dwData));
-	}
-	else
-	{
-//		hWnd_Help = ::HtmlHelp(this->m_pMainWnd->m_hWnd, szChmPath, HH_DISPLAY_TOPIC, NULL);
-		hWnd_Help = ::HtmlHelp(this->m_pMainWnd->m_hWnd, szChmPath, HH_HELP_CONTEXT, LOWORD(dwData));
-	}
-
-	if(hWnd_Help == NULL)
-	{	// ヘルプファイルの起動に失敗した場合
-		sAfxMsg.LoadString(AFX_STR_ERR_HELP);	// 「ヘルプファイルの表示ができません\r\n ファイル: %s\r\n コンテキストID: %04X」
-
-		sTmp.Format(sAfxMsg, szChmPath, LOWORD(dwData));
-		this->m_pMainWnd->MessageBox(sTmp, "Help File Error", MB_ICONWARNING);
-	}
-
+	CWinApp::HtmlHelp(dwData, nCmd);
 }

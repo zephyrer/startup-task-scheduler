@@ -1,4 +1,4 @@
-//Microsoft Developer Studio generated resource script.
+// Microsoft Visual C++ generated resource script.
 //
 #include "resource.h"
 
@@ -27,18 +27,18 @@ LANGUAGE LANG_JAPANESE, SUBLANG_DEFAULT
 // TEXTINCLUDE
 //
 
-1 TEXTINCLUDE DISCARDABLE 
+1 TEXTINCLUDE 
 BEGIN
     "resource.h\0"
 END
 
-2 TEXTINCLUDE DISCARDABLE 
+2 TEXTINCLUDE 
 BEGIN
     "#include ""afxres.h""\r\n"
     "\0"
 END
 
-3 TEXTINCLUDE DISCARDABLE 
+3 TEXTINCLUDE 
 BEGIN
     "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
     "#define _AFX_NO_OLE_RESOURCES\r\n"
@@ -66,21 +66,21 @@ END
 
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
-IDR_MAINFRAME           ICON    DISCARDABLE     "res\\idr_main.ico"
-IDR_STASKTYPE           ICON    DISCARDABLE     "res\\sTaskDoc.ico"
-IDR_XDOCICON            ICON    DISCARDABLE     "res\\docicon.ico"
-IDI_ICO_INST            ICON    DISCARDABLE     "res\\ico_inst.ico"
-IDR_JSCRIPT             ICON    DISCARDABLE     "res\\ico-jscript.ico"
-IDR_VBSCRIPT            ICON    DISCARDABLE     "res\\ico-vbs.ico"
-IDR_SCRIPT              ICON    DISCARDABLE     "res\\ico-cmd.ico"
-IDR_UNKNOWN             ICON    DISCARDABLE     "res\\ico-unknown.ico"
+IDR_MAINFRAME           ICON                    "res\\idr_main.ico"
+IDR_STASKTYPE           ICON                    "res\\sTaskDoc.ico"
+IDR_XDOCICON            ICON                    "res\\docicon.ico"
+IDI_ICO_INST            ICON                    "res\\ico_inst.ico"
+IDR_JSCRIPT             ICON                    "res\\ico-jscript.ico"
+IDR_VBSCRIPT            ICON                    "res\\ico-vbs.ico"
+IDR_SCRIPT              ICON                    "res\\ico-cmd.ico"
+IDR_UNKNOWN             ICON                    "res\\ico-unknown.ico"
 
 /////////////////////////////////////////////////////////////////////////////
 //
 // Menu
 //
 
-IDR_MAINFRAME MENU PRELOAD DISCARDABLE 
+IDR_MAINFRAME MENU 
 BEGIN
     POPUP "ファイル(&F)"
     BEGIN
@@ -129,7 +129,7 @@ END
 // Accelerator
 //
 
-IDR_MAINFRAME ACCELERATORS PRELOAD MOVEABLE PURE 
+IDR_MAINFRAME ACCELERATORS 
 BEGIN
     "D",            ID_TASK_DOWN,           VIRTKEY, CONTROL, NOINVERT
     "N",            ID_TASK_NEW,            VIRTKEY, CONTROL, NOINVERT
@@ -145,19 +145,19 @@ END
 // Dialog
 //
 
-IDD_ABOUTBOX DIALOG DISCARDABLE  0, 0, 274, 89
-STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+IDD_ABOUTBOX DIALOGEX 0, 0, 274, 89
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "スタートアップ タスクスケジューラ   バージョン情報"
-FONT 9, "ＭＳ Ｐゴシック"
+FONT 9, "ＭＳ Ｐゴシック", 0, 0, 0x0
 BEGIN
     DEFPUSHBUTTON   "OK",IDOK,215,70,50,15,WS_GROUP
     ICON            IDR_MAINFRAME,IDC_STATIC,10,10,20,20
-    LTEXT           "スタートアップ タスクスケジューラ for Windows (Multi Language)\n\n       Version 1.66 (Free Software / フリー ソフトウエア）\n       (C) 1999-2007 INOUE. Hirokazu\n       http://oasis.halfmoon.jp/\n       http://www.vector.co.jp/vpack/browse/person/an001911.html",
+    LTEXT           "スタートアップ タスク スケジューラ for Windows (Multi Language)\n\n       Version 1.7 (GNU GPL フリー ソフトウエア）\n       (C) 1999-2012 INOUE Hirokazu\n       http://oasis.halfmoon.jp/",
                     IDC_STATIC,40,5,225,55
 END
 
 IDD_PROP_ADD1 DIALOGEX 0, 0, 255, 219
-STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
+STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
 CAPTION "タスク"
 FONT 9, "ＭＳ Ｐゴシック", 0, 0, 0x1
 BEGIN
@@ -195,7 +195,7 @@ BEGIN
 END
 
 IDD_PROP_ADD2 DIALOGEX 0, 0, 255, 219
-STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
+STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
 CAPTION "スケジュール"
 FONT 9, "ＭＳ Ｐゴシック", 0, 0, 0x1
 BEGIN
@@ -239,7 +239,7 @@ BEGIN
 END
 
 IDD_PROP_ADD3 DIALOGEX 0, 0, 254, 219
-STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
+STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
 CAPTION "高度な設定"
 FONT 9, "ＭＳ Ｐゴシック", 0, 0, 0x1
 BEGIN
@@ -287,7 +287,7 @@ BEGIN
 END
 
 IDD_PROP_CNF1 DIALOGEX 0, 0, 255, 219
-STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
+STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
 CAPTION "環境設定"
 FONT 9, "ＭＳ Ｐゴシック", 0, 0, 0x1
 BEGIN
@@ -321,8 +321,8 @@ BEGIN
     PUSHBUTTON      "参照 ...",IDC_BTN_CURDIR,215,180,35,15
 END
 
-IDD_PROP_CNF2 DIALOG DISCARDABLE  0, 0, 255, 219
-STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
+IDD_PROP_CNF2 DIALOG  0, 0, 255, 219
+STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
 CAPTION "セキュリティー"
 FONT 9, "ＭＳ Ｐゴシック"
 BEGIN
@@ -337,8 +337,8 @@ BEGIN
                     IDC_STATIC,90,100,160,20
 END
 
-IDD_DEBUG DIALOG DISCARDABLE  0, 0, 249, 159
-STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+IDD_DEBUG DIALOG  0, 0, 249, 159
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "スタートアップ タスクスケジューラ 「デバッグモード」"
 FONT 9, "ＭＳ Ｐゴシック"
 BEGIN
@@ -362,8 +362,8 @@ BEGIN
     PUSHBUTTON      "いいえ",IDCANCEL,190,140,50,14
 END
 
-IDD_DLG_PASSWD DIALOG DISCARDABLE  0, 0, 234, 79
-STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+IDD_DLG_PASSWD DIALOG  0, 0, 234, 79
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "スタートアップ タスクスケジューラ"
 FONT 9, "ＭＳ Ｐゴシック"
 BEGIN
@@ -375,7 +375,7 @@ BEGIN
 END
 
 IDD_PROP_ADD4 DIALOGEX 0, 0, 254, 219
-STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
+STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
 CAPTION "高度な設定"
 FONT 9, "ＭＳ Ｐゴシック", 0, 0, 0x1
 BEGIN
@@ -408,7 +408,7 @@ BEGIN
 END
 
 IDD_PROP_ADD5 DIALOGEX 0, 0, 254, 219
-STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
+STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
 CAPTION "完了"
 FONT 9, "ＭＳ Ｐゴシック", 0, 0, 0x1
 BEGIN
@@ -423,8 +423,8 @@ BEGIN
                     85,235,15,SS_CENTERIMAGE
 END
 
-IDD_PROP_ADD0 DIALOG DISCARDABLE  0, 0, 255, 219
-STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
+IDD_PROP_ADD0 DIALOG  0, 0, 255, 219
+STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
 CAPTION "新しいタスクの追加"
 FONT 9, "ＭＳ Ｐゴシック"
 BEGIN
@@ -440,8 +440,8 @@ BEGIN
                     BS_AUTORADIOBUTTON,10,150,230,15
 END
 
-IDD_DLG_NORMAL DIALOG DISCARDABLE  0, 0, 274, 79
-STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION
+IDD_DLG_NORMAL DIALOG  0, 0, 274, 79
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION
 CAPTION "スタートアップ タスクスケジューラ"
 FONT 9, "ＭＳ Ｐゴシック"
 BEGIN
@@ -453,11 +453,11 @@ BEGIN
                     60,260,8
 END
 
-IDD_DLG_INST DIALOG DISCARDABLE  0, 0, 259, 185
-STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+IDD_DLG_INST DIALOGEX 0, 0, 259, 222
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "スタートアップ タスクスケジューラ のインストール  / sTask Install"
 
-FONT 9, "ＭＳ Ｐゴシック"
+FONT 9, "ＭＳ Ｐゴシック", 0, 0, 0x0
 BEGIN
     ICON            IDI_ICO_INST,IDC_STATIC,5,5,20,20
     LTEXT           "スタートアップ  タスクスケジューラをインストールします (Install sTask)",
@@ -481,21 +481,26 @@ BEGIN
     CONTROL         "スタートメニューに登録する （推奨） (from Start Men&u)",
                     IDC_CHECK_UNINST_START,"Button",BS_AUTOCHECKBOX | 
                     WS_TABSTOP,10,145,240,10
-    DEFPUSHBUTTON   "OK(&K)",IDOK,80,165,55,15
-    PUSHBUTTON      "キャンセル(&C)",IDCANCEL,140,165,55,15
-    PUSHBUTTON      "ヘルプ(&H)",IDC_BTN_HELP,200,165,55,15
+    GROUPBOX        "パスワードによる制限 (Protect by password)",IDC_STATIC,
+                    4,163,250,32
+    CONTROL         "制限を行う (Enable)",IDC_CHECK_PROTECT,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,177,86,12
+    RTEXT           "Password :",IDC_STATIC,99,180,42,9
+    EDITTEXT        IDC_EDIT_PASSWORD,144,177,105,15,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK(&K)",IDOK,80,201,55,15
+    PUSHBUTTON      "キャンセル(&C)",IDCANCEL,140,201,55,15
+    PUSHBUTTON      "ヘルプ(&H)",IDC_BTN_HELP,200,201,55,15
 END
 
 
-#ifndef _MAC
 /////////////////////////////////////////////////////////////////////////////
 //
 // Version
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 1,6,6,0
- PRODUCTVERSION 1,6,6,0
+ FILEVERSION 1,7,0,0
+ PRODUCTVERSION 1,7,0,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x9L
@@ -510,18 +515,16 @@ BEGIN
     BEGIN
         BLOCK "041104b0"
         BEGIN
-            VALUE "Comments", "\0"
-            VALUE "CompanyName", "(C) INOUE Hirokazu\0"
-            VALUE "FileDescription", "Startup Task Scheduler (Multi Language Version)\0"
-            VALUE "FileVersion", "1.6.6.0\0"
-            VALUE "InternalName", "sTask\0"
-            VALUE "LegalCopyright", "Copyright (C) 1999-2007 INOUE. Hirokazu\0"
-            VALUE "LegalTrademarks", "Free Softare\0"
-            VALUE "OriginalFilename", "sTask.exe\0"
-            VALUE "PrivateBuild", "Microsoft Visual C++ 6.0\0"
-            VALUE "ProductName", "Startup Task Scheduler (Multi Language Version)\0"
-            VALUE "ProductVersion", "1.6.6.0\0"
-            VALUE "SpecialBuild", "\0"
+            VALUE "CompanyName", "(C) INOUE Hirokazu"
+            VALUE "FileDescription", "Startup Task Scheduler (Multi Language Version)"
+            VALUE "FileVersion", "1.7.0.0"
+            VALUE "InternalName", "sTask"
+            VALUE "LegalCopyright", "Copyright (C) 1999-2012 INOUE Hirokazu"
+            VALUE "LegalTrademarks", "GNU GPL Free Softare"
+            VALUE "OriginalFilename", "sTask.exe"
+            VALUE "PrivateBuild", "Microsoft Visual C++ 7.0"
+            VALUE "ProductName", "Startup Task Scheduler (Multi Language Version)"
+            VALUE "ProductVersion", "1.7.0.0"
         END
     END
     BLOCK "VarFileInfo"
@@ -530,8 +533,6 @@ BEGIN
     END
 END
 
-#endif    // !_MAC
-
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -539,7 +540,7 @@ END
 //
 
 #ifdef APSTUDIO_INVOKED
-GUIDELINES DESIGNINFO DISCARDABLE 
+GUIDELINES DESIGNINFO 
 BEGIN
     IDD_ABOUTBOX, DIALOG
     BEGIN
@@ -578,7 +579,7 @@ BEGIN
         LEFTMARGIN, 7
         RIGHTMARGIN, 252
         TOPMARGIN, 7
-        BOTTOMMARGIN, 178
+        BOTTOMMARGIN, 215
     END
 END
 #endif    // APSTUDIO_INVOKED
@@ -589,7 +590,7 @@ END
 // Toolbar
 //
 
-IDR_MAINFRAME TOOLBAR DISCARDABLE  16, 15
+IDR_MAINFRAME TOOLBAR  16, 15
 BEGIN
     BUTTON      ID_TASK_NEW
     BUTTON      ID_TASK_CUT
@@ -612,7 +613,7 @@ END
 // Bitmap
 //
 
-IDR_MAINFRAME           BITMAP  MOVEABLE PURE   "res\\Toolbar.bmp"
+IDR_MAINFRAME           BITMAP                  "res\\Toolbar.bmp"
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -770,19 +771,19 @@ END
 // String Table
 //
 
-STRINGTABLE PRELOAD DISCARDABLE 
+STRINGTABLE 
 BEGIN
     IDR_MAINFRAME           "sTask\n\nSTask\n\n\nSTask.Document\nSTask Document"
 END
 
-STRINGTABLE PRELOAD DISCARDABLE 
+STRINGTABLE 
 BEGIN
     AFX_IDS_APP_TITLE       "sTask"
     AFX_IDS_IDLEMESSAGE     "ﾍﾙﾌﾟを表示するには [F1] を押してください。"
     AFX_IDS_HELPMODEMESSAGE "ﾍﾙﾌﾟを使用するｵﾌﾞｼﾞｪｸﾄを選択"
 END
 
-STRINGTABLE DISCARDABLE 
+STRINGTABLE 
 BEGIN
     ID_INDICATOR_EXT        "EXT"
     ID_INDICATOR_CAPS       "CAP"
@@ -793,7 +794,7 @@ BEGIN
     ID_INDICATOR_KANA       "ｶﾅ"
 END
 
-STRINGTABLE DISCARDABLE 
+STRINGTABLE 
 BEGIN
     ID_APP_ABOUT            "ﾌﾟﾛｸﾞﾗﾑの情報、ﾊﾞｰｼﾞｮﾝそして著作権を表示\nﾊﾞｰｼﾞｮﾝ情報"
     ID_APP_EXIT             "スタートアップ タスクスケジューラを終了します\n終了"
@@ -804,7 +805,7 @@ BEGIN
     ID_HELP                 "現在のﾀｽｸまたはｺﾏﾝﾄﾞのﾍﾙﾌﾟを表示\nﾍﾙﾌﾟ"
 END
 
-STRINGTABLE DISCARDABLE 
+STRINGTABLE 
 BEGIN
     AFX_IDS_SCRESTORE       "ｳｨﾝﾄﾞｳを通常のｻｲｽﾞに戻す"
     AFX_IDS_SCTASKLIST      "ｱﾌﾟﾘｹｰｼｮﾝの切り替え"
@@ -821,7 +822,7 @@ BEGIN
     STR_NAME_DISKCLEAN      "ディスクのクリーンアップ"
 END
 
-STRINGTABLE DISCARDABLE 
+STRINGTABLE 
 BEGIN
     ID_TASK_NEW             "新しいタスクの追加\nタスク追加"
     ID_WRITEREG             "タスクの追加・削除・条件などの変更点をレジストリに保存します\n保存"
@@ -837,7 +838,7 @@ BEGIN
     ID_TASK_CUT             "選択中タスクを削除します\n削除"
 END
 
-STRINGTABLE DISCARDABLE 
+STRINGTABLE 
 BEGIN
     STR_NAME_REGCHK         "レジストリチェッカー"
     STR_PER_LOGON           "回ごと"
@@ -855,7 +856,7 @@ BEGIN
     STR_PAS_ERR_OFF         "パスワードが間違っています\nセキュリティー設定は使用できません"
 END
 
-STRINGTABLE DISCARDABLE 
+STRINGTABLE 
 BEGIN
     STR_EXEC_DEBUG          "タスク 「 %s 」 を実行します。     \n\nファイル　　　%s\nパラメーター　%s\nファイル種別　%s\n\n実行しますか ？"
     STR_EXEC_DEBUG_TITLE    "タスク実行 （デバッグモード）"
@@ -874,7 +875,7 @@ BEGIN
     STR_THU                 "木"
 END
 
-STRINGTABLE DISCARDABLE 
+STRINGTABLE 
 BEGIN
     STR_FRI                 "金"
     STR_SAT                 "土"
@@ -894,7 +895,7 @@ BEGIN
     STR_VIEW_SCHEDULE       "スケジュール"
 END
 
-STRINGTABLE DISCARDABLE 
+STRINGTABLE 
 BEGIN
     STR_VIEW_PREVEXEC       "前回の実行日"
     STR_VIEW_NEXTEXEC       "次回の実行予定"
@@ -916,7 +917,7 @@ BEGIN
     STR_MES_REGSAVED        "設定を保存しました"
 END
 
-STRINGTABLE DISCARDABLE 
+STRINGTABLE 
 BEGIN
     STR_TASK_NEW_SHORT      "新しいタスクの追加"
     AFX_STR_ERR_HELP        "ヘルプファイルの表示ができません\r\n ファイル: %s\r\n コンテキストID: %04X"
@@ -927,7 +928,7 @@ END
 
 
 /////////////////////////////////////////////////////////////////////////////
-// 英語 (ｱﾒﾘｶ) resources
+// 英語 (米国) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
 #ifdef _WIN32
@@ -940,7 +941,7 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 // Menu
 //
 
-IDR_MAINFRAME MENU PRELOAD DISCARDABLE 
+IDR_MAINFRAME MENU 
 BEGIN
     POPUP "File(&F)"
     BEGIN
@@ -989,8 +990,8 @@ END
 // Dialog
 //
 
-IDD_DLG_NORMAL DIALOG DISCARDABLE  0, 0, 274, 79
-STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION
+IDD_DLG_NORMAL DIALOG  0, 0, 274, 79
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION
 CAPTION "Startup Task Scheduler"
 FONT 9, "Arial"
 BEGIN
@@ -1002,8 +1003,8 @@ BEGIN
                     60,260,8
 END
 
-IDD_DLG_PASSWD DIALOG DISCARDABLE  0, 0, 229, 63
-STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+IDD_DLG_PASSWD DIALOG  0, 0, 229, 63
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Startup Task Scheduler"
 FONT 9, "Arial"
 BEGIN
@@ -1014,19 +1015,19 @@ BEGIN
     PUSHBUTTON      "Cancel",IDCANCEL,170,45,50,14
 END
 
-IDD_ABOUTBOX DIALOG DISCARDABLE  0, 0, 274, 74
-STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+IDD_ABOUTBOX DIALOGEX 0, 0, 274, 74
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Startup Task Scheduler    Version Information"
-FONT 9, "Arial"
+FONT 9, "Arial", 0, 0, 0x0
 BEGIN
     DEFPUSHBUTTON   "OK",IDOK,210,55,55,15,WS_GROUP
-    ICON            IDR_MAINFRAME,IDC_STATIC,10,10,18,17
-    LTEXT           "Startup Task Scheduler for Windows (Multi Language)\n\n       Version 1.66 ( Free Software )\n       (C) 1999-2007 INOUE. Hirokazu\n       http://oasis.halfmoon.jp/\n       http://www.vector.co.jp/vpack/browse/person/an001911.html",
+    ICON            IDR_MAINFRAME,IDC_STATIC,10,10,20,20
+    LTEXT           "Startup Task Scheduler for Windows (Multi Language)\n\n       Version 1.7 ( GNU GPL Free Software )\n       (C) 1999-2012 INOUE Hirokazu\n       http://oasis.halfmoon.jp/",
                     IDC_STATIC,40,5,225,50
 END
 
-IDD_DEBUG DIALOG DISCARDABLE  0, 0, 249, 159
-STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+IDD_DEBUG DIALOG  0, 0, 249, 159
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Startup Task Scheduler - Debug (Evaluation) Mode"
 FONT 9, "Arial"
 BEGIN
@@ -1047,10 +1048,10 @@ BEGIN
     PUSHBUTTON      "No",IDCANCEL,190,140,50,14
 END
 
-IDD_DLG_INST DIALOG DISCARDABLE  0, 0, 259, 185
-STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+IDD_DLG_INST DIALOGEX 0, 0, 259, 214
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Startup Task Scheduler (sTask) Install"
-FONT 9, "Arial"
+FONT 9, "Arial", 0, 0, 0x0
 BEGIN
     ICON            IDI_ICO_INST,IDC_STATIC,5,5,20,20
     LTEXT           "Install Startup Task Scheduler (sTask)",IDC_STATIC,30,
@@ -1070,13 +1071,18 @@ BEGIN
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,10,131,240,10
     CONTROL         "Uninstall from Start Men&u",IDC_CHECK_UNINST_START,
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,10,145,240,10
-    DEFPUSHBUTTON   "OK(&K)",IDOK,80,165,55,15
-    PUSHBUTTON      "Cancel(&C)",IDCANCEL,140,165,55,15
-    PUSHBUTTON      "Help(&H)",IDC_BTN_HELP,200,165,55,15
+    GROUPBOX        "Protection by password",IDC_STATIC,5,164,250,28
+    CONTROL         "Enable",IDC_CHECK_PROTECT,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,10,177,54,9
+    RTEXT           "password :",IDC_STATIC,87,177,45,9
+    EDITTEXT        IDC_EDIT_PASSWORD,138,174,111,12,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK(&K)",IDOK,80,195,55,15
+    PUSHBUTTON      "Cancel(&C)",IDCANCEL,140,195,55,15
+    PUSHBUTTON      "Help(&H)",IDC_BTN_HELP,200,195,55,15
 END
 
-IDD_PROP_ADD0 DIALOG DISCARDABLE  0, 0, 255, 219
-STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
+IDD_PROP_ADD0 DIALOG  0, 0, 255, 219
+STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
 CAPTION "Scheduled Task Wizard (Add New Task)"
 FONT 9, "Arial"
 BEGIN
@@ -1093,7 +1099,7 @@ BEGIN
 END
 
 IDD_PROP_ADD1 DIALOGEX 0, 0, 255, 219
-STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
+STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
 CAPTION "Task"
 FONT 9, "Arial", 0, 0, 0x1
 BEGIN
@@ -1132,7 +1138,7 @@ BEGIN
 END
 
 IDD_PROP_ADD2 DIALOGEX 0, 0, 255, 219
-STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
+STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
 CAPTION "Schedule"
 FONT 9, "Arial", 0, 0, 0x1
 BEGIN
@@ -1178,7 +1184,7 @@ BEGIN
 END
 
 IDD_PROP_ADD3 DIALOGEX 0, 0, 254, 219
-STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
+STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
 CAPTION "Settings"
 FONT 9, "Arial", 0, 0, 0x1
 BEGIN
@@ -1221,7 +1227,7 @@ BEGIN
 END
 
 IDD_PROP_ADD4 DIALOGEX 0, 0, 254, 219
-STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
+STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
 CAPTION "Settings"
 FONT 9, "Arial", 0, 0, 0x1
 BEGIN
@@ -1254,7 +1260,7 @@ BEGIN
 END
 
 IDD_PROP_CNF1 DIALOGEX 0, 0, 255, 183
-STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
+STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
 CAPTION "Global Configuration"
 FONT 9, "Arial", 0, 0, 0x1
 BEGIN
@@ -1288,8 +1294,8 @@ BEGIN
     PUSHBUTTON      "Browse",IDC_BTN_CURDIR,215,165,35,12
 END
 
-IDD_PROP_CNF2 DIALOG DISCARDABLE  0, 0, 255, 183
-STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
+IDD_PROP_CNF2 DIALOG  0, 0, 255, 183
+STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
 CAPTION "Security Setting"
 FONT 9, "Arial"
 BEGIN
@@ -1305,7 +1311,7 @@ BEGIN
 END
 
 IDD_PROP_ADD5 DIALOGEX 0, 0, 254, 219
-STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
+STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
 CAPTION "Complete"
 FONT 9, "Arial", 0, 0, 0x1
 BEGIN
@@ -1327,7 +1333,7 @@ END
 //
 
 #ifdef APSTUDIO_INVOKED
-GUIDELINES DESIGNINFO DISCARDABLE 
+GUIDELINES DESIGNINFO 
 BEGIN
     IDD_DLG_NORMAL, DIALOG
     BEGIN
@@ -1366,7 +1372,7 @@ BEGIN
         LEFTMARGIN, 7
         RIGHTMARGIN, 252
         TOPMARGIN, 7
-        BOTTOMMARGIN, 178
+        BOTTOMMARGIN, 207
     END
 END
 #endif    // APSTUDIO_INVOKED
@@ -1377,7 +1383,7 @@ END
 // Toolbar
 //
 
-IDR_MAINFRAME TOOLBAR DISCARDABLE  16, 15
+IDR_MAINFRAME TOOLBAR  16, 15
 BEGIN
     BUTTON      ID_TASK_NEW
     BUTTON      ID_TASK_CUT
@@ -1400,7 +1406,7 @@ END
 // Bitmap
 //
 
-IDR_MAINFRAME           BITMAP  MOVEABLE PURE   "res\\mainfram.bmp"
+IDR_MAINFRAME           BITMAP                  "res\\mainfram.bmp"
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -1556,19 +1562,19 @@ END
 // String Table
 //
 
-STRINGTABLE PRELOAD DISCARDABLE 
+STRINGTABLE 
 BEGIN
     IDR_MAINFRAME           "sTask\n\nSTask\n\n\nSTask.Document\nSTask Document"
 END
 
-STRINGTABLE PRELOAD DISCARDABLE 
+STRINGTABLE 
 BEGIN
     AFX_IDS_APP_TITLE       "sTask"
     AFX_IDS_IDLEMESSAGE     "Press [F1] to view help"
     AFX_IDS_HELPMODEMESSAGE "Select an object to consult with help file"
 END
 
-STRINGTABLE DISCARDABLE 
+STRINGTABLE 
 BEGIN
     ID_INDICATOR_EXT        "EXT"
     ID_INDICATOR_CAPS       "CAP"
@@ -1579,7 +1585,7 @@ BEGIN
     ID_INDICATOR_KANA       "KANA"
 END
 
-STRINGTABLE DISCARDABLE 
+STRINGTABLE 
 BEGIN
     ID_APP_ABOUT            "Show version information\nAbout"
     ID_APP_EXIT             "Quit Startup Task Scheduler\nQuit"
@@ -1590,7 +1596,7 @@ BEGIN
     ID_HELP                 "Show current command help\nHelp"
 END
 
-STRINGTABLE DISCARDABLE 
+STRINGTABLE 
 BEGIN
     AFX_IDS_SCRESTORE       "Restore window size"
     AFX_IDS_SCTASKLIST      "Change application"
@@ -1607,7 +1613,7 @@ BEGIN
     STR_NAME_DISKCLEAN      "Disk Cleanup"
 END
 
-STRINGTABLE DISCARDABLE 
+STRINGTABLE 
 BEGIN
     ID_TASK_NEW             "Add New Task\nAdd New Task"
     ID_WRITEREG             "Save all configuration and task settings\nSave"
@@ -1623,7 +1629,7 @@ BEGIN
     ID_TASK_CUT             "Delete selected task\nDelete"
 END
 
-STRINGTABLE DISCARDABLE 
+STRINGTABLE 
 BEGIN
     STR_NAME_REGCHK         "Registry Checker"
     STR_PER_LOGON           "Logon Interval."
@@ -1641,7 +1647,7 @@ BEGIN
     STR_PAS_ERR_OFF         "Wrong password !\nPassword protect mode is disabled"
 END
 
-STRINGTABLE DISCARDABLE 
+STRINGTABLE 
 BEGIN
     STR_EXEC_DEBUG          "Exec task [ %s] . \n\nFile    %s\nParameter   %s\nExtention  %s\n\nDo you want to exec this task ?"
     STR_EXEC_DEBUG_TITLE    "Exec Task (Debugging Mode)"
@@ -1660,7 +1666,7 @@ BEGIN
     STR_THU                 "Thu "
 END
 
-STRINGTABLE DISCARDABLE 
+STRINGTABLE 
 BEGIN
     STR_FRI                 "Fri "
     STR_SAT                 "Sat "
@@ -1680,7 +1686,7 @@ BEGIN
     STR_VIEW_SCHEDULE       "Schedulle"
 END
 
-STRINGTABLE DISCARDABLE 
+STRINGTABLE 
 BEGIN
     STR_VIEW_PREVEXEC       "Last Run"
     STR_VIEW_NEXTEXEC       "Next Run"
@@ -1702,13 +1708,13 @@ BEGIN
     STR_MES_REGSAVED        "Settings are Saved to Registry"
 END
 
-STRINGTABLE DISCARDABLE 
+STRINGTABLE 
 BEGIN
     STR_TASK_NEW_SHORT      "Add New Task"
     AFX_STR_ERR_HELP        "Fail to load HTML help file.\r\n file : %s\r\n context ID: %04X"
 END
 
-#endif    // 英語 (ｱﾒﾘｶ) resources
+#endif    // 英語 (米国) resources
 /////////////////////////////////////////////////////////////////////////////
 
 

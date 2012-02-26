@@ -730,8 +730,9 @@ void CPropCnf2::OnBtnPass()
 	CString strTmp1, strTmp2;
 	CDlgPasswd dlg;
 
+	// 現在のパスワードを入力させ、SHA1変換してチェック。ただし、レジストリのパスワードSHA1値が40文字以外（旧バージョンアップデート）の場合は通す
 	dlg.m_message.LoadString(STR_PAS_INPOLD);
-	if((dlg.DoModal() == TRUE) && (dlg.m_passwd == theApp->m_tasks.g_passwd)) ;
+	if(dlg.DoModal() == TRUE && (::CalcHash_String(dlg.m_passwd, "SHA1") == theApp->m_tasks.g_passwd || theApp->m_tasks.g_passwd.GetLength() != 40)) ;
 	else
 	{	// パスワードの変更を受け付けない場合
 		strTmp1.LoadString(STR_ERRPAS);
@@ -754,7 +755,7 @@ void CPropCnf2::OnBtnPass()
 				strTmp1.LoadString(STR_PAS_CHANGEOK);
 				strTmp2.LoadString(STR_APPNAME);
 				::MessageBox(NULL, strTmp1, strTmp2 ,MB_OK|MB_ICONINFORMATION|MB_APPLMODAL);
-				theApp->m_tasks.g_passwd = pass;
+				theApp->m_tasks.g_passwd = ::CalcHash_String(pass, "SHA1");
 				return;
 			}
 		}
@@ -777,9 +778,9 @@ void CPropCnf2::OnGSecure()
 		theApp = (CSTaskApp *)AfxGetApp();
 		CDlgPasswd dlg;
 		dlg.m_message.LoadString(STR_PAS_IMP); // "現在のパスワードを入力してください";
-		if((dlg.DoModal() == TRUE) && (dlg.m_passwd == theApp->m_tasks.g_passwd)) ;
+		if(dlg.DoModal() == TRUE && ::CalcHash_String(dlg.m_passwd, "SHA1") == theApp->m_tasks.g_passwd) ;
 		else
-		{	// パスワードの変更を受け付けない場合
+		{	// 間違ったパスワード入力 または キャンセルボタンが押された
 			strTmp1.LoadString(STR_PAS_ERR_OFF);
 			strTmp2.LoadString(STR_APPNAME);
 			::MessageBox(NULL, strTmp1, strTmp2 ,MB_OK|MB_ICONSTOP|MB_APPLMODAL);

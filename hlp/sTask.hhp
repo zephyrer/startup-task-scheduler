@@ -27,26 +27,51 @@ index.html
 001-intro.html
 
 [ALIAS]
-0=index.html
-IDD_ABOUTBOX=index.html
-IDD_DEBUG=004-1-file-menu.html
-IDD_DLG_INST=003-install.html
-IDD_DLG_NORMAL=index.html
-IDD_DLG_PASSWD=004-1-file-menu.html
-IDD_PROP_ADD0=004-2-task-menu.html
-IDD_PROP_ADD1=004-2-task-menu.html
-IDD_PROP_ADD2=004-2-task-menu.html
-IDD_PROP_ADD3=004-2-task-menu.html
-IDD_PROP_ADD4=004-2-task-menu.html
-IDD_PROP_ADD5=004-2-task-menu.html
-IDD_PROP_CNF1=004-1-file-menu.html
-IDD_PROP_CNF2=004-1-file-menu.html
-IDR_MAINFRAME=index.html
-MENU_HELP_CONTEXT=index.html
+HIDR_MAINFRAME=index.html
+HIDD_ABOUTBOX=index.html
+HIDD_DEBUG=004-1-file-menu.html
+HIDD_DLG_INST=003-install.html
+HIDD_DLG_NORMAL=index.html
+HIDD_DLG_PASSWD=004-1-file-menu.html
+HIDD_PROP_ADD0=004-2-task-menu.html
+HIDD_PROP_ADD1=004-2-task-menu.html
+HIDD_PROP_ADD2=004-2-task-menu.html
+HIDD_PROP_ADD3=004-2-task-menu.html
+HIDD_PROP_ADD4=004-2-task-menu.html
+HIDD_PROP_ADD5=004-2-task-menu.html
+HIDD_PROP_CNF1=004-1-file-menu.html
+HIDD_PROP_CNF2=004-1-file-menu.html
+
+HID_TASK_NEW   =004-1-file-menu.html
+HID_WRITEREG   =004-1-file-menu.html
+HID_VIEW_ICON  =004-3-task-view.html
+HID_VIEW_REPORT=004-3-task-view.html
+HID_TASK_UP    =004-2-task-menu.html
+HID_DEBUG      =004-1-file-menu.html
+HID_TASK_DOWN  =004-2-task-menu.html
+HID_TASK_OFF   =004-2-task-menu.html
+HID_CONFIG     =004-1-file-menu.html
+HID_TASK_EXEC  =004-2-task-menu.html
+HID_TASK_CONFIG=004-2-task-menu.html
+HID_TASK_CUT   =004-2-task-menu.html
+HID_APP_ABOUT      =index.html
+HID_HELP_FINDER    =index.html
+HID_VIEW_TOOLBAR   =index.html
+HID_VIEW_STATUS_BAR=index.html
+
+
+HID_HT_CAPTION =index.html
+HID_HT_SIZE    =index.html
+
+AFX_HIDW_TOOLBAR     = index.html
+AFX_HIDW_STATUS_BAR  =index.html
+AFX_HIDW_DOCKBAR_TOP =index.html
+
+
 
 [MAP]
-#include ..\resource.h
-#include mapping.h
+#include HTMLDefines.h
+
 
 [INFOTYPES]
 

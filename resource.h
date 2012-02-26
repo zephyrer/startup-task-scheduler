@@ -1,5 +1,5 @@
 //{{NO_DEPENDENCIES}}
-// Microsoft Developer Studio generated include file.
+// Microsoft Visual C++ generated include file.
 // Used by sTask.rc
 //
 #define IDC_BTN_HELP                    3
@@ -105,6 +105,9 @@
 #define IDC_EDIT_CURDIR                 1064
 #define IDC_BTN_CURDIR                  1065
 #define IDC_CMB_EXECDIR                 1066
+#define IDC_CHECK_PROTECT               1068
+#define IDC_EDIT_PASSWORD               1069
+#define IDC_CHECK1                      1070
 #define ID_TASK_NEW                     32771
 #define ID_WRITEREG                     32772
 #define ID_VIEW_ICON                    32773
@@ -201,7 +204,7 @@
 #define _APS_3D_CONTROLS                     1
 #define _APS_NEXT_RESOURCE_VALUE        165
 #define _APS_NEXT_COMMAND_VALUE         32784
-#define _APS_NEXT_CONTROL_VALUE         1068
+#define _APS_NEXT_CONTROL_VALUE         1072
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

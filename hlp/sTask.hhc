@@ -13,19 +13,19 @@
 		<param name="Local" value="index.html">
 		</OBJECT>
 	<LI> <OBJECT type="text/sitemap">
-		<param name="Name" value="スタートアップ タスクスケジューラとは">
+		<param name="Name" value="概要">
 		<param name="Local" value="001-intro.html">
 		</OBJECT>
 	<LI> <OBJECT type="text/sitemap">
-		<param name="Name" value="Windowsのタスクスケジューラ、スタートアップフォルダとの違い">
+		<param name="Name" value="Windowsタスクスケジューラ、スタートアップフォルダとの違い">
 		<param name="Local" value="002-difference.html">
 		</OBJECT>
 	<LI> <OBJECT type="text/sitemap">
-		<param name="Name" value="インストール方法">
+		<param name="Name" value="インストール">
 		<param name="Local" value="003-install.html">
 		</OBJECT>
 	<LI> <OBJECT type="text/sitemap">
-		<param name="Name" value="設定ウインドウの使い方">
+		<param name="Name" value="タスク一覧画面（メインウインドウ）">
 		<param name="Local" value="004-menu.html">
 		</OBJECT>
 	<UL>
@@ -43,11 +43,11 @@
 			</OBJECT>
 	</UL>
 	<LI> <OBJECT type="text/sitemap">
-		<param name="Name" value="新しいタスクの追加とタスクの機能設定">
+		<param name="Name" value="新規タスク追加と機能設定">
 		<param name="Local" value="005-newtask.html">
 		</OBJECT>
 	<LI> <OBJECT type="text/sitemap">
-		<param name="Name" value="アンインストール方法">
+		<param name="Name" value="アンインストール">
 		<param name="Local" value="006-uninstall.html">
 		</OBJECT>
 	<LI> <OBJECT type="text/sitemap">
@@ -55,11 +55,11 @@
 		<param name="Local" value="007-error.html">
 		</OBJECT>
 	<LI> <OBJECT type="text/sitemap">
-		<param name="Name" value="あとがき・技術資料">
+		<param name="Name" value="リリースノート（バージョンアップ履歴）">
 		<param name="Local" value="008-other.html">
 		</OBJECT>
 	<LI> <OBJECT type="text/sitemap">
-		<param name="Name" value="使用許諾条件">
+		<param name="Name" value="GNU 一般公衆利用許諾契約書">
 		<param name="Local" value="009-copyright.html">
 		</OBJECT>
 </UL>

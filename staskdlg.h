@@ -117,6 +117,9 @@ protected:
 	afx_msg void OnBtnHelp();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
+public:
+	BOOL m_chk_protect;
+	CString m_edit_password;
 };
 //{{AFX_INSERT_LOCATION}}
 // Microsoft Visual C++ は前行の直前に追加の宣言を挿入します。

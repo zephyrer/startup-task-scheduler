@@ -42,7 +42,6 @@ public:
 	public:
 	virtual BOOL InitInstance();
 	virtual int ExitInstance();
-	virtual void WinHelp(DWORD dwData, UINT nCmd = HELP_CONTEXT);
 	//}}AFX_VIRTUAL
 
 // インプリメンテーション
@@ -50,6 +49,8 @@ public:
 	afx_msg void OnAppAbout();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
+	virtual void HtmlHelp(DWORD dwData,UINT nCmd);
+
 };
 
 
