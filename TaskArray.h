@@ -38,6 +38,9 @@ public:
 	BOOL dialog;
 	BOOL syncprev;
 	int syncexec;
+	int wndstyle;
+	int execdir_mode;
+	CString execdir;
 };
 
 // **********************************
@@ -56,12 +59,15 @@ public:
 	BOOL g_faildlg;
 	BOOL g_time;
 	UINT g_delay;
+	int g_curdir_mode;
+	CString g_curdir;
 	BOOL ExecTask(UINT i, HWND hWnd=NULL);
 	BOOL SwapTask(UINT i, UINT j);
 	BOOL DeleteTask(UINT i);
 	CTime CalcNextTime(UINT i);
 	BOOL NewTask(CString name, CString fpass, CString param="", CString mes="",
-			BOOL exec=FALSE, UINT apart =2, UINT interval=1, UINT date=0,
+			BOOL exec=FALSE, int wndstyle=0,  int execdir_mode=0, CString execdir="",
+			UINT apart =2, UINT interval=1, UINT date=0,
 			BOOL excludetime=FALSE, CTime time0=CTime(1999,1,1,0,0,0), CTime time1=CTime(1999,1,1,0,0,0),
 			BOOL waitexit=FALSE, UINT waitsec=0, BOOL taskoff=FALSE, UINT taskoffcount=0,
 			BOOL dialog=0, BOOL syncprev=FALSE, int syncexec=0);

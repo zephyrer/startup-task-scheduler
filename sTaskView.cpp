@@ -415,6 +415,8 @@ void CSTaskView::OnTaskNew()
 	prop1.trn_recom = &prop0.m_recom;
 	prop1.trn_winfile = &prop0.m_winfile;
 	prop1.trn_sel = &prop0.m_select;
+	prop1.m_cmb_wndstyle = 0;
+	prop1.m_execdir_mode = 1;
 	prop2.m_apart = 2;
 	prop2.m_interval = 1;
 	prop2.m_time0 = CTime(1999,1,1,0,0,0);
@@ -434,7 +436,8 @@ void CSTaskView::OnTaskNew()
 			UINT date = (prop2.m_dsun ? 0x40:0) | (prop2.m_dmon ? 0x20:0) | (prop2.m_dtue ? 0x10:0) |
 					(prop2.m_dwed ? 0x08:0) | (prop2.m_dthu ? 0x04:0) | (prop2.m_dfri ? 0x02:0) | (prop2.m_dsat ? 0x01:0);
 			theApp->m_tasks.NewTask(prop1.m_name, prop1.m_fpass, prop1.m_param ,prop1.m_mes,
-					prop1.m_exec, prop2.m_apart, prop2.m_interval , date,
+					prop1.m_exec, prop1.m_cmb_wndstyle, prop1.m_execdir_mode, prop1.m_execdir,
+					prop2.m_apart, prop2.m_interval , date,
 					prop2.m_time, prop2.m_time0, prop2.m_time1,
 					prop4.m_waitexit, prop4.m_waitsec, prop4.m_taskoff, prop4.m_taskoffcount,
 					prop4.m_dialog, prop4.m_syncprev, prop4.m_cmb_syncexec);
@@ -536,6 +539,9 @@ BOOL CSTaskView::EditTask(UINT i)
 	prop1.m_param = theApp->m_tasks.tasks[i].param;
 	prop1.m_mes = theApp->m_tasks.tasks[i].mes;
 	prop1.m_exec = theApp->m_tasks.tasks[i].exec;
+	prop1.m_cmb_wndstyle = theApp->m_tasks.tasks[i].wndstyle;
+	prop1.m_execdir_mode = theApp->m_tasks.tasks[i].execdir_mode;
+	prop1.m_execdir = theApp->m_tasks.tasks[i].execdir;
 	prop2.m_apart = theApp->m_tasks.tasks[i].apart;
 	prop2.m_interval = theApp->m_tasks.tasks[i].interval;
 	if(theApp->m_tasks.tasks[i].date & 0x40) prop2.m_dsun = TRUE;
@@ -575,6 +581,9 @@ BOOL CSTaskView::EditTask(UINT i)
 		theApp->m_tasks.tasks[i].param = prop1.m_param;
 		theApp->m_tasks.tasks[i].mes = prop1.m_mes;
 		theApp->m_tasks.tasks[i].exec = prop1.m_exec;
+		theApp->m_tasks.tasks[i].wndstyle = prop1.m_cmb_wndstyle;
+		theApp->m_tasks.tasks[i].execdir_mode = prop1.m_execdir_mode;
+		theApp->m_tasks.tasks[i].execdir = prop1.m_execdir;
 		theApp->m_tasks.tasks[i].apart = prop2.m_apart;
 		theApp->m_tasks.tasks[i].interval = prop2.m_interval;
 		theApp->m_tasks.tasks[i].date = (prop2.m_dsun ? 0x40:0) | (prop2.m_dmon ? 0x20:0) |
@@ -716,6 +725,8 @@ void CSTaskView::OnConfig()
 	prop1.m_dialog0 = theApp->m_tasks.g_dialog0;
 	prop1.m_faildlg = theApp->m_tasks.g_faildlg;
 	prop1.m_time = theApp->m_tasks.g_time;
+	prop1.m_cmb_curdir = theApp->m_tasks.g_curdir_mode;
+	prop1.m_curdir = theApp->m_tasks.g_curdir;
 	prop2.m_secure = theApp->m_tasks.g_secure;
 	if(DlgAdd.DoModal() == TRUE)
 	{
@@ -724,6 +735,8 @@ void CSTaskView::OnConfig()
 		theApp->m_tasks.g_dialog0 = prop1.m_dialog0;
 		theApp->m_tasks.g_faildlg = prop1.m_faildlg;
 		theApp->m_tasks.g_time = prop1.m_time;
+		theApp->m_tasks.g_curdir_mode = prop1.m_cmb_curdir;
+		theApp->m_tasks.g_curdir = prop1.m_curdir;
 		theApp->m_tasks.g_secure = prop2.m_secure;
 	}
 	ChgViewStyle();	

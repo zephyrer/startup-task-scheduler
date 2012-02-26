@@ -30,7 +30,9 @@
 #define IDC_CHECK_ON                    1004
 #define IDC_COMBO_APART                 1005
 #define IDC_EDIT_NAME                   1005
+#define IDC_EDIT_EXECDIR                1006
 #define IDC_TEXT_APART                  1007
+#define IDC_BTN_EXECDIR                 1007
 #define IDC_CHECK_WAIT                  1008
 #define IDC_CHECK_MON                   1009
 #define IDC_CHECK_STOP                  1010
@@ -93,6 +95,11 @@
 #define IDC_CHECK_UNINST_START          1058
 #define IDC_CMB_SYNCEXEC                1058
 #define IDC_PROP5_NAME                  1060
+#define IDC_CMB_WNDSTYLE                1061
+#define IDC_CMB_CURDIR                  1063
+#define IDC_EDIT_CURDIR                 1064
+#define IDC_BTN_CURDIR                  1065
+#define IDC_CMB_EXECDIR                 1066
 #define ID_TASK_NEW                     32771
 #define ID_WRITEREG                     32772
 #define ID_VIEW_ICON                    32773
@@ -186,9 +193,9 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
-#define _APS_NEXT_RESOURCE_VALUE        156
+#define _APS_NEXT_RESOURCE_VALUE        160
 #define _APS_NEXT_COMMAND_VALUE         32784
-#define _APS_NEXT_CONTROL_VALUE         1061
+#define _APS_NEXT_CONTROL_VALUE         1067
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

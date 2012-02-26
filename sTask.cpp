@@ -20,6 +20,9 @@
 static char THIS_FILE[] = __FILE__;
 #endif
 
+char  sMutexInstance[] = {"sTaskCtrlMutex"};    //  多重起動防止のため利用
+
+
 /////////////////////////////////////////////////////////////////////////////
 // CSTaskApp
 
@@ -78,6 +81,19 @@ BOOL CSTaskApp::InitInstance()
 	//  レジストリから全設定値を読み込む
 	// **********************************
 	RegReadAll();
+
+	// **********************************
+	//  多重起動防止
+	// **********************************
+	m_hMutex = ::CreateMutex(NULL, TRUE, sMutexInstance);
+	if(::GetLastError() == ERROR_ALREADY_EXISTS)
+	{	// すでに起動している
+//		::CloseHandle(m_hMutex);
+		m_bMutexOwner = FALSE;
+		return FALSE;
+	}
+	m_bMutexOwner = TRUE;
+
 
 	// **********************************
 	//  コマンドライン引数による分岐
@@ -192,6 +208,10 @@ BOOL CSTaskApp::RegWriteAll()
 		WriteProfileString("Settings","pass",m_tasks.g_passwd);
 	if(m_tasks.maxtask != GetProfileInt("Settings","maxtask",0))
 		WriteProfileInt("Settings","maxtask",m_tasks.maxtask);
+	if(m_tasks.g_curdir_mode != (int)GetProfileInt("Settings","curdir_mode",0))
+		WriteProfileInt("Settings","curdir_mode",m_tasks.g_curdir_mode);
+	if(m_tasks.g_curdir != GetProfileString("Settings","curdir",""))
+		WriteProfileString("Settings","curdir",m_tasks.g_curdir);
 
 	for(UINT i=0; i<m_tasks.maxtask; i++)
 	{
@@ -238,6 +258,12 @@ BOOL CSTaskApp::RegWriteAll()
 			WriteProfileInt(str_n,"c_c",m_tasks.tasks[i].cnt_check);
 		if(m_tasks.tasks[i].cnt_exec != GetProfileInt(str_n,"c_e",0))
 			WriteProfileInt(str_n,"c_e",m_tasks.tasks[i].cnt_exec);
+		if(m_tasks.tasks[i].wndstyle != (int)GetProfileInt(str_n,"wndstyle",0))
+			WriteProfileInt(str_n,"wndstyle",m_tasks.tasks[i].wndstyle);
+		if(m_tasks.tasks[i].execdir_mode != (int)GetProfileInt(str_n,"execdir_mode",0))
+			WriteProfileInt(str_n,"execdir_mode",m_tasks.tasks[i].execdir_mode);
+		if(m_tasks.tasks[i].execdir != GetProfileString(str_n,"execdir"))
+			WriteProfileString(str_n,"execdir",m_tasks.tasks[i].execdir);
 		
 	}
 	return TRUE;
@@ -258,6 +284,8 @@ BOOL CSTaskApp::RegReadAll()
 	m_tasks.g_secure = GetProfileInt("Settings","secure",0);
 	m_tasks.g_passwd = GetProfileString("Settings","pass","");
 	m_tasks.maxtask = GetProfileInt("Settings","maxtask",0);
+	m_tasks.g_curdir_mode = GetProfileInt("Settings","curdir_mode",0);
+	m_tasks.g_curdir = GetProfileString("Settings","curdir","");
 
 	for(UINT i=0; i<m_tasks.maxtask; i++)
 	{
@@ -283,6 +311,9 @@ BOOL CSTaskApp::RegReadAll()
 		m_tasks.tasks[i].syncexec = GetProfileInt(str_n,"syncexec",0);
 		m_tasks.tasks[i].cnt_check = GetProfileInt(str_n,"c_c",0);
 		m_tasks.tasks[i].cnt_exec = GetProfileInt(str_n,"c_e",0);
+		m_tasks.tasks[i].wndstyle = GetProfileInt(str_n,"wndstyle",0);
+		m_tasks.tasks[i].execdir_mode = GetProfileInt(str_n,"execdir_mode",0);
+		m_tasks.tasks[i].execdir = GetProfileString(str_n,"execdir");
 		// オーバーフロー対策
 		if(m_tasks.tasks[i].cnt_check > 1000) m_tasks.tasks[i].cnt_check=0;
 		if(m_tasks.tasks[i].cnt_exec > 1000) m_tasks.tasks[i].cnt_exec = 0;
@@ -573,4 +604,20 @@ void CSTaskApp::OnAppAbout()
 {
 	CAboutDlg aboutDlg;
 	aboutDlg.DoModal();
+}
+
+int CSTaskApp::ExitInstance() 
+{
+	// TODO: この位置に固有の処理を追加するか、または基本クラスを呼び出してください
+
+	if(m_bMutexOwner)
+	{
+		// **********************************
+		//  多重起動防止の Mutex を閉じる
+		// **********************************
+		::ReleaseMutex(m_hMutex);
+		::CloseHandle(m_hMutex);
+	}
+	
+	return CWinApp::ExitInstance();
 }

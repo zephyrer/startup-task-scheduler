@@ -34,7 +34,8 @@ CTaskArray::~CTaskArray()
 // 新しいタスクを追加する
 // **********************************
 BOOL CTaskArray::NewTask(CString name, CString fpass, CString param, CString mes,
-			BOOL exec, UINT apart, UINT interval, UINT date,
+			BOOL exec, int wndstyle, int execdir_mode, CString execdir,
+			UINT apart, UINT interval, UINT date,
 			BOOL excludetime, CTime time0, CTime time1,
 			BOOL waitexit, UINT waitsec, BOOL taskoff, UINT taskoffcount,
 			BOOL dialog, BOOL syncprev, int syncexec)
@@ -48,6 +49,9 @@ BOOL CTaskArray::NewTask(CString name, CString fpass, CString param, CString mes
 	tasks[i].param=param;
 	tasks[i].mes=mes;
 	tasks[i].exec=exec;
+	tasks[i].wndstyle = wndstyle;
+	tasks[i].execdir_mode = execdir_mode;
+	tasks[i].execdir = execdir;
 	tasks[i].apart=apart;
 	tasks[i].interval=interval;
 	tasks[i].date=date;
@@ -169,8 +173,24 @@ BOOL CTaskArray::ExecTask(UINT i, HWND hWnd)
 	PROCESS_INFORMATION pi;		// CreateProcess 用
 	STARTUPINFO si;				// CreateProcess 用
 	char strTmp3[MAX_PATH];		// CreateProcess 用
-   
+
+	// カレントディレクトリの設定
+	if(g_curdir_mode == 2)
+	{	// ユーザ指定のディレクトリ
+		if(strlen(g_curdir)>0) ::SetCurrentDirectory(g_curdir);
+	}
+	else if(g_curdir_mode == 1)
+	{	// sTask のディレクトリ
+		::GetModuleFileName(NULL, strTmp3, MAX_PATH);
+		_splitpath((LPCSTR)strTmp3, drive, dir, fname, ext);
+		strTmp1.Format("%s%s", drive, dir);
+		if(strTmp1 != "") ::SetCurrentDirectory(strTmp1);
+	}
+
+	// プログラムのパス名を分解
 	_splitpath((LPCSTR)tasks[i].fpass, drive, dir, fname, ext);
+
+
 
 	// デバッグモードでの表示
 	if(g_debug)
@@ -203,46 +223,85 @@ BOOL CTaskArray::ExecTask(UINT i, HWND hWnd)
 //			******************** ver 1.61b *.cmd も CreateProcess で実行
 	if(!strcmpi(ext,".exe") || !strcmpi(ext,".com") || !strcmpi(ext,".bat") || !strcmpi(ext,".cmd"))	
 	{
-		if(tasks[i].waitexit)
-		{	// 次のタスクを待機させる
-			// (2002/05/11) spawnl から spawnlp に変更
-
 //			******************** ver 1.61b プロセス実行方法を変更（スペースのあるパス名に対応）
 //			if(_spawnlp(_P_WAIT,tasks[i].fpass,tasks[i].fpass,tasks[i].param,NULL) < 0)
 //				return FALSE;
 
+		// プログラム実行時に渡すワーキングディレクトリ
+		if(tasks[i].execdir_mode == 1)
+		{	// プログラムの存在するフォルダ
+			strTmp2.Format("%s%s", drive, dir);
+		}
+		else if(tasks[i].execdir_mode == 2)
+		{	// TEMPフォルダ
+			::GetTempPath(MAX_PATH-1, strTmp3);
+			strTmp2 = strTmp3;
+		}
+		else if(tasks[i].execdir_mode == 3)
+		{	// ユーザ指定のフォルダ
+			strTmp2 = tasks[i].execdir;
+		}
 
-			// 途中にスペースのあるパス名への対応
-			if(strstr(tasks[i].fpass, " ") != NULL)
-				sprintf(strTmp3, "\"%s\" %s", tasks[i].fpass, tasks[i].param);
-			else
-				sprintf(strTmp3, "%s %s", tasks[i].fpass, tasks[i].param);
 
-			// プロセスの作成・実行
-			ZeroMemory(&si,sizeof(si));
-			si.cb=sizeof(si);
-			if(!::CreateProcess(NULL, strTmp3, NULL, NULL, FALSE, NORMAL_PRIORITY_CLASS, NULL, NULL, &si, &pi))
+		// 途中にスペースのあるパス名への対応
+		if(strstr(tasks[i].fpass, " ") != NULL)
+			sprintf(strTmp3, "\"%s\" %s", tasks[i].fpass, tasks[i].param);
+		else
+			sprintf(strTmp3, "%s %s", tasks[i].fpass, tasks[i].param);
+
+
+		ZeroMemory(&si,sizeof(si));
+		si.cb=sizeof(si);	// 何も指定しない場合でも、 si は必要
+		// ウインドウの状態
+		if(tasks[i].wndstyle != 0)
+		{
+			si.dwFlags = STARTF_USESHOWWINDOW;
+			switch(tasks[i].wndstyle)
+			{
+			case 1:
+				si.wShowWindow = SW_SHOWNORMAL;
+				break;
+			case 2:
+				si.wShowWindow = SW_SHOW;
+				break;
+			case 3:
+				si.wShowWindow = SW_SHOWDEFAULT;
+				break;
+			case 4:
+				si.wShowWindow = SW_HIDE;
+				break;
+			case 5:
+				si.wShowWindow = SW_MAXIMIZE;
+				break;
+			case 6:
+				si.wShowWindow = SW_SHOWMAXIMIZED;
+				break;
+			case 7:
+				si.wShowWindow = SW_MINIMIZE;
+				break;
+			case 8:
+				si.wShowWindow = SW_SHOWMINIMIZED;
+				break;
+			default:
+				si.wShowWindow = SW_SHOWNORMAL;
+				break;
+			}
+		}
+		// プロセスの作成・実行
+		if(tasks[i].execdir_mode != 0)
+		{	// ワーキングフォルダ指定
+			if(!::CreateProcess(NULL, strTmp3, NULL, NULL, FALSE, NORMAL_PRIORITY_CLASS, NULL, (LPCSTR)strTmp2, &si, &pi))
 				return FALSE;	// プロセス作成に失敗
-
-			::WaitForSingleObject(pi.hProcess, INFINITE);		// プログラムが終了するまで待機
 		}
 		else
-		{
-//			******************** ver 1.61b プロセス実行方法を変更（スペースのあるパス名に対応）
-//			if(_spawnlp(_P_NOWAIT,tasks[i].fpass,tasks[i].fpass,tasks[i].param,NULL) < 0)
-//				return FALSE;
-			// 途中にスペースのあるパス名への対応
-			if(strstr(tasks[i].fpass, " ") != NULL)
-				sprintf(strTmp3, "\"%s\" %s", tasks[i].fpass, tasks[i].param);
-			else
-				sprintf(strTmp3, "%s %s", tasks[i].fpass, tasks[i].param);
-
-			// プロセスの作成・実行
-			ZeroMemory(&si,sizeof(si));
-			si.cb=sizeof(si);
+		{	// ワーキングフォルダ未指定
 			if(!::CreateProcess(NULL, strTmp3, NULL, NULL, FALSE, NORMAL_PRIORITY_CLASS, NULL, NULL, &si, &pi))
 				return FALSE;	// プロセス作成に失敗
+		}
 
+		if(tasks[i].waitexit)
+		{	// 次のタスクを待機させる
+			::WaitForSingleObject(pi.hProcess, INFINITE);		// プログラムが終了するまで待機
 		}
 
 	}

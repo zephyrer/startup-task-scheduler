@@ -26,11 +26,17 @@ public:
 // ダイアログ データ
 	//{{AFX_DATA(CPropAdd1)
 	enum { IDD = IDD_PROP_ADD1 };
+	CButton	m_btn_execdir_ctrl;
+	CComboBox	m_cmb_execdir_ctrl;
+	CEdit	m_execdir_ctrl;
 	CString	m_name;
 	CString	m_fpass;
 	CString	m_param;
 	CString	m_mes;
 	BOOL	m_exec;
+	int		m_cmb_wndstyle;
+	int		m_execdir_mode;
+	CString	m_execdir;
 	//}}AFX_DATA
 
 
@@ -48,6 +54,9 @@ protected:
 	//{{AFX_MSG(CPropAdd1)
 	afx_msg void OnBtnBrowse();
 	afx_msg void OnShowWindow(BOOL bShow, UINT nStatus);
+	afx_msg void OnSelchangeCmbExecdir();
+	virtual BOOL OnInitDialog();
+	afx_msg void OnBtnExecdir();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 
@@ -174,11 +183,16 @@ public:
 // ダイアログ データ
 	//{{AFX_DATA(CPropCnf1)
 	enum { IDD = IDD_PROP_CNF1 };
+	CButton	m_btn_curdir_ctrl;
+	CComboBox	m_cmb_curdir_ctrl;
+	CEdit	m_edit_curdir_ctrl;
 	BOOL	m_dialog;
 	BOOL	m_dialog0;
 	BOOL	m_faildlg;
 	UINT	m_delay;
 	int		m_time;
+	int		m_cmb_curdir;
+	CString	m_curdir;
 	//}}AFX_DATA
 
 
@@ -194,7 +208,9 @@ public:
 protected:
 	// 生成されたメッセージ マップ関数
 	//{{AFX_MSG(CPropCnf1)
-		// メモ: ClassWizard はこの位置にメンバ関数を追加します。
+	afx_msg void OnBtnCurdir();
+	afx_msg void OnSelchangeCmbCurdir();
+	virtual BOOL OnInitDialog();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 
@@ -369,3 +385,8 @@ protected:
 	DECLARE_MESSAGE_MAP()
 
 };
+
+
+int CALLBACK myBrowseCallbackProc(HWND hwnd, UINT uMsg, LPARAM lParam, LPARAM lpData);
+LPITEMIDLIST ConvertPIDL(char *lpszPath);
+

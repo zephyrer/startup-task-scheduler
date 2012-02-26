@@ -33,12 +33,15 @@ public:
 	BOOL RegWriteAll(void);
 	CTaskArray m_tasks;
 	CSTaskApp();
+	BOOL m_bMutexOwner;
+	HANDLE m_hMutex;
 
 // オーバーライド
 	// ClassWizard は仮想関数のオーバーライドを生成します。
 	//{{AFX_VIRTUAL(CSTaskApp)
 	public:
 	virtual BOOL InitInstance();
+	virtual int ExitInstance();
 	//}}AFX_VIRTUAL
 
 // インプリメンテーション
