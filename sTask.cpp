@@ -14,6 +14,10 @@
 #include "InstFunc.h"
 #include "CheckWinVer.h"
 
+#include <HtmlHelp.h>
+#include <stdlib.h>
+
+
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #undef THIS_FILE
@@ -33,6 +37,7 @@ BEGIN_MESSAGE_MAP(CSTaskApp, CWinApp)
 	// 標準のファイル基本ドキュメント コマンド
 	ON_COMMAND(ID_FILE_NEW, CWinApp::OnFileNew)
 	ON_COMMAND(ID_FILE_OPEN, CWinApp::OnFileOpen)
+	ON_COMMAND(ID_HELP, CWinApp::OnHelp)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -432,9 +437,14 @@ BOOL CSTaskApp::InstallSeq()
 	char strTmp3[2];	// パスワード作成用
 	CString tmpstr, tmpstr2;
 	tmpstr = "";
+	::srand((unsigned)::time(NULL));
 	for(i=0; i<8; i++)
 	{
-		strTmp3[0] = GenerateRandom(0x41, 0x5a);
+		while(1)
+		{
+			strTmp3[0] = GenerateRandom(0x41, 0x5a);			// 'A' - 'Z' のランダム値
+			if(strTmp3[0] != 'I' && strTmp3[0] != 'O') break;	// I と O は紛らわしいので禁止
+		}
 		strTmp3[1] = (char)NULL;
 		tmpstr += strTmp3;
 	}
@@ -541,6 +551,9 @@ BOOL CSTaskApp::UninstallSeq()
 
 }
 
+// **********************************
+// ランダムな整数を返す（min ～ maxの間の整数）
+// **********************************
 unsigned int CSTaskApp::GenerateRandom(unsigned int min, unsigned int max)
 {
 	unsigned int i=0;
@@ -623,4 +636,60 @@ int CSTaskApp::ExitInstance()
 	}
 	
 	return CWinApp::ExitInstance();
+}
+
+// ************************************************************
+// ヘルプ表示関数（仮想関数をオーバーライド）
+// HTMLヘルプに対応させるために、アプリケーションの最上位クラスでオーバーライド
+// 
+// 引数 dwData : 下位8ビットに、resource.hで定義されたダイアログのIDが入る
+//      nCmd   : HELP_CONTEXT=1
+// ************************************************************
+void CSTaskApp::WinHelp(DWORD dwData, UINT nCmd) 
+{
+	// TODO: この位置に固有の処理を追加するか、または基本クラスを呼び出してください
+
+//	既存の WinHelp 関数を無効にする
+//	CWinApp::WinHelp(dwData, nCmd);
+
+	// HELP_CONTEXT (F1キー、ヘルプボタン）、HELP_FINDER（メニューのヘルプ） 以外は何もしない
+	if(nCmd != HELP_CONTEXT && nCmd != HELP_FINDER) return;
+
+	// HTMLヘルプのhWndハンドラ （失敗時はNULL）
+	HWND hWnd_Help;
+	// ヘルプファイルへの絶対パスを作るための、パス分解用一時文字列
+	char szChmPath[MAX_PATH], szAppPath[MAX_PATH];
+	char szDrive[_MAX_DRIVE];
+	char szDir[_MAX_DIR];
+	char szFname[_MAX_FNAME];
+	char szExt[_MAX_EXT];
+
+	CString sTmp, sAfxMsg;
+
+	// アプリケーション自身のパスを取得し、拡張子を chm に書き換える
+	// (HtmlHelp関数はカレントフォルダのヘルプファイルを取得しようとするため)
+	if(!::GetModuleFileName(NULL, szAppPath, MAX_PATH)) return;
+	::_splitpath(szAppPath, szDrive, szDir, szFname, szExt);
+	::_makepath(szChmPath, szDrive, szDir,szFname, ".chm");
+
+	// ヘルプの表示
+	if(this->m_pMainWnd == NULL)
+	{	// メインウインドウのハンドラが定義されていないとき
+//		hWnd_Help = ::HtmlHelp(NULL, szChmPath, HH_DISPLAY_TOPIC, NULL);
+		hWnd_Help = ::HtmlHelp(NULL, szChmPath, HH_HELP_CONTEXT, LOWORD(dwData));
+	}
+	else
+	{
+//		hWnd_Help = ::HtmlHelp(this->m_pMainWnd->m_hWnd, szChmPath, HH_DISPLAY_TOPIC, NULL);
+		hWnd_Help = ::HtmlHelp(this->m_pMainWnd->m_hWnd, szChmPath, HH_HELP_CONTEXT, LOWORD(dwData));
+	}
+
+	if(hWnd_Help == NULL)
+	{	// ヘルプファイルの起動に失敗した場合
+		sAfxMsg.LoadString(AFX_STR_ERR_HELP);	// 「ヘルプファイルの表示ができません\r\n ファイル: %s\r\n コンテキストID: %04X」
+
+		sTmp.Format(sAfxMsg, szChmPath, LOWORD(dwData));
+		this->m_pMainWnd->MessageBox(sTmp, "Help File Error", MB_ICONWARNING);
+	}
+
 }

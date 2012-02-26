@@ -57,7 +57,7 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 
 	// CreateEx -> Create on 1999.11.24 Win95/US ‚Å‹N“®‰Â‚Æ‚È‚é
 
-	if (!m_wndToolBar.Create(this)||
+	if (!m_wndToolBar.CreateEx(this, TBSTYLE_FLAT)||
 		!m_wndToolBar.LoadToolBar(IDR_MAINFRAME))
 	{
 		TRACE0("Failed to create toolbar\n");

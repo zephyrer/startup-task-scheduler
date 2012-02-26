@@ -1,0 +1,65 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+<meta http-equiv="Content-Language" content="ja">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>エラーと対処方法</title>
+<link rel="stylesheet" type="text/css" href="main.css">
+</head>
+
+<body>
+
+<img border="0" src="pics/bg-blue-shade.png" width="100%" height="40">
+<div style="position:absolute; top:0px; left:0px;">
+	<table class="pagehead" border="0" width="95%" cellspacing="0" cellpadding="0" height="40">
+		<tr>
+			<td valign="middle" width="35"><img border="0" src="pics/ico-stask.png" align="middle"
+				width="32" height="32"></td>
+			<td valign="middle">&nbsp;エラーと対処方法</td>
+			<td valign="middle" width="80">
+				<p align="center"><a href="index.html"><img border="0" src="pics/ico-home.png"
+				width="61" height="18"></a></p>
+			</td>
+		</tr>
+	</table>
+</div>
+<h1>起動時に起こるエラーは次の通りです</h1>
+<h2>「無効なファイル MFC42.DLL xxxx へのエクスポート」<br>
+「…」（メッセージの無いダイアログ）</h2>
+<p class="doc-indent20">最新のMFC42.DLLとMSVCRT.DLLをインストールしてください。</p>
+<h2>「cant create empty document」</h2>
+<p class="doc-indent20">ｓTask version 1.5で解決したと思っていますが、まだこのメッセージが出る場合は、このバージョンでは解決できません。（Windows95の場合起こりえます）</p>
+<h2>「一般保護違反」</h2>
+<p class="doc-indent20">sTask version 1.5で解決したと思っていますが、まだこのメッセージが出る場合は、このバージョンでは解決できません。</p>
+<h2>「Internal Error (Fail to Create Progress Dialog Thread)」</h2>
+<p class="doc-indent20">sTask 
+プログラム内部でのエラーです。原因に心当たりがあれば、ぜひ作者までご一報を！ 
+（直すことが出来るかもしれません）<br>
+ダイアログ系統のエラーの場合は、タスクの実行自体は正常に行われます。（表示が出ないだけです）</p>
+<h1>タスク実行時に起こる可能性のあるエラーは、次のとおりです。</h1>
+<h2>「タスク ｘｘｘ 
+は実行できませんでした。ファイルが存在しないか壊れている可能性があります。」</h2>
+<p class="doc-indent20"><img border="0" src="pics/dlg-err-noexec.png" width="480" height="239"></p>
+<p class="doc-indent20">このエラーが表示された場合、タスクの機能設定でファイル名が正しく入力されているか確認してください。</p>
+<h2>「タスク ｘｘｘ は実行日時に達していないため、実行されません。」</h2>
+<p class="doc-indent20">このエラーは、「判定結果ダイアログを表示する」モードでの表示結果です。この場合、スケジュールの条件が整うまでタスクは実行されません。</p>
+<h1>その他</h1>
+<h2>登録されたタスクのアイコンの色がおかしい</h2>
+<p class="doc-indent20">このプログラムは、16色アイコンにしか対応していません。</p>
+<h2>「ヘルプファイルの表示が出来ません」</h2>
+<p class="doc-indent20">ヘルプファイル（sTask.chm）が、sTask.exeと同じフォルダに存在しない場合。もしくは、コンテキストNoが存在しないヘルプ項目を呼び出そうとした場合に表示されるエラーです。<br>
+コンテキストIDが0x8000番台 （メニューの各項目） に対する F1 
+キーでのヘルプは存在しません。（バグでは無く、仕様）</p>
+<h2>「レジストリに登録（ユーザごと設定）」で、自動実行されない</h2>
+<p class="doc-indent20">HKCU\Software\Microsoft\Windows\CurrentVersion に run 
+というキーが存在しない場合に、run 
+の下にある値を書き込もうとして失敗したときに起きるエラーです。<br>
+インストール直後のWindowsでは、HKCUのrunには何もかかれていない 
+（runのキーそのものが存在していない）ためにおきます。回避するためには、レジストリエディタで 
+run キーを作成してください。</p>
+
+</body>
+
+</html>

@@ -40,6 +40,7 @@ RSC=rc.exe
 # PROP Use_Debug_Libraries 0
 # PROP Output_Dir "Release"
 # PROP Intermediate_Dir "Release"
+# PROP Ignore_Export_Lib 0
 # PROP Target_Dir ""
 # ADD BASE CPP /nologo /MD /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_AFXDLL" /Yu"stdafx.h" /FD /c
 # ADD CPP /nologo /MD /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /Yu"stdafx.h" /FD /c
@@ -52,7 +53,7 @@ BSC32=bscmake.exe
 # ADD BSC32 /nologo
 LINK32=link.exe
 # ADD BASE LINK32 /nologo /subsystem:windows /machine:I386
-# ADD LINK32 /nologo /subsystem:windows /machine:I386
+# ADD LINK32 htmlhelp.lib /nologo /subsystem:windows /machine:I386
 
 !ELSEIF  "$(CFG)" == "sTask - Win32 Debug"
 
@@ -65,6 +66,7 @@ LINK32=link.exe
 # PROP Use_Debug_Libraries 1
 # PROP Output_Dir "Debug"
 # PROP Intermediate_Dir "Debug"
+# PROP Ignore_Export_Lib 0
 # PROP Target_Dir ""
 # ADD BASE CPP /nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /Yu"stdafx.h" /FD /GZ /c
 # ADD CPP /nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /FR /Yu"stdafx.h" /FD /GZ /c
@@ -77,7 +79,7 @@ BSC32=bscmake.exe
 # ADD BSC32 /nologo
 LINK32=link.exe
 # ADD BASE LINK32 /nologo /subsystem:windows /debug /machine:I386 /pdbtype:sept
-# ADD LINK32 /nologo /subsystem:windows /debug /machine:I386 /pdbtype:sept
+# ADD LINK32 htmlhelp.lib /nologo /subsystem:windows /debug /machine:I386 /pdbtype:sept
 
 !ENDIF 
 
@@ -107,53 +109,6 @@ SOURCE=.\ProgressThread.cpp
 # Begin Source File
 
 SOURCE=.\sTask.cpp
-# End Source File
-# Begin Source File
-
-SOURCE=.\hlp\sTask.hpj
-
-!IF  "$(CFG)" == "sTask - Win32 Release"
-
-# Begin Custom Build - ÕŸÃﬂ Ãß≤ŸÇçÏê¨ÇµÇƒÇ¢Ç‹Ç∑...
-OutDir=.\Release
-InputPath=.\hlp\sTask.hpj
-InputName=sTask
-
-"$(OutDir)\$(InputName).hlp" : $(SOURCE) "$(INTDIR)" "$(OUTDIR)"
-	start /wait hcw /C /E /M "hlp\$(InputName).hpj" 
-	if errorlevel 1 goto :Error 
-	if not exist "hlp\$(InputName).hlp" goto :Error 
-	copy "hlp\$(InputName).hlp" $(OutDir) 
-	goto :done 
-	:Error 
-	echo hlp\$(InputName).hpj(1) : error: 
-	type "hlp\$(InputName).log" 
-	:done 
-	
-# End Custom Build
-
-!ELSEIF  "$(CFG)" == "sTask - Win32 Debug"
-
-# Begin Custom Build - ÕŸÃﬂ Ãß≤ŸÇçÏê¨ÇµÇƒÇ¢Ç‹Ç∑...
-OutDir=.\Debug
-InputPath=.\hlp\sTask.hpj
-InputName=sTask
-
-"$(OutDir)\$(InputName).hlp" : $(SOURCE) "$(INTDIR)" "$(OUTDIR)"
-	start /wait hcw /C /E /M "hlp\$(InputName).hpj" 
-	if errorlevel 1 goto :Error 
-	if not exist "hlp\$(InputName).hlp" goto :Error 
-	copy "hlp\$(InputName).hlp" $(OutDir) 
-	goto :done 
-	:Error 
-	echo hlp\$(InputName).hpj(1) : error: 
-	type "hlp\$(InputName).log" 
-	:done 
-	
-# End Custom Build
-
-!ENDIF 
-
 # End Source File
 # Begin Source File
 
@@ -317,6 +272,22 @@ SOURCE=.\res\docicon.ico
 # End Source File
 # Begin Source File
 
+SOURCE=".\res\ico-cmd.ico"
+# End Source File
+# Begin Source File
+
+SOURCE=".\res\ico-jscript.ico"
+# End Source File
+# Begin Source File
+
+SOURCE=".\res\ico-unknown.ico"
+# End Source File
+# Begin Source File
+
+SOURCE=".\res\ico-vbs.ico"
+# End Source File
+# Begin Source File
+
 SOURCE=.\res\ico_inst.ico
 # End Source File
 # Begin Source File
@@ -350,47 +321,6 @@ SOURCE=.\res\Toolbar.bmp
 # Begin Source File
 
 SOURCE=.\res\train.bmp
-# End Source File
-# End Group
-# Begin Group "Help Files"
-
-# PROP Default_Filter "cnt;rtf"
-# Begin Source File
-
-SOURCE=.\hlp\sTask.cnt
-
-!IF  "$(CFG)" == "sTask - Win32 Release"
-
-# PROP Ignore_Default_Tool 1
-# Begin Custom Build - ñ⁄éüÃß≤ŸÇçÏê¨íÜÇ≈Ç∑...
-OutDir=.\Release
-InputPath=.\hlp\sTask.cnt
-InputName=sTask
-
-"$(OutDir)\$(InputName).cnt" : $(SOURCE) "$(INTDIR)" "$(OUTDIR)"
-	copy "hlp\$(InputName).cnt" $(OutDir)
-
-# End Custom Build
-
-!ELSEIF  "$(CFG)" == "sTask - Win32 Debug"
-
-# PROP Ignore_Default_Tool 1
-# Begin Custom Build - ñ⁄éüÃß≤ŸÇçÏê¨íÜÇ≈Ç∑...
-OutDir=.\Debug
-InputPath=.\hlp\sTask.cnt
-InputName=sTask
-
-"$(OutDir)\$(InputName).cnt" : $(SOURCE) "$(INTDIR)" "$(OUTDIR)"
-	copy "hlp\$(InputName).cnt" $(OutDir)
-
-# End Custom Build
-
-!ENDIF 
-
-# End Source File
-# Begin Source File
-
-SOURCE=.\hlp\sTask.rtf
 # End Source File
 # End Group
 # Begin Source File

@@ -114,7 +114,6 @@ protected:
 	// 生成されたメッセージ マップ関数
 	//{{AFX_MSG(CDlgInstall)
 	virtual BOOL OnInitDialog();
-	afx_msg void OnHelp();
 	afx_msg void OnBtnHelp();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()

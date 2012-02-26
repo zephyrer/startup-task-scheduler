@@ -1,0 +1,52 @@
+[OPTIONS]
+Compatibility=1.1 or later
+Compiled file=sTask.chm
+Contents file=sTask.hhc
+Default Window=WndMain
+Default topic=index.html
+Display compile progress=No
+Language=0x411 日本語
+
+[WINDOWS]
+WndMain="スタートアップ タスクスケジューラ （sTask） ヘルプファイル","sTask.hhc",,"index.html","index.html",,,,,0x2120,150,0x104e,[5,5,800,585],,,,,,,0
+
+
+[FILES]
+index.html
+002-difference.html
+003-install.html
+004-1-file-menu.html
+004-2-task-menu.html
+004-3-task-view.html
+004-menu.html
+005-newtask.html
+006-uninstall.html
+007-error.html
+008-other.html
+009-copyright.html
+001-intro.html
+
+[ALIAS]
+0=index.html
+IDD_ABOUTBOX=index.html
+IDD_DEBUG=004-1-file-menu.html
+IDD_DLG_INST=003-install.html
+IDD_DLG_NORMAL=index.html
+IDD_DLG_PASSWD=004-1-file-menu.html
+IDD_PROP_ADD0=004-2-task-menu.html
+IDD_PROP_ADD1=004-2-task-menu.html
+IDD_PROP_ADD2=004-2-task-menu.html
+IDD_PROP_ADD3=004-2-task-menu.html
+IDD_PROP_ADD4=004-2-task-menu.html
+IDD_PROP_ADD5=004-2-task-menu.html
+IDD_PROP_CNF1=004-1-file-menu.html
+IDD_PROP_CNF2=004-1-file-menu.html
+IDR_MAINFRAME=index.html
+MENU_HELP_CONTEXT=index.html
+
+[MAP]
+#include ..\resource.h
+#include mapping.h
+
+[INFOTYPES]
+

@@ -123,7 +123,6 @@ void CDlgInstall::DoDataExchange(CDataExchange* pDX)
 
 BEGIN_MESSAGE_MAP(CDlgInstall, CDialog)
 	//{{AFX_MSG_MAP(CDlgInstall)
-	ON_COMMAND(ID_HELP, OnHelp)
 	ON_BN_CLICKED(IDC_BTN_HELP, OnBtnHelp)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
@@ -147,22 +146,24 @@ BOOL CDlgInstall::OnInitDialog()
 	              // 例外: OCX プロパティ ページの戻り値は FALSE となります
 }
 
-void CDlgInstall::OnHelp() 
-{
-	// TODO: この位置にコマンド ハンドラ用のコードを追加してください
-	CSTaskApp *theApp;
-	theApp = (CSTaskApp *)AfxGetApp();
 
-	theApp->WinHelp(0);
-	
-}
-
+// ************************************************************
+// ヘルプ表示関数
+// HTMLヘルプに対応させるために、クラスに対して WM_HELP メッセージを送る
+// (F1キーを押したときは、この関数は通らずに直接 this->WinHelp() 関数へ行く
+//
+// 最終的には CWinApp の WinHelp 関数へ渡され、HTMLヘルプを表示する
+// ************************************************************
 void CDlgInstall::OnBtnHelp() 
 {
 	// TODO: この位置にコントロール通知ハンドラ用のコードを追加してください
-	CSTaskApp *theApp;
-	theApp = (CSTaskApp *)AfxGetApp();
 
-	theApp->WinHelp(0);
+	// CWinApp の WinHelp 関数を強制的に呼び出す
+//	CSTaskApp *theApp;
+//	theApp = (CSTaskApp *)AfxGetApp();
+//	theApp->WinHelp(0);
+
+	// イベントメッセージの送信
+	this->SendMessage(WM_HELP);
 
 }

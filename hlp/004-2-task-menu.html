@@ -1,0 +1,115 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+<meta http-equiv="Content-Language" content="ja">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>機能設定：選択中タスクの編集 メニュー</title>
+<link rel="stylesheet" type="text/css" href="main.css">
+</head>
+
+<body>
+
+<img border="0" src="pics/bg-blue-shade.png" width="100%" height="40">
+<div style="position:absolute; top:0px; left:0px;">
+	<table class="pagehead" border="0" width="95%" cellspacing="0" cellpadding="0" height="40">
+		<tr>
+			<td valign="middle" width="35"><img border="0" src="pics/ico-stask.png" align="middle"
+				width="32" height="32"></td>
+			<td valign="middle">&nbsp;機能設定：選択中タスクの編集 メニュー</td>
+			<td valign="middle" width="80">
+				<p align="center"><a href="index.html"><img border="0" src="pics/ico-home.png"
+				width="61" height="18"></a></p>
+			</td>
+		</tr>
+	</table>
+</div>
+<h1>機能設定（タスク）</h1>
+<p class="doc-indent20"><img border="0" src="pics/dlg-conf-1.png" width="474" height="420"></p>
+<h2>タスクの名前</h2>
+<p class="doc-indent20">ユーザーが識別しやすいように、任意の名前をつけます。実行ファイル名と無関係な名前をつけても、タスクの実行には影響を与えません。<br>
+<img border="0" src="pics/ico-redsq.gif" width="12" height="12">必ず１文字以上の文字列（タスクの名前）を入力すること。（必須入力項目）</p>
+<h2>実行するファイル名</h2>
+<p class="doc-indent20">実際に実行されるファイルの「フルパス名」を入力します。<br>
+参照ボタンを押すとファイル選択のダイアログが表示されます。</p>
+<p class="doc-indent20"><img border="0" src="pics/ico-redsq.gif" width="12" height="12">必ずファイル名を入力すること。（必須入力項目）</p>
+<h2>実行時のパラメーター</h2>
+<p class="doc-indent20">ファイルの実行時に何らかのパラメーター（オプションスイッチ）が必要な場合は、ここに記入してください。</p>
+<p class="doc-indent20">例 ： ノートパッドで、NETLOG.TXTを開く場合は、「実行するファイル名」に「c:\Windows\Notepad.exe」を入力し、「パラメーター」に「c:\Windows\Netlog.txt」と入力します。</p>
+<h2>作業フォルダ</h2>
+<p class="doc-indent20">タスク実行時に作業フォルダを指定します。（実行ファイルのみで有効）<br>
+このオプションが設定された場合、「環境設定のカレントディレクトリ」はほとんど意味を持ちません。<br>
+※ 適用順序<br>
+　　　　環境設定のカレントディレクトリ → 作業フォルダ<br>
+<img border="0" src="pics/ico-redsq.gif" width="12" height="12">通常は実行するプログラムのフォルダを使用</p>
+<h2>コメント</h2>
+<p class="doc-indent20">「タスクを実行する前に、ダイアログを表示する」がONの場合、このコメントが表示されます。<br>
+コメントに何も記入されていない場合は、タスクの名前が使用されます。</p>
+<h2>ウインドウの状態</h2>
+<p class="doc-indent20">タスク実行時のウインドウの状態を指定します。<br>
+Win32SDK の ShowWindow API のウインドウ状態変数に対応する設定値があります。<br>
+<img border="0" src="pics/ico-redsq.gif" width="12" height="12">通常は「この機能を使わない」</p>
+<h2>電源の状態</h2>
+<p class="doc-indent20">電源状態によってタスクの実行を中止します。<br>
+Windows Base Services の Power Management Function の GetSystemPowerStatus 
+より電源状態を取得しています。 
+通常のノートパソコンなどでの利用を想定しています。 UPSなどを用いたサーバ等での利用は想定していません。<br>
+システムの電源状態、OSでの状態取得状況を確認するには「電源テスト」ボタンを押してください。<br>
+<img border="0" src="pics/ico-redsq.gif" width="12" height="12">通常は「常に実行」</p>
+<h2>実行する</h2>
+<p class="doc-indent20">このタスクは実行されます。<br>
+このスイッチをOFFにした場合は、実行期日が来ても実行されません。<br>
+<img border="0" src="pics/ico-redsq.gif" width="12" height="12">通常はONで使用</p>
+<p class="doc-indent20">　</p>
+<h1><a name="config2"></a>機能設定（スケジュール）</h1>
+<p class="doc-indent20"><img border="0" src="pics/dlg-conf-2.png" width="474" height="420"></p>
+<h2>ログオン時のスケジュール</h2>
+<p class="doc-indent20">「起動ごと」、「日ごと」、「週ごと」、「月ごと」から選択します。<br>
+選択された間隔に応じて、すぐ下の間隔を入力します。</p>
+<p class="doc-indent20">例 ： 2週間に1回実行する場合は、「週ごと」と、「２」と入力します。</p>
+<h2>タスクのスケジュール</h2>
+<p class="doc-indent20">特定の曜日に実行しない場合は、その曜日にチェックを入れます。チェックを入れた曜日には（実行期日が来ても）実行しません。タスクの実行期日は順延されます。</p>
+<p class="doc-indent20">また、特定の時間帯に実行したくない場合は、その時間帯を入力してください。2つの時刻に挟まれた時間帯には（実行期日が来ても）実行しません。</p>
+<p>　</p>
+<h1><a name="config3"></a>機能設定（高度な設定）</h1>
+<p class="doc-indent20"><img border="0" src="pics/dlg-conf-3.png" width="474" height="420"></p>
+<h2>次のタスクを待機させる</h2>
+<p class="doc-indent20">このタスクが実行中は、次のタスクの実行に移りません。このオプションは実行可能ファイル（拡張子がEXE, 
+COM, BAT, CMD のファイル）でのみ有効です。<br>
+<img border="0" src="pics/ico-redsq.gif" width="12" height="12">通常はONで使用</p>
+<h2>ｘ秒待ってから実行する</h2>
+<p class="doc-indent20">このタスクを実行するまで、ｘ秒待ちます。待っている間は、何もしません。<br>
+<img border="0" src="pics/ico-redsq.gif" width="12" height="12">通常は0秒で使用</p>
+<h2>次の回数実行したら、タスクを停止する</h2>
+<p class="doc-indent20">指定された回数実行すると、このタスクの「実行する」スイッチがOFFとなります。OFFになったタスクは設定ダイアログに状態「停止中」が表示されます。<br>
+<img border="0" src="pics/ico-redsq.gif" width="12" height="12">通常はOFFで使用</p>
+<h2>タスクを実行する前にダイアログを表示する</h2>
+<p class="doc-indent20">実行期日が来たとき、タスクの実行前に「タスク ｘｘｘ 
+を実行しますか？」というダイアログを表示します。<br>
+<img border="0" src="pics/ico-redsq.gif" width="12" height="12">通常はOFFで使用</p>
+<h2>直前のタスクの実行と連動（このタスクの最終実行日時を事前同期）</h2>
+<p class="doc-indent20">直前のタスクが実行されたら、このタスクの最終実行日時を現在時にします。<br>
+例 ： 全体のバックアップを1ヶ月に1回、重要部分だけのバックアップを1週間に1回する場合、「重要部分だけのバックアップ」は「全体のバックアップ」が行われたときには実行しないというような条件のときに使用するスイッチです。<br>
+<img border="0" src="pics/ico-redsq.gif" width="12" height="12">通常はOFFで使用</p>
+<h2>直前のタスクと連動</h2>
+<p class="doc-indent20">直前のタスクが実行・非実行によりこのタスクを強制実行、実行中止することが出来ます。これは、他の条件判断（経過時間などによる自動実行）よりも優先されます。（例）この連動判断で「実行中止」と判断された場合は、スケジュール上実行するタイミングであっても「実行中止」となります。<br>
+<img border="0" src="pics/ico-redsq.gif" width="12" height="12">通常はOFF（この機能は使わない）で使用</p>
+<h2>デバッグ用の設定</h2>
+<p class="doc-indent20">このタスクの実行履歴を編集できます。おもにデバッグ時に使用することを目的としています。<br>
+総実行回数は、実際にタスクが実行された回数。<br>
+チェック回数は、タスクの期日をチェックした回数で、実行・非実行にかかわらず毎回カウントアップするカウンターです。</p>
+<p class="doc-indent20">　</p>
+<p class="doc-indent20">　</p>
+<h1>一時的にOFF</h1>
+<p class="doc-indent20">タスクの機能設定の「実行する」をOFFにします。</p>
+<p class="doc-indent20">　</p>
+<h1>実行</h1>
+<p class="doc-indent20">選択中のタスクを実行します。実行期日が来ていなくても実行されます。</p>
+<p class="doc-indent20">　</p>
+<h1>実行順序「ひとつ上へ、ひとつ下へ」</h1>
+<p class="doc-indent20">タスクリストの表示順序（実行もこの順番に行われる）を上下させます。</p>
+
+</body>
+
+</html>

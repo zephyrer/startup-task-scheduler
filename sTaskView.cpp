@@ -46,7 +46,6 @@ BEGIN_MESSAGE_MAP(CSTaskView, CListView)
 	ON_UPDATE_COMMAND_UI(ID_TASK_UP, OnUpdateTaskUp)
 	ON_UPDATE_COMMAND_UI(ID_TASK_DOWN, OnUpdateTaskDown)
 	ON_UPDATE_COMMAND_UI(ID_TASK_NEW, OnUpdateTaskNew)
-	ON_COMMAND(ID_HELP_FINDER, OnHelpFinder)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -191,6 +190,13 @@ BOOL CSTaskView::DisplayTasks()
 	static int insert_col=0;
 	int n = theApp->m_tasks.maxtask;	// 0 のときは存在しない
 	int i,j;
+
+	// アイコン抽出用にプログラムの拡張子を得るための、パス分解用一時文字列
+	char szDrive[_MAX_DRIVE];
+	char szDir[_MAX_DIR];
+	char szFname[_MAX_FNAME];
+	char szExt[_MAX_EXT];
+
 	CListCtrl& ListCtrl = GetListCtrl();
 	CString strTmp;
 
@@ -213,8 +219,27 @@ BOOL CSTaskView::DisplayTasks()
 		hicon = ::ExtractIcon(AfxGetApp()->m_hInstance, theApp->m_tasks.tasks[i].fpass ,0);
 		if((UINT)hicon == NULL || (UINT)hicon == 1)
 		{	// アイコンを持たないファイルのとき
-			m_lIconList.Add(theApp->LoadIcon(IDR_SCRIPT));	// ドキュメントのアイコン
-			m_sIconList.Add(theApp->LoadIcon(IDR_SCRIPT));
+			::_splitpath(theApp->m_tasks.tasks[i].fpass, szDrive, szDir, szFname, szExt);
+			if(!::stricmp(szExt, ".bat") || !::strcmpi(szExt, ".cmd"))
+			{
+				m_lIconList.Add(theApp->LoadIcon(IDR_SCRIPT));		// バッチファイルのアイコン
+				m_sIconList.Add(theApp->LoadIcon(IDR_SCRIPT));
+			}
+			else if(!::stricmp(szExt, ".vbs"))
+			{
+				m_lIconList.Add(theApp->LoadIcon(IDR_VBSCRIPT));	// VBSのアイコン
+				m_sIconList.Add(theApp->LoadIcon(IDR_VBSCRIPT));
+			}
+			else if(!::stricmp(szExt, ".js"))
+			{
+				m_lIconList.Add(theApp->LoadIcon(IDR_JSCRIPT));		// JSのアイコン
+				m_sIconList.Add(theApp->LoadIcon(IDR_JSCRIPT));
+			}
+			else
+			{
+				m_lIconList.Add(theApp->LoadIcon(IDR_UNKNOWN));		// 不明文書のアイコン
+				m_sIconList.Add(theApp->LoadIcon(IDR_UNKNOWN));
+			}
 		}
 		else
 		{
@@ -398,7 +423,7 @@ void CSTaskView::OnTaskNew()
 
 	strTmp.LoadString(STR_TASK_NEW_SHORT);	// タスクの機能設定
 	CPropertySheet DlgAdd(strTmp, this);
-	DlgAdd.AddPage(&prop0);
+//	DlgAdd.AddPage(&prop0);
 	DlgAdd.AddPage(&prop1);
 	DlgAdd.AddPage(&prop2);
 	DlgAdd.AddPage(&prop4);
@@ -409,7 +434,7 @@ void CSTaskView::OnTaskNew()
 	DlgAdd.m_psh.dwFlags=(DlgAdd.m_psh.dwFlags|PSH_NOAPPLYNOW);
 
 	// 標準的な内容の設定
-	prop0.m_select = 0;
+//	prop0.m_select = 0;
 	prop1.is_new = TRUE;
 	prop1.m_exec = TRUE;
 	prop1.trn_recom = &prop0.m_recom;
@@ -881,13 +906,3 @@ void CSTaskView::OnUpdateTaskNew(CCmdUI* pCmdUI)
 	else pCmdUI->Enable(TRUE);
 }
 
-void CSTaskView::OnHelpFinder() 
-{
-	// TODO: この位置にコマンド ハンドラ用のコードを追加してください
-	CSTaskApp *theApp;
-	theApp = (CSTaskApp *)AfxGetApp();
-
-	theApp->WinHelp(0);
-
-	return ;
-}

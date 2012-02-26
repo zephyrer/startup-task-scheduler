@@ -1,0 +1,98 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+<meta http-equiv="Content-Language" content="ja">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>機能設定：ファイル メニュー</title>
+<link rel="stylesheet" type="text/css" href="main.css">
+</head>
+
+<body>
+
+<img border="0" src="pics/bg-blue-shade.png" width="100%" height="40">
+<div style="position:absolute; top:0px; left:0px;">
+	<table class="pagehead" border="0" width="95%" cellspacing="0" cellpadding="0" height="40">
+		<tr>
+			<td valign="middle" width="35"><img border="0" src="pics/ico-stask.png" align="middle"
+				width="32" height="32"></td>
+			<td valign="middle">&nbsp;機能設定：ファイル メニュー</td>
+			<td valign="middle" width="80">
+				<p align="center"><a href="index.html"><img border="0" src="pics/ico-home.png"
+				width="61" height="18"></a></p>
+			</td>
+		</tr>
+	</table>
+</div>
+<h1>新しいタスクの追加</h1>
+<p class="doc-indent20">注意 ： タスクは最大21個までしか追加できません。</p>
+<p class="doc-indent20">ダイアログの指示に従い、新しいタスクを追加します。タスクは最終行に追加されますが、実行順序の入れ替えにより任意の実行順に出来ます。</p>
+<p class="doc-indent20">　</p>
+<h1>タスクの削除</h1>
+<p class="doc-indent20">選択中のタスクを削除します。</p>
+<h1>　</h1>
+<h1>変更を（レジストリに）保存する</h1>
+<p class="doc-indent20">現在のタスクの内容を、レジストリに保存します。<br>
+通常は、設定ウインドウを閉じるときに自動的に保存されますが、何らかの理由で強制保存したいときに使用するメニューです。</p>
+<h1>　</h1>
+<h1><a name="config1"></a>タスクスケジューラの環境設定 （１） 環境設定</h1>
+<p class="doc-indent20">タスクスケジューラの一般的な設定をします。</p>
+<p class="doc-indent20"><img border="0" src="pics/dlg-env-0.png" width="474" height="420"></p>
+<h2>スタートアップ タスクスケジューラ自体の起動遅延時間</h2>
+<p class="doc-indent20">スタートアップタスクスケジューラが最初のタスクの実行判定を開始するまでの時間で、この秒数が経過するまでは何もしません。<br>
+<img border="0" src="pics/ico-redsq.gif" width="12" height="12">通常は３秒くらい</p>
+<h2>タスク実行間隔の判定方法</h2>
+<p class="doc-indent20">１日の判定を、時分秒まで考慮して判定するか、無視するかです。<br>
+たとえば１月１日13時14分の１日後が１月２日０時０分以降となるか、１月２日13時15分以降となるかの違いです。<br>
+<img border="0" src="pics/ico-redsq.gif" width="12" height="12">通常は時分秒は無視する</p>
+<h2>タスクが実行できなかった場合、ダイアログを表示する</h2>
+<p class="doc-indent20">タスクに指定されているファイルが存在しない等の理由で、実行できなかったときに、ダイアログを表示します。<br>
+<img border="0" src="pics/ico-redsq.gif" width="12" height="12">通常はＯＮで使用</p>
+<p class="doc-indent40"><img border="0" src="pics/dlg-err-noexec.png" width="480" height="239"></p>
+<h2>実行状況のダイアログを表示する</h2>
+<p class="doc-indent20">ユーザーに本ソフトの動作を隠したい場合はOFFにすると良いでしょう。<br>
+<img border="0" src="pics/ico-redsq.gif" width="12" height="12">通常はＯＮで使用</p>
+<p class="doc-indent40"><img border="0" src="pics/dlg-progress.png" width="486" height="146"></p>
+<h2>全てのタスクの実行判定結果のダイアログを表示する</h2>
+<p class="doc-indent20">タスクがどのような理由で実行されなかったのか（スキップされたのか）を表示します。<br>
+これは、エラー表示ではありません。デバッグ時に役に立つでしょう。<br>
+<img border="0" src="pics/ico-redsq.gif" width="12" height="12">通常はOFFで使用</p>
+<h2>カレントディレクトリ</h2>
+<p class="doc-indent20">タスク実行時のカレントディレクトリを設定します。<br>
+タスクごとの「作業フォルダ」を指定しない場合は、このディレクトリがタスク実行時のカレントフォルダになります。</p>
+<p class="doc-indent20">デフォルト（通常） → 
+カレントディレクトリの明示的な移動を行いません<br>
+sTaskのディレクトリ → sTaskプログラムの格納されているフォルダ<br>
+ユーザ指定 → 任意のフォルダを指定できます</p>
+<p class="doc-indent20">※ 適用順序 ： カレントディレクトリ → 
+タスクごとの作業フォルダ</p>
+<p class="doc-indent20"><img border="0" src="pics/ico-redsq.gif" width="12" height="12">通常はデフォルトで使用</p>
+<p class="doc-indent20">　</p>
+<h1><a name="config2"></a>タスクスケジューラの環境設定 （2） セキュリティ</h1>
+<p class="doc-indent20"><img border="0" src="pics/dlg-env-1.png" width="474" height="420"></p>
+<h2>パスワードによる保護</h2>
+<p class="doc-indent20">設定ウインドウを表示するために、パスワードの入力を必要とするかどうかの設定です。なお、設定をONにするには、パスワードが必要です。<br>
+なお、個々のタスクの実行に対してのパスワードの設定は出来ません。<br>
+<img border="0" src="pics/ico-redsq.gif" width="12" height="12">通常はOFFで使用</p>
+<h2>パスワードの変更</h2>
+<p class="doc-indent20">本製品では、パスワードを含む全てのデータを暗号化せずにレジストリに格納しています。そのため、レジストリを解析することにより、パスワードは解析可能です。個々に設定するパスワードは、ネットワークなどで使用するような重要なパスワードと同一のフレーズは設定しないでください。</p>
+<p class="doc-indent20">※ 
+全ユーザ共通実行設定（アドミニストレータ・モードでインストールされた）場合、個別のユーザの初期パスワードはNULLストリングです。パスワードを使う必要がある場合、適宜変更してください。</p>
+<p class="doc-indent20">パスワードを忘れた場合は、本ソフトを一旦アンインストールした後、再度インストールしてください。（または、レジストリを解析してください 
+:-）<br>
+パスワードに関する質問には作者は一切お答えしません。</p>
+<h2>アンインストール作成</h2>
+<p class="doc-indent20">スタートメニューにアンインストール用のショートカットメニューを作成します。アンインストーラをどこから起動してよいか分からなくなったときなどに利用してください。</p>
+<h1>　</h1>
+<h1><a name="debug"></a>デバッグモード</h1>
+<p class="doc-indent20"><img border="0" src="pics/dlg-debug.png" width="442" height="266"></p>
+<p class="doc-indent20">任意の日時でのタスク実行をシミュレートするモードです。</p>
+<p class="doc-indent20">シミュレートしたい日時を入力し、「OK」を押すとシミュレートが開始されます。<br>
+<b>デバッグモードに入った状態では、環境設定を含むすべての変更・追加などの情報はレジストリに保存されません。</b>これまでの変更内容等をレジストリに保存する場合は、「変更を（レジストリに）保存する」コマンドを実行してください。</p>
+<p class="doc-indent20">デバッグモードに入った状態で、再び「デバッグモード」コマンドを実行すると、デバッグモードから抜けるかどうかを問い合わせるダイアログが表示されます。</p>
+<p class="doc-indent20">デバッグモードから抜ける場合は「OK」を押します。レジストリから以前のデータを読み込んで復元します。「キャンセル」を押した場合は、再びデバッグモードでのシミュレートに入ります。</p>
+
+</body>
+
+</html>

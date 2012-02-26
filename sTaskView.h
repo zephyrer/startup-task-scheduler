@@ -76,7 +76,6 @@ protected:
 	afx_msg void OnUpdateTaskUp(CCmdUI* pCmdUI);
 	afx_msg void OnUpdateTaskDown(CCmdUI* pCmdUI);
 	afx_msg void OnUpdateTaskNew(CCmdUI* pCmdUI);
-	afx_msg void OnHelpFinder();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };

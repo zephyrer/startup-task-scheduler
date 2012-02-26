@@ -1,0 +1,66 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD>
+<meta name="GENERATOR" content="Microsoft&reg; HTML Help Workshop 4.1">
+<!-- Sitemap 1.0 -->
+</HEAD><BODY>
+<OBJECT type="text/site properties">
+	<param name="ImageType" value="Folder">
+</OBJECT>
+<UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="目次">
+		<param name="Local" value="index.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="スタートアップ タスクスケジューラとは">
+		<param name="Local" value="001-intro.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Windowsのタスクスケジューラ、スタートアップフォルダとの違い">
+		<param name="Local" value="002-difference.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="インストール方法">
+		<param name="Local" value="003-install.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="設定ウインドウの使い方">
+		<param name="Local" value="004-menu.html">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="ファイル メニュー">
+			<param name="Local" value="004-1-file-menu.html">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="選択中タスクの編集 メニュー">
+			<param name="Local" value="004-2-task-menu.html">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="表示 メニュー">
+			<param name="Local" value="004-3-task-view.html">
+			</OBJECT>
+	</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="新しいタスクの追加とタスクの機能設定">
+		<param name="Local" value="005-newtask.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="アンインストール方法">
+		<param name="Local" value="006-uninstall.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="エラーと対処方法">
+		<param name="Local" value="007-error.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="あとがき・技術資料">
+		<param name="Local" value="008-other.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="使用許諾条件">
+		<param name="Local" value="009-copyright.html">
+		</OBJECT>
+</UL>
+</BODY></HTML>

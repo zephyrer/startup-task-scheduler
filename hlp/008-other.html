@@ -1,0 +1,105 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+<meta http-equiv="Content-Language" content="ja">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>あとがき・技術資料</title>
+<link rel="stylesheet" type="text/css" href="main.css">
+</head>
+
+<body>
+
+<img border="0" src="pics/bg-blue-shade.png" width="100%" height="40">
+<div style="position:absolute; top:0px; left:0px;">
+	<table class="pagehead" border="0" width="95%" cellspacing="0" cellpadding="0" height="40">
+		<tr>
+			<td valign="middle" width="35"><img border="0" src="pics/ico-stask.png" align="middle"
+				width="32" height="32"></td>
+			<td valign="middle">&nbsp;あとがき・技術資料</td>
+			<td valign="middle" width="80">
+				<p align="center"><a href="index.html"><img border="0" src="pics/ico-home.png"
+				width="61" height="18"></a></p>
+			</td>
+		</tr>
+	</table>
+</div>
+<h1>制限</h1>
+<p class="doc-indent20">待ち時間を設定した場合に、マウスカーソルが「砂時計付きの矢印」モードになります。これは仕様です。（Sleep 
+命令を使っているため）<br>
+タスクは21個までしか追加できません。<br>
+レジストリに格納する全データを暗号化していません。</p>
+<h1>インストール処理のダイアグラム</h1>
+<p class="doc-indent40"><img border="0" src="pics/fig-inst-diagram.png" width="261" height="513"></p>
+<h1>その他 技術的情報</h1>
+<h2>多重起動防止</h2>
+<p class="doc-indent20">Mutex を使って実現しています。<br>
+sTask 実行中は、&quot;sTaskCtrlMutex&quot; という文字列の Mutex 
+が確保されています</p>
+<h2>プログラムの実行</h2>
+<p class="doc-indent20">実行ファイルは下記形式で実行されます</p>
+<p class="doc-indent20">STARTUPINFO si;<br>
+PROCESS_INFORMATION pi;<br>
+… (中略) …<br>
+si.wShowWindow = SW_SHOWNORMAL; // 例：ウインドウスタイルの指定<br>
+… (中略) …</p>
+<p class="doc-indent20">::CreateProcess(NULL, [LPCSTR ProgPath], NULL, NULL, FALSE, 
+NORMAL_PRIORITY_CLASS, NULL, [LPCSTR Current Folder], &amp;si, &amp;pi);</p>
+<p class="doc-indent20">::WaitForSingleObject(pi.hProcess, INFINITE); // 
+プログラム終了まで待機</p>
+<p class="doc-indent20">実行ファイル以外は下記形式で実行されます</p>
+<p class="doc-indent20">::ShellExecute(NULL,&quot;OPEN&quot;, [LPCSTR ProgPath], [LPCSTR ProgSwitch],&quot;&quot;,SW_SHOW);</p>
+<h2>使用しているレジストリ</h2>
+<p class="doc-indent20">HKCU\Software\hi_soft</p>
+<h1>編集履歴</h1>
+<h2>業務用バージョンからバージョン1.0への変更点</h2>
+<p class="doc-indent20">ヘルプファイルの大幅な充実<br>
+新規追加に「お勧めタスク、Windowsフォルダ」を追加<br>
+レジストリ保存内容を非暗号化<br>
+パスワード認証を簡略化<br>
+インストーラ、アンインストーラの追加</p>
+<h2>バージョン 1.1 （99年7月15日）</h2>
+<p class="doc-indent20">[BugFix] 
+アンインストール時にアイコンが消去されない問題を解決<br>
+[BugFix] 
+パスワードがわからなくてもセキュリティー設定ができる問題を解決<br>
+バージョン 1.2 （99年7月31日）<br>
+[BugFix] Windows95で起動時にシステム停止する問題を解決（MRU管理復活）</p>
+<h2>バージョン 1.5 (99年11月27日)</h2>
+<p class="doc-indent20">[BugFix] Windows95で２回目以降の起動時にシステム停止する問題を解決。また、GDIエラーについても解決（ｲﾒｰｼﾞﾘｽﾄ・ﾊﾝﾄﾞﾗとｱｲｺﾝ・ﾊﾝﾄﾞﾗの開放方法のミスを訂正）<br>
+[BugFix] 12月と1月をまたぐnヶ月単位の計算のミスを訂正<br>
+[BugFix] マルチユーザーに対応。（レジストリ削除方法をHKEY_USERSからHKEY_CURRENT_USERへ変更）<br>
+英語メッセージ版を付属 (sTask_e.exe)</p>
+<h2>バージョン 1.6 (2002年05月15日)</h2>
+<p class="doc-indent20">[VerUp] Windows 2000/XP 対応（アンインストーラを対応）<br>
+[VerUp] 実行状況のダイアログを別スレッドに<br>
+[BugFix] 問い合わせダイアログを最全面に<br>
+[VerUp] 英語リソースの結合で、日本語版以外のWindowsで動作が可能</p>
+<h2>バージョン 1.61 (2002年11月14日)</h2>
+<p class="doc-indent20">[BugFix] 
+間にスペースの入るパスを実行できない問題を修正 (spawn → CreateProcess)<br>
+[VerUp] 拡張子 CMD も後のタスクを待機させられる</p>
+<h2>バージョン 1.62 (2003年7月15日)</h2>
+<p class="doc-indent20">[BugFix] 
+タスクの追加で最終ステップでの設定が反映されないバグを修正<br>
+[VerUp] 直前のタスクと連動機能を拡充</p>
+<h2>バージョン 1.63 (2003年8月14日)</h2>
+<p class="doc-indent20">[VerUp] カレントディレクトリ設定の追加<br>
+[VerUp] 作業フォルダ設定の追加<br>
+[VerUp] ウインドウ状態の追加<br>
+[VerUp] 多重起動の防止</p>
+<h2>バージョン 1.65 (2004年2月8日)</h2>
+<p class="doc-indent20">[VerUp] 電源状態の追加</p>
+<h2>バージョン 1.66 (2007年1月27日)</h2>
+<p class="doc-indent20">[VerUp] HTML help 化<br>
+[VerUp] （実質的に無意味だった）お気に入りタスクの削除<br>
+[VerUp] アイコンの追加（JScript, VBScript, shell script, other）<br>
+[VerUp] パスワードの乱数が初期化されていなかったバグを修正（srand 
+関数の追加）<br>
+[VerUp] ツールバーをフラット・ツールバーに変更<br>
+[VerUp] Windows Vista 対応</p>
+
+</body>
+
+</html>

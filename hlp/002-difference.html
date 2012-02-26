@@ -1,0 +1,69 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+<meta http-equiv="Content-Language" content="ja">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>Windowsタスクスケジューラ、スタートアップ フォルダとの違い</title>
+<link rel="stylesheet" type="text/css" href="main.css">
+</head>
+
+<body>
+
+<img border="0" src="pics/bg-blue-shade.png" width="100%" height="40">
+<div style="position:absolute; top:0px; left:0px;">
+	<table class="pagehead" border="0" width="95%" cellspacing="0" cellpadding="0" height="40">
+		<tr>
+			<td valign="middle" width="35"><img border="0" src="pics/ico-stask.png" align="middle"
+				width="32" height="32"></td>
+			<td valign="middle">&nbsp;Windowsタスクスケジューラ、スタートアップ 
+				フォルダとの違い</td>
+			<td valign="middle" width="80">
+				<p align="center"><a href="index.html"><img border="0" src="pics/ico-home.png"
+				width="61" height="18"></a></p>
+			</td>
+		</tr>
+	</table>
+</div>
+<span class="pagemain">
+<h2>Windowsタスクスケジューラ</h2>
+<p class="doc-indent20">Windows98/Me/2000/XP/Vista 
+等では標準で付属しています。また、Windows95ではInternet Explorer 4以上をインストールすると使えるようになります。</p>
+<p class="doc-indent20">Windowsタスクスケジューラは「常時電源ONのワークステーション」を対象としています。コンピューターを使用している間、常に実行条件をチェックし、期日が到来するとタスクを実行します。<br>
+つまり、「コンピューター使用中に急にタスクが実行される」ということが起こり、CD-R・DVD-R焼きこみなどの遅延が許されにくいプログラムが実行中の場合、それらのプログラムに悪影響を与える場合があります。（バッファ・アンダーランが発生して焼きミスにつながる場合もあります）</p>
+<h2>Windowsスタートアップ フォルダ</h2>
+<p class="doc-indent20">Windows2000/XP/Vistaでは、「C:\Documents and Settings 
+」の下のユーザフォルダの中にあるスタートアップフォルダに、Windows95/98（日本語版）では 
+「C:\Windows\ｽﾀｰﾄﾒﾆｭｰ\ﾌﾟﾛｸﾞﾗﾑ\ｽﾀｰﾄｱｯﾌﾟ」以下のフォルダに格納されたプログラムなどは、Windowsログイン時に毎回実行されます。<br>
+また、レジストリの 「…\Windows\CurrentVersion\Run」といったところに格納されているファイルも、自動実行されます。</p>
+<p class="doc-indent20">スタートアップ 
+フォルダに格納されているプログラムは、ログオン時に毎回実行されます。期日などの条件で実行・非実行を切り替えることは通常できません。</p>
+<h2>スタートアップ タスクスケジューラ</h2>
+<p class="doc-indent20">上記２つのスケジューラの隙間を埋めるのが、「スタートアップ 
+タスクスケジューラ」です。<br>
+ログオン時に、条件が満たされればタスクを実行させることができます。一度すべてのタスクをチェックし終われば、「スタートアップ 
+タスクスケジューラ」は終了しますので、コンピューター使用中に急に何らかのタスクが動き出すこともありません。</p>
+<p class="doc-indent20">ログオン時に他のプログラムが機動を開始しているタイミングを避けて、ログオン後に任意の時間が経過してから実行を開始するように設定することも出来ます。</p>
+<h2>このタスクは、どこに入れたらいいの？</h2>
+<p class="doc-indent20">タスクの性質ごとに、どこに入れておくのがいいかの指針です。</p>
+<p class="doc-indent20">毎回実行が必要なプログラムは、スタートアップ 
+フォルダに入れておいてください。<br>
+現在、スタートアップ 
+フォルダに入っているプログラムを、無理に「スタートアップ 
+タスクスケジューラ」に移し変える必要はありません。<br>
+例 ： 
+ウイルス対策ソフト、画面設定ソフト、圧縮エージェント、ダイヤルアップ監視、ネットワーク監視、セキュリティー関連</p>
+<p class="doc-indent20">定期的に実行が必要だが、毎回ログオン時に実行するとわずらわしいプログラムは、「スタートアップ 
+タスクスケジューラ」のタスクに追加してください。</p>
+<p class="doc-indent20">例 ： スキャンディスク、デフラグ、システムファイル 
+チェッカー、常駐しないスパイウエア検査・ウイルス検査、各種バックアップ</p>
+<h2>注意</h2>
+<p class="doc-indent20">サーバ マシンなどの常時電源ONのコンピューターでは、Windowsタスクスケジューラを使用してください。</p>
+<p class="doc-indent20">「スタートアップ タスクスケジューラ」 
+はログオンが行われない限り実行されませんので、必要なタスクの種類に応じて使い分けてください。</p>
+</span>
+
+</body>
+
+</html>

@@ -3,13 +3,16 @@
 .nf
 .hl 1
 
-.ce 3
+.ce 2
 スタートアップ タスク スケジューラ
-Startup Task Scheduler
-version 1.65beta for Windows
+version 1.66 for Windows
+
+.ri 4
+http://oasis.halfmoon.jp/
+http://www.vector.co.jp/vpack/browse/person/an001911.html
 
 .ri 1
-(C)opyright 1999-2004 井上 博計
+(C)opyright 1999-2007 井上 博計
 
 .hl 1
 .sp 12
@@ -39,10 +42,10 @@ version 1.65beta for Windows
 
 １．動作環境
 .in 6
-Windows 95/98/Me/NT/2000/XP
+Windows 95/98/Me/NT/2000/XP/Vista
 
 .fi
-MFC42.DLL および MSVCRT.DLL がシステムフォルダに存在すること
+最新のMFC42.DLL および MSVCRT.DLL がシステムフォルダに存在すること
 .nf
 .in 0
 
@@ -53,8 +56,6 @@ MFC42.DLL および MSVCRT.DLL がシステムフォルダに存在すること
 （新たにフォルダを作ることを薦めます。アンインストールに便利です。）
 .sp 1
 始めてsTask.exeを実行すると自動的にインストーラが起動します。
-.br
-なお詳しい使用方法、sTaskを起動して、ヘルプメニューを選択して下さい。
 .nf
 .in 0
 
@@ -75,5 +76,5 @@ sTaskヘルプファイルの「使用許諾条件」に沿います。
 
 
 .ri 1
-2004 / 2 / 8
+2007 / 1 / 27
 .hl 1

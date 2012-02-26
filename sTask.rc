@@ -68,9 +68,12 @@ END
 // remains consistent on all systems.
 IDR_MAINFRAME           ICON    DISCARDABLE     "res\\idr_main.ico"
 IDR_STASKTYPE           ICON    DISCARDABLE     "res\\sTaskDoc.ico"
-IDR_SCRIPT              ICON    DISCARDABLE     "res\\script.ico"
 IDR_XDOCICON            ICON    DISCARDABLE     "res\\docicon.ico"
 IDI_ICO_INST            ICON    DISCARDABLE     "res\\ico_inst.ico"
+IDR_JSCRIPT             ICON    DISCARDABLE     "res\\ico-jscript.ico"
+IDR_VBSCRIPT            ICON    DISCARDABLE     "res\\ico-vbs.ico"
+IDR_SCRIPT              ICON    DISCARDABLE     "res\\ico-cmd.ico"
+IDR_UNKNOWN             ICON    DISCARDABLE     "res\\ico-unknown.ico"
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -79,7 +82,7 @@ IDI_ICO_INST            ICON    DISCARDABLE     "res\\ico_inst.ico"
 
 IDR_MAINFRAME MENU PRELOAD DISCARDABLE 
 BEGIN
-    POPUP "ﾌｧｲﾙ(&F)"
+    POPUP "ファイル(&F)"
     BEGIN
         MENUITEM "タスクの追加(&N) ...",        ID_TASK_NEW
         MENUITEM "タスクの削除(&D)",            ID_TASK_CUT
@@ -112,7 +115,7 @@ BEGIN
             MENUITEM "詳細(&S)",                    ID_VIEW_REPORT
         END
     END
-    POPUP "ﾍﾙﾌﾟ(&H)"
+    POPUP "ヘルプ(&H)"
     BEGIN
         MENUITEM "ヘルプ(&H)",                  ID_HELP_FINDER
         MENUITEM SEPARATOR
@@ -142,23 +145,21 @@ END
 // Dialog
 //
 
-IDD_ABOUTBOX DIALOG DISCARDABLE  0, 0, 239, 215
+IDD_ABOUTBOX DIALOG DISCARDABLE  0, 0, 274, 89
 STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "スタートアップ タスクスケジューラ"
+CAPTION "スタートアップ タスクスケジューラ   バージョン情報"
 FONT 9, "ＭＳ Ｐゴシック"
 BEGIN
-    CONTROL         "OK",IDOK,"Button",BS_OWNERDRAW | WS_GROUP | WS_TABSTOP,
-                    10,10,215,140
-    CONTROL         152,IDC_STATIC,"Static",SS_BITMAP,5,5,229,151
-    ICON            IDR_MAINFRAME,IDC_STATIC,5,160,20,20
-    LTEXT           "スタートアップ タスクスケジューラ (sTask)\n version 1.65beta for Windows 95/98/Me/NT/2000/XP\n(C) 1999-2004 INOUE. Hirokazu\n\nhttp://www.ne.jp/asahi/oasis/inoue-h/\nhttp://inoue-h.connect.to/",
-                    IDC_STATIC,30,160,200,50
+    DEFPUSHBUTTON   "OK",IDOK,215,70,50,15,WS_GROUP
+    ICON            IDR_MAINFRAME,IDC_STATIC,10,10,20,20
+    LTEXT           "スタートアップ タスクスケジューラ for Windows (Multi Language)\n\n       Version 1.66 (Free Software / フリー ソフトウエア）\n       (C) 1999-2007 INOUE. Hirokazu\n       http://oasis.halfmoon.jp/\n       http://www.vector.co.jp/vpack/browse/person/an001911.html",
+                    IDC_STATIC,40,5,225,55
 END
 
 IDD_PROP_ADD1 DIALOGEX 0, 0, 255, 219
 STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
 CAPTION "タスク"
-FONT 9, "ＭＳ Ｐゴシック"
+FONT 9, "ＭＳ Ｐゴシック", 0, 0, 0x1
 BEGIN
     LTEXT           "タスクの名前",IDC_STATIC,10,10,75,15,SS_CENTERIMAGE
     EDITTEXT        IDC_EDIT_NAME,90,10,155,15,ES_AUTOHSCROLL | NOT 
@@ -288,7 +289,7 @@ END
 IDD_PROP_CNF1 DIALOGEX 0, 0, 255, 219
 STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
 CAPTION "環境設定"
-FONT 9, "ＭＳ Ｐゴシック"
+FONT 9, "ＭＳ Ｐゴシック", 0, 0, 0x1
 BEGIN
     CTEXT           "すべてのタスク実行に影響する条件を設定します",
                     IDC_STATIC,15,10,225,10
@@ -409,7 +410,7 @@ END
 IDD_PROP_ADD5 DIALOGEX 0, 0, 254, 219
 STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
 CAPTION "完了"
-FONT 9, "ＭＳ Ｐゴシック"
+FONT 9, "ＭＳ Ｐゴシック", 0, 0, 0x1
 BEGIN
     LTEXT           "タスクの名前",IDC_STATIC,10,10,75,15,SS_CENTERIMAGE
     EDITTEXT        IDC_PROP5_NAME,90,10,155,15,ES_AUTOHSCROLL | ES_READONLY | 
@@ -474,7 +475,7 @@ BEGIN
                     IDC_R_AUTOEXEC4,"Button",BS_AUTORADIOBUTTON,15,95,230,10
     GROUPBOX        "アンインストール方法の設定  (Uninstall Shortcut on ...?)",
                     IDC_STATIC,5,115,250,45
-    CONTROL         "コントロールパネルの「アプリケーションの追加と削除」 (from &Control Panel)",
+    CONTROL         "コントロールパネルの「プログラムの追加と削除」 (from &Control Panel)",
                     IDC_CHECK_UNINST_CPL,"Button",BS_AUTOCHECKBOX | 
                     WS_TABSTOP,10,131,240,10
     CONTROL         "スタートメニューに登録する （推奨） (from Start Men&u)",
@@ -493,8 +494,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 1,6,5,0
- PRODUCTVERSION 1,6,5,0
+ FILEVERSION 1,6,6,0
+ PRODUCTVERSION 1,6,6,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x9L
@@ -512,14 +513,14 @@ BEGIN
             VALUE "Comments", "\0"
             VALUE "CompanyName", "(C) INOUE Hirokazu\0"
             VALUE "FileDescription", "Startup Task Scheduler (Multi Language Version)\0"
-            VALUE "FileVersion", "1.6.5.0\0"
+            VALUE "FileVersion", "1.6.6.0\0"
             VALUE "InternalName", "sTask\0"
-            VALUE "LegalCopyright", "Copyright (C) 1999-2004 INOUE. Hirokazu\0"
-            VALUE "LegalTrademarks", "Free Ware Version\0"
+            VALUE "LegalCopyright", "Copyright (C) 1999-2007 INOUE. Hirokazu\0"
+            VALUE "LegalTrademarks", "Free Softare\0"
             VALUE "OriginalFilename", "sTask.exe\0"
             VALUE "PrivateBuild", "Microsoft Visual C++ 6.0\0"
             VALUE "ProductName", "Startup Task Scheduler (Multi Language Version)\0"
-            VALUE "ProductVersion", "1.6.5.0\0"
+            VALUE "ProductVersion", "1.6.6.0\0"
             VALUE "SpecialBuild", "\0"
         END
     END
@@ -543,9 +544,9 @@ BEGIN
     IDD_ABOUTBOX, DIALOG
     BEGIN
         LEFTMARGIN, 7
-        RIGHTMARGIN, 232
+        RIGHTMARGIN, 267
         TOPMARGIN, 7
-        BOTTOMMARGIN, 208
+        BOTTOMMARGIN, 82
     END
 
     IDD_DEBUG, DIALOG
@@ -603,7 +604,6 @@ BEGIN
     SEPARATOR
     BUTTON      ID_CONFIG
     BUTTON      ID_APP_ABOUT
-    BUTTON      ID_CONTEXT_HELP
 END
 
 
@@ -613,7 +613,6 @@ END
 //
 
 IDR_MAINFRAME           BITMAP  MOVEABLE PURE   "res\\Toolbar.bmp"
-IDB_TRAIN               BITMAP  DISCARDABLE     "res\\train.bmp"
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -920,6 +919,7 @@ END
 STRINGTABLE DISCARDABLE 
 BEGIN
     STR_TASK_NEW_SHORT      "新しいタスクの追加"
+    AFX_STR_ERR_HELP        "ヘルプファイルの表示ができません\r\n ファイル: %s\r\n コンテキストID: %04X"
 END
 
 #endif    // 日本語 resources
@@ -1014,17 +1014,15 @@ BEGIN
     PUSHBUTTON      "Cancel",IDCANCEL,170,45,50,14
 END
 
-IDD_ABOUTBOX DIALOG DISCARDABLE  0, 0, 239, 189
+IDD_ABOUTBOX DIALOG DISCARDABLE  0, 0, 274, 74
 STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "Startup Task Scheduler"
+CAPTION "Startup Task Scheduler    Version Information"
 FONT 9, "Arial"
 BEGIN
-    CONTROL         "OK",IDOK,"Button",BS_OWNERDRAW | WS_GROUP | WS_TABSTOP,
-                    10,10,215,115
-    CONTROL         152,IDC_STATIC,"Static",SS_BITMAP,5,5,229,151
-    ICON            IDR_MAINFRAME,IDC_STATIC,10,140,20,20
-    LTEXT           "Startup Task Scheduler (sTask) (Multi Language)\n version 1.65beta for Windows 95/98/Me/NT/2000/XP\n(C) 1999-2004 INOUE. Hirokazu\n\nhttp://www.ne.jp/asahi/oasis/inoue-h/\nhttp://inoue-h.connect.to/",
-                    IDC_STATIC,35,135,195,50
+    DEFPUSHBUTTON   "OK",IDOK,210,55,55,15,WS_GROUP
+    ICON            IDR_MAINFRAME,IDC_STATIC,10,10,18,17
+    LTEXT           "Startup Task Scheduler for Windows (Multi Language)\n\n       Version 1.66 ( Free Software )\n       (C) 1999-2007 INOUE. Hirokazu\n       http://oasis.halfmoon.jp/\n       http://www.vector.co.jp/vpack/browse/person/an001911.html",
+                    IDC_STATIC,40,5,225,50
 END
 
 IDD_DEBUG DIALOG DISCARDABLE  0, 0, 249, 159
@@ -1097,7 +1095,7 @@ END
 IDD_PROP_ADD1 DIALOGEX 0, 0, 255, 219
 STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
 CAPTION "Task"
-FONT 9, "Arial"
+FONT 9, "Arial", 0, 0, 0x1
 BEGIN
     LTEXT           "Task Name",IDC_STATIC,10,10,75,15,SS_CENTERIMAGE
     EDITTEXT        IDC_EDIT_NAME,90,10,155,15,ES_AUTOHSCROLL | NOT 
@@ -1258,7 +1256,7 @@ END
 IDD_PROP_CNF1 DIALOGEX 0, 0, 255, 183
 STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
 CAPTION "Global Configuration"
-FONT 9, "Arial"
+FONT 9, "Arial", 0, 0, 0x1
 BEGIN
     CTEXT           "Global Configuration of Startup Task Scheduler",
                     IDC_STATIC,15,10,225,10
@@ -1309,7 +1307,7 @@ END
 IDD_PROP_ADD5 DIALOGEX 0, 0, 254, 219
 STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
 CAPTION "Complete"
-FONT 9, "Arial"
+FONT 9, "Arial", 0, 0, 0x1
 BEGIN
     LTEXT           "Task Name",IDC_STATIC,10,8,75,12,SS_CENTERIMAGE
     EDITTEXT        IDC_PROP5_NAME,90,8,155,12,ES_AUTOHSCROLL | ES_READONLY | 
@@ -1350,9 +1348,9 @@ BEGIN
     IDD_ABOUTBOX, DIALOG
     BEGIN
         LEFTMARGIN, 7
-        RIGHTMARGIN, 232
+        RIGHTMARGIN, 267
         TOPMARGIN, 7
-        BOTTOMMARGIN, 182
+        BOTTOMMARGIN, 67
     END
 
     IDD_DEBUG, DIALOG
@@ -1394,7 +1392,6 @@ BEGIN
     SEPARATOR
     BUTTON      ID_CONFIG
     BUTTON      ID_APP_ABOUT
-    BUTTON      ID_CONTEXT_HELP
 END
 
 
@@ -1708,6 +1705,7 @@ END
 STRINGTABLE DISCARDABLE 
 BEGIN
     STR_TASK_NEW_SHORT      "Add New Task"
+    AFX_STR_ERR_HELP        "Fail to load HTML help file.\r\n file : %s\r\n context ID: %04X"
 END
 
 #endif    // 英語 (ｱﾒﾘｶ) resources

@@ -22,6 +22,9 @@
 #define IDR_STASKTYPE                   151
 #define IDB_TRAIN                       152
 #define IDD_PROP_ADD5                   155
+#define IDR_JSCRIPT                     160
+#define IDR_VBSCRIPT                    162
+#define IDR_UNKNOWN                     164
 #define IDR_XDOCICON                    185
 #define IDC_EDIT_FPASS                  1000
 #define IDC_BTN_BROWSE                  1001
@@ -189,13 +192,14 @@
 #define STR_MES_EXIT_DEBUG              61278
 #define STR_MES_REGSAVED                61279
 #define STR_TASK_NEW_SHORT              61280
+#define AFX_STR_ERR_HELP                61281
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
-#define _APS_NEXT_RESOURCE_VALUE        160
+#define _APS_NEXT_RESOURCE_VALUE        165
 #define _APS_NEXT_COMMAND_VALUE         32784
 #define _APS_NEXT_CONTROL_VALUE         1068
 #define _APS_NEXT_SYMED_VALUE           101

@@ -42,6 +42,7 @@ public:
 	public:
 	virtual BOOL InitInstance();
 	virtual int ExitInstance();
+	virtual void WinHelp(DWORD dwData, UINT nCmd = HELP_CONTEXT);
 	//}}AFX_VIRTUAL
 
 // インプリメンテーション

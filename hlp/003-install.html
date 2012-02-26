@@ -1,0 +1,84 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+<meta http-equiv="Content-Language" content="ja">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>インストール方法</title>
+<link rel="stylesheet" type="text/css" href="main.css">
+</head>
+
+<body>
+
+<img border="0" src="pics/bg-blue-shade.png" width="100%" height="40">
+<div style="position:absolute; top:0px; left:0px;">
+	<table class="pagehead" border="0" width="95%" cellspacing="0" cellpadding="0" height="40">
+		<tr>
+			<td valign="middle" width="35"><img border="0" src="pics/ico-stask.png" align="middle"
+				width="32" height="32"></td>
+			<td valign="middle">&nbsp;インストール方法</td>
+			<td valign="middle" width="80">
+				<p align="center"><a href="index.html"><img border="0" src="pics/ico-home.png"
+				width="61" height="18"></a></p>
+			</td>
+		</tr>
+	</table>
+</div>
+<p class="doc-indent20">スタートアップ・タスクスケジューラ 
+の全てのファイルを、適当なフォルダに入れます。（インストーラは最初に起動されたフォルダにインストールします）</p>
+<p class="doc-indent20"><img border="0" src="pics/dlg-install.png" width="459" height="305"></p>
+<h2>自動実行オプション</h2>
+<p class="doc-indent20"><img border="0" src="pics/ico-redsq.gif" width="12" height="12">通常は、スタートメニューの「スタート」グループに登録を選択</p>
+<p class="doc-indent20"><img border="0" src="pics/ico-check.gif" width="13" height="13"> 
+自動起動しない<br>
+スタートアップ時に、自動起動しません。通常、このオプションは選択しません。</p>
+<p class="doc-indent20"><img border="0" src="pics/ico-check.gif" width="13" height="13"> 
+スタートメニューの「スタート」グループに登録<br>
+カレントユーザのスタートメニューのスタートアップ・グループにショートカットを登録します。</p>
+<p class="doc-indent20"><img border="0" src="pics/ico-check.gif" width="13" height="13"> 
+レジストリに登録（ユーザ毎設定）<br>
+レジストリのカレントユーザ (HKCU) の自動実行キーに登録します。</p>
+<p class="doc-indent20"><img border="0" src="pics/ico-check.gif" width="13" height="13"> 
+レジストリに登録（全ユーザ共通設定）<br>
+レジストリのローカルマシン (HKLM) 
+の自動実行キーに登録します。（カレントユーザを含む、<b>このマシンを使う全ユーザの起動時に自動的に実行されます。</b>）<br>
+このオプションでを選択することで、アドミニストレータモードでのインストールとなります。</p>
+<h2>アンインストール方法の設定</h2>
+<p class="doc-indent20"><img border="0" src="pics/ico-redsq.gif" width="12" height="12">通常は、「スタートメニューに登録する」を選択</p>
+<p class="doc-indent20"><img border="0" src="pics/ico-check.gif" width="13" height="13"> 
+コントロールパネルの「プログラムの追加と削除」<br>
+コントロールパネル（「プログラムの追加と削除」）にアンインストールのための項目を作成します。</p>
+<p class="doc-indent20"><img border="0" src="pics/ico-check.gif" width="13" height="13"> 
+スタートメニューに登録する<br>
+スタートメニューにアンインストーラのショートカットを作成します。</p>
+<h1>シングルユーザで（カレントユーザ限定）のインストール</h1>
+<p class="doc-indent20">アドミニストレータ権限でのインストールが出来ない場合、自動的にこのインストールオプションしか選択できないようになります。</p>
+<p class="doc-indent20">Windows95系の全てのユーザや、Windows NT 
+系のアドミニストレータは、必ずアドミニストレータとしてインストールする必要はありません。 
+シングルユーザとしてインストールすれば、他のユーザに影響を与えることなく、本プログラムを利用することが出来ます。</p>
+<p class="doc-indent20">自動実行オプションを、「スタートメニュー」または「レジストリ（ユーザ毎）」に設定してください。</p>
+<h1>アドミニストレータのインストール</h1>
+<p class="doc-indent20">このマシンを利用する全ユーザの起動時に自動的に実行します。<br>
+Windows NT/2000/XP/Vista では アドミニストレータまたは レジストリの HKLM 
+にある Run 
+キーにアクセスできる権限が必要です。（プログラムが自動的に判断します）</p>
+<p class="doc-indent20">自動実行オプションを、「レジストリ（全ユーザ共通）」に設定してください。</p>
+<h1>以前のバージョンからのアップデート</h1>
+<p class="doc-indent20">以前のプログラムをアンインストールしてから、本プログラムをインストールしてください。<br>
+（アドミニストレータ機能を利用して利用していた場合、アンインストール順序に注意してください。 
+もし、どうしてもアンインストールできなくなった場合は、Windows の 
+Administrator としてログオンし、<a href="006-uninstall.html#manual_uninstall">「アンインストール方法」に書かれている「手動でアンインストールする方法」のレジストリを消去</a>することにより強制アンインストールできます）</p>
+<h1>インストールについてのさらに詳しい情報</h1>
+<p class="doc-indent20"><a href="008-other.html">「あとがき・技術資料」</a>に詳しく書かれています。</p>
+<h1>パスワードの発行</h1>
+<p class="doc-indent20">インストール時に、自動的にパスワードが発行されます。<a
+href="004-1-file-menu.html#config2">「環境設定」で「パスワードによる保護」</a>を利用する場合に必要です。どこかにメモして置いてください。<br>
+なお、「環境設定」でパスワードを変更することが出来ます。<br>
+※ 
+パスワードを忘れてしまった場合、スタートアップ・タスクスケジューラを一旦アンインストールすると、新しいパスワードが発行されます。<br>
+※ パスワードに関する質問には、作者は一切回答しません。</p>
+
+</body>
+
+</html>
